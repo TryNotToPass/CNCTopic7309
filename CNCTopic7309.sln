@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31613.86
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CNCTopic7309", "CNCTopic7309.csproj", "{ECAC3723-7D87-4309-885A-B22341F2A15B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserManager", "UserManager\UserManager.csproj", "{6B62DC8D-4F8A-4D43-A499-9AF69A7148AA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ORM", "ORM\ORM.csproj", "{447FAA6C-E16E-45F3-BDC6-BEDDA6AEC52C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ECAC3723-7D87-4309-885A-B22341F2A15B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECAC3723-7D87-4309-885A-B22341F2A15B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECAC3723-7D87-4309-885A-B22341F2A15B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ECAC3723-7D87-4309-885A-B22341F2A15B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B62DC8D-4F8A-4D43-A499-9AF69A7148AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B62DC8D-4F8A-4D43-A499-9AF69A7148AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B62DC8D-4F8A-4D43-A499-9AF69A7148AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B62DC8D-4F8A-4D43-A499-9AF69A7148AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{447FAA6C-E16E-45F3-BDC6-BEDDA6AEC52C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{447FAA6C-E16E-45F3-BDC6-BEDDA6AEC52C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{447FAA6C-E16E-45F3-BDC6-BEDDA6AEC52C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{447FAA6C-E16E-45F3-BDC6-BEDDA6AEC52C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {456E59CB-26D2-40A4-B1A2-26E6A0FD38C3}
+	EndGlobalSection
+EndGlobal
