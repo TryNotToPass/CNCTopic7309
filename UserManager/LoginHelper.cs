@@ -133,19 +133,37 @@ namespace UserManager
             }
         }
 
+        /// <summary>
+        /// 更新使用者資訊
+        /// </summary>
+        /// <param name="userinfo"></param>
+        /// <returns></returns>
         public static bool UpdateUserInfo(UserInfo userinfo) 
         {
             //字串應在按下案件前確認，故這裡不確認
             try
             {
-                using (ContextModel context = new ContextModel())
+                if (string.IsNullOrEmpty(userinfo.PWD))
                 {
-                    var dbObj = context.UserInfoes.Where(o => o.ID == userinfo.ID).FirstOrDefault();
-                    dbObj.Account = userinfo.Account;
-                    dbObj.Name = userinfo.Name;
-                    dbObj.Email = userinfo.Email;
-                    context.SaveChanges();
+                    using (ContextModel context = new ContextModel())
+                    {
+                        var dbObj = context.UserInfoes.Where(o => o.ID == userinfo.ID).FirstOrDefault();
+                        dbObj.Account = userinfo.Account;
+                        dbObj.Name = userinfo.Name;
+                        dbObj.Email = userinfo.Email;
+                        context.SaveChanges();
+                    }
                 }
+                else
+                {
+                    using (ContextModel context = new ContextModel())
+                    {
+                        var dbObj = context.UserInfoes.Where(o => o.ID == userinfo.ID).FirstOrDefault();
+                        dbObj.PWD = userinfo.PWD;
+                        context.SaveChanges();
+                    }
+                }
+
                 return true;
             }
             catch(Exception ex) 

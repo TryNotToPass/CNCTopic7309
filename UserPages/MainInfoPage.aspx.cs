@@ -21,6 +21,10 @@ namespace CNCTopic7309.UserPages
                 this.btnBIE.Visible = true;
                 this.btnRIE.Visible = true;
             }
+            if (LoginHelper.GetUserType() == 0)
+            {
+                this.btnLvChange.Visible = true;
+            }
         }
 
         protected void btnLogOut_Click(object sender, EventArgs e)
@@ -28,6 +32,9 @@ namespace CNCTopic7309.UserPages
             var cookie = Request.Cookies[FormsAuthentication.FormsCookieName];
             cookie.Expires = DateTime.Now.AddHours(-5);
             Response.Cookies.Add(cookie);
+
+            HttpContext.Current.User = null;
+
             Response.Redirect("~/Login.aspx");
         }
 
