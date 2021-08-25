@@ -212,7 +212,7 @@ namespace UserManager
                         version,
                         account,
                         DateTime.Now,
-                        DateTime.Now.AddMinutes(5),
+                        DateTime.Now.AddMinutes(60),
                         isPersistance,
                         infodata.ID.ToString()
                     );

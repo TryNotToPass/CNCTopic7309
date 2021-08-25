@@ -42,5 +42,14 @@ namespace CNCTopic7309.UserPages
         {
             Response.Redirect("UserInfoEditor.aspx");
         }
+
+        protected void btnLvChange_Click(object sender, EventArgs e)
+        {
+            if (LoginHelper.GetUserType() == 0)
+            {
+                Response.Redirect("PermissionChangePage.aspx");
+            }
+            
+        }
     }
 }

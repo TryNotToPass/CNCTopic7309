@@ -28,7 +28,7 @@
         </asp:PlaceHolder>
         <br />
         <asp:Button Text="更新" runat="server" ID="btnUpdate" OnClick="btnUpdate_Click"/> &nbsp
-        <asp:Button Text="變更密碼" runat="server" ID="btnPWDChange" OnClick="btnPWDChange_Click"/> &nbsp
+        <asp:Button Text="啟用/關閉變更密碼" runat="server" ID="btnPWDChange" OnClick="btnPWDChange_Click"/> &nbsp
         <br />
         <a href="MainInfoPage.aspx">返回資訊總頁</a>
         <br />

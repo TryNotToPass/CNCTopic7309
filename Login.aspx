@@ -9,6 +9,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
+        <a href="CssTemp.aspx">GOGO</a>
         <table>
             <tr>
                 <th>帳號：</th>

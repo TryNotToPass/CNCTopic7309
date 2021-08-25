@@ -7,6 +7,6 @@
     <asp:Button Text="球隊編輯(Admin)" runat="server" ID="btnTIE" Visible="false"/> &nbsp
     <asp:Button Text="球員編輯(Admin)" runat="server" ID="btnBIE" Visible="false"/> &nbsp
     <asp:Button Text="賽場編輯(Admin)" runat="server" ID="btnRIE" Visible="false"/> &nbsp
-    <asp:Button Text="權限變更(SuperAdmin)" runat="server" ID="btnLvChange" Visible="false"/> &nbsp
+    <asp:Button Text="權限變更(SuperAdmin)" runat="server" ID="btnLvChange" OnClick="btnLvChange_Click" Visible="false"/> &nbsp
     <asp:Button Text="LogOut" ID="btnLogOut" runat="server" OnClick="btnLogOut_Click"/>
 </asp:Content>
