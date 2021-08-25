@@ -7,56 +7,47 @@
 // </自動產生的>
 //------------------------------------------------------------------------------
 
-namespace CNCTopic7309.UserPages
+namespace CNCTopic7309.UserControls
 {
 
 
-    public partial class PermissionChangePage
+    public partial class ucPager
     {
 
         /// <summary>
-        /// form1 控制項。
+        /// aLinkF 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor aLinkF;
 
         /// <summary>
-        /// GridView1 控制項。
+        /// ltlPager 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridView1;
+        protected global::System.Web.UI.WebControls.Literal ltlPager;
 
         /// <summary>
-        /// ucPager 控制項。
+        /// aLinkL 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::CNCTopic7309.UserControls.ucPager ucPager;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor aLinkL;
 
         /// <summary>
-        /// plcNoData 控制項。
+        /// ltlMsg 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder plcNoData;
-
-        /// <summary>
-        /// lblMsg 控制項。
-        /// </summary>
-        /// <remarks>
-        /// 自動產生的欄位。
-        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMsg;
+        protected global::System.Web.UI.WebControls.Literal ltlMsg;
     }
 }

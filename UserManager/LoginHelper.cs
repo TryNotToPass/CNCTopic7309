@@ -105,7 +105,7 @@ namespace UserManager
             }
         }
         /// <summary>
-        /// 獲取使用者等級
+        /// 獲取當前使用者等級
         /// </summary>
         /// <returns></returns>
         public static int GetUserType()

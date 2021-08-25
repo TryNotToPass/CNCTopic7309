@@ -1,5 +1,8 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="PermissionChangePage.aspx.cs" Inherits="CNCTopic7309.UserPages.PermissionChangePage" %>
 
+<%@ Register Src="~/UserControls/ucPager.ascx" TagPrefix="uc1" TagName="ucPager" %>
+
+
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -27,14 +30,22 @@
                 <asp:BoundField DataField="Email" HeaderText="信箱" />
                 <asp:TemplateField HeaderText="行動">
                     <ItemTemplate>
-                            <asp:Button Text="刪除" CssClass="btn btn-primary" ID="btnDel" runat="server"
-                            OnCommand="btnDel_Command" CommandArgument='<%# Eval("ID") %>' OnClientClick='<%# $"return funcAlert(\"{Eval("Account")}\")" %>'/>
+                        <asp:Button Text="升/降級" CssClass="btn btn-primary" runat="server" ID="btnUDG" OnCommand="btnUDG_Command" CommandArgument='<%# Eval("ID") %>'/>
+                        <asp:Button Text="刪除" CssClass="btn btn-primary" ID="btnDel" runat="server"
+                        OnCommand="btnDel_Command" CommandArgument='<%# Eval("ID") %>' OnClientClick='<%# $"return funcAlert(\"{Eval("Account")}\")" %>'/>
                     </ItemTemplate>
                 </asp:TemplateField>
             </Columns>
         </asp:GridView>
         <br />
-        <asp:Label Text="text" runat="server" ID="label1"/>
+        <uc1:ucPager runat="server" id="ucPager" PageSize="2" CurrentPage="1" TotalSize="2" Url="/UserPages/PermissionChangePage.aspx"/>
+        <br />
+        <asp:PlaceHolder ID="plcNoData" runat="server" Visible="false">
+            <p>
+                目前尚無任何使用者。
+            </p>
+        </asp:PlaceHolder>
+        <asp:Label Text="text" runat="server" ID="lblMsg"/>
     </form>
     <script>
         function funcAlert(txtAccount) {

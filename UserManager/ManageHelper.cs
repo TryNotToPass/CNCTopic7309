@@ -59,5 +59,29 @@ namespace UserManager
                 LoginHelper.WriteLog(ex);
             }
         }
+
+        public static bool UpdateUserLv(UserInfo userinfo ,int act)
+        {
+            //字串應在按下案件前確認，故這裡不確認
+            try
+            {
+                if (act > 0 && act < 3 )
+                {
+                    using (ContextModel context = new ContextModel())
+                    {
+                        var dbObj = context.UserInfoes.Where(o => o.ID == userinfo.ID).FirstOrDefault();
+                        dbObj.UserLevel = act;
+                        context.SaveChanges();
+                    }
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                LoginHelper.WriteLog(ex);
+                return false;
+            }
+        }
     }
 }
