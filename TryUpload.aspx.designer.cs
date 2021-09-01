@@ -7,56 +7,65 @@
 // </自動產生的>
 //------------------------------------------------------------------------------
 
-namespace CNCTopic7309.UserPages
+namespace CNCTopic7309
 {
 
 
-    public partial class MainInfoPage
+    public partial class TryUpload
     {
 
         /// <summary>
-        /// ltlTest 控制項。
+        /// form1 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal ltlTest;
+        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
-        /// btnUIE 控制項。
+        /// FileUpload1 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnUIE;
+        protected global::System.Web.UI.WebControls.FileUpload FileUpload1;
 
         /// <summary>
-        /// btnTIE 控制項。
+        /// FileUpload2 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnTIE;
+        protected global::System.Web.UI.WebControls.FileUpload FileUpload2;
 
         /// <summary>
-        /// btnLvChange 控制項。
+        /// FileUpload3 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnLvChange;
+        protected global::System.Web.UI.WebControls.FileUpload FileUpload3;
 
         /// <summary>
-        /// btnLogOut 控制項。
+        /// btnOK 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnLogOut;
+        protected global::System.Web.UI.WebControls.Button btnOK;
+
+        /// <summary>
+        /// lblMsg 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMsg;
     }
 }

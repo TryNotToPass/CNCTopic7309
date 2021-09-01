@@ -18,8 +18,6 @@ namespace CNCTopic7309.UserPages
             if (LoginHelper.GetUserType() < 2) 
             {
                 this.btnTIE.Visible = true;
-                this.btnBIE.Visible = true;
-                this.btnRIE.Visible = true;
             }
             if (LoginHelper.GetUserType() == 0)
             {
@@ -50,6 +48,14 @@ namespace CNCTopic7309.UserPages
                 Response.Redirect("PermissionChangePage.aspx");
             }
             
+        }
+
+        protected void btnTIE_Click(object sender, EventArgs e)
+        {
+            if (LoginHelper.GetUserType() < 2)
+            {
+                Response.Redirect("AdminNCPage.aspx");
+            }
         }
     }
 }

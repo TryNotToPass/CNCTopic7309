@@ -14,14 +14,14 @@ namespace CNCTopic7309.UserPages
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            //確認管理員權限
+            if (LoginHelper.GetUserType() != 0)
+            {
+                Response.Redirect("MainInfoPage.aspx");
+                return;
+            }
             if (!this.IsPostBack)
             {
-                //確認管理員權限
-                if (LoginHelper.GetUserType() != 0)
-                {
-                    Response.Redirect("MainInfoPage.aspx");
-                    return;
-                }
 
                 var list = ManageHelper.GetUserList();
                 if (list.Count > 0)

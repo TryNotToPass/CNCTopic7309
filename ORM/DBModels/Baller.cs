@@ -26,10 +26,10 @@ namespace ORM.DBModels
 
         public int Height { get; set; }
 
-        public int weight { get; set; }
+        public int Weight { get; set; }
 
         [Column(TypeName = "date")]
-        public DateTime birth { get; set; }
+        public DateTime Birth { get; set; }
 
         [StringLength(50)]
         public string University { get; set; }

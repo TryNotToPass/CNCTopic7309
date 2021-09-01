@@ -8,6 +8,7 @@ using System.Data;
 using ORM.DBModels;
 using System.Web.Security;
 using System.Security.Principal;
+using System.Net.Mail;
 
 namespace UserManager
 {
@@ -238,6 +239,72 @@ namespace UserManager
                 return false;
             }
 
+        }
+
+        /// <summary>
+        /// 創帳號
+        /// </summary>
+        /// <param name="user"></param>
+        public static void CreateUser(UserInfo user)
+        {
+            try
+            {
+                using (ContextModel context = new ContextModel())
+                {
+                    user.ID = Guid.NewGuid();
+                    user.UserLevel = 2;
+                    context.UserInfoes.Add(user);
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                LoginHelper.WriteLog(ex);
+            }
+        }
+
+        public static void SendGmail(string eMail, Guid ID)
+        {
+            MailMessage mail = new MailMessage();
+            //前面是發信email後面是顯示的名稱
+            mail.From = new MailAddress("wuyukagura@gmail.com", "NBA冠軍賽系統");
+
+            //收信者email
+            mail.To.Add(eMail);
+
+            //設定優先權
+            mail.Priority = MailPriority.Normal;
+
+            //標題
+            mail.Subject = "忘記密碼信件-此信件由NBA冠軍賽系統自動寄出";
+
+            string idText = ID.ToString();
+            //byte[] idByte = Encoding.Default.GetBytes(idText);
+            string add = "http://localhost:55092/GetPWDBack.aspx?ID=" + idText;
+            //內容
+            mail.Body = "<h1>你好，若你沒有忘記NBA冠軍賽系統之密碼，那請無視這張郵件</h1> <br/> <p>請點擊以下連結取回密碼</p> <br/>" +
+                "<a href='"+ add + "'>取回密碼連結</a>";
+
+            //內容使用html
+            mail.IsBodyHtml = true;
+
+            //設定gmail的smtp (這是google的)
+            SmtpClient MySmtp = new SmtpClient("smtp.gmail.com", 587);
+
+            //您在gmail的帳號密碼
+            MySmtp.Credentials = new System.Net.NetworkCredential("wuyukagura@gmail.com", "9kirisameKagura8");
+
+            //開啟ssl
+            MySmtp.EnableSsl = true;
+
+            //發送郵件
+            MySmtp.Send(mail);
+
+            //放掉宣告出來的MySmtp
+            MySmtp = null;
+
+            //放掉宣告出來的mail
+            mail.Dispose();
         }
     }
 }

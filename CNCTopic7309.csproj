@@ -94,6 +94,7 @@
     <Content Include="css\bootstrap.min.css" />
     <Content Include="css\bootstrap.rtl.css" />
     <Content Include="css\bootstrap.rtl.min.css" />
+    <Content Include="GetPWDBack.aspx" />
     <Content Include="Global.asax" />
     <Content Include="js\bootstrap.bundle.js" />
     <Content Include="js\bootstrap.bundle.min.js" />
@@ -101,8 +102,11 @@
     <Content Include="js\bootstrap.esm.min.js" />
     <Content Include="js\bootstrap.js" />
     <Content Include="js\bootstrap.min.js" />
+    <Content Include="js\jQuery360.js" />
     <Content Include="Login.aspx" />
+    <Content Include="TryUpload.aspx" />
     <Content Include="UserControls\ucPager.ascx" />
+    <Content Include="UserPages\AdminNCPage.aspx" />
     <Content Include="UserPages\MainInfoPage.aspx" />
     <Content Include="UserPages\PermissionChangePage.aspx" />
     <Content Include="UserPages\UserInfoEditor.aspx" />
@@ -116,8 +120,18 @@
     <Compile Include="CssTemp.aspx.designer.cs">
       <DependentUpon>CssTemp.aspx</DependentUpon>
     </Compile>
+    <Compile Include="GetPWDBack.aspx.cs">
+      <DependentUpon>GetPWDBack.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GetPWDBack.aspx.designer.cs">
+      <DependentUpon>GetPWDBack.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Handlers\AdminNCHandle.ashx.cs">
+      <DependentUpon>AdminNCHandle.ashx</DependentUpon>
     </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
@@ -134,12 +148,26 @@
       <DependentUpon>Main.Master</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TryUpload.aspx.cs">
+      <DependentUpon>TryUpload.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TryUpload.aspx.designer.cs">
+      <DependentUpon>TryUpload.aspx</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\ucPager.ascx.cs">
       <DependentUpon>ucPager.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="UserControls\ucPager.ascx.designer.cs">
       <DependentUpon>ucPager.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserPages\AdminNCPage.aspx.cs">
+      <DependentUpon>AdminNCPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserPages\AdminNCPage.aspx.designer.cs">
+      <DependentUpon>AdminNCPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="UserPages\MainInfoPage.aspx.cs">
       <DependentUpon>MainInfoPage.aspx</DependentUpon>
@@ -187,6 +215,7 @@
     <Content Include="js\bootstrap.esm.min.js.map" />
     <Content Include="js\bootstrap.js.map" />
     <Content Include="js\bootstrap.min.js.map" />
+    <Content Include="Handlers\AdminNCHandle.ashx" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -197,6 +226,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="FileDownload\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

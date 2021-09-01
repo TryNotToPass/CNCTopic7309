@@ -11,52 +11,43 @@ namespace CNCTopic7309.UserPages
 {
 
 
-    public partial class MainInfoPage
+    public partial class AdminNCPage
     {
 
         /// <summary>
-        /// ltlTest 控制項。
+        /// form1 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal ltlTest;
+        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
-        /// btnUIE 控制項。
+        /// gvTeam 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnUIE;
+        protected global::System.Web.UI.WebControls.GridView gvTeam;
 
         /// <summary>
-        /// btnTIE 控制項。
+        /// gvBaller 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnTIE;
+        protected global::System.Web.UI.WebControls.GridView gvBaller;
 
         /// <summary>
-        /// btnLvChange 控制項。
+        /// gvRace 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnLvChange;
-
-        /// <summary>
-        /// btnLogOut 控制項。
-        /// </summary>
-        /// <remarks>
-        /// 自動產生的欄位。
-        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnLogOut;
+        protected global::System.Web.UI.WebControls.GridView gvRace;
     }
 }
