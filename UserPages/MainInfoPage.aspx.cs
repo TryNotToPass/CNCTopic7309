@@ -68,9 +68,90 @@ namespace CNCTopic7309.UserPages
                     this.ltlChatBoard.Text += "</td></tr></table></div></div><br />";
                 }
 
-                //產生圖片
+                //產生基礎資訊
+                this.ltlInfo.Text = "<div class='card shadow mb-4'>";
+                if (about == "Team") 
+                {
+                    //單純table
+                    var rowInfo = ManageHelper.GetTeamByID(id);
+                    this.ltlInfo.Text += $"<div class='card-header py-3'><h6 class='m-0 font-weight-bold text-primary'>{rowInfo.TeamName}</h6>";
+                    this.ltlInfo.Text += "<div class='card-body'><div class='table-responsive'><table class='table table-bordered' id='dataTable' width='100%' cellspacing='0'>";
+                    this.ltlInfo.Text += "<thead><tr> <th>國籍</th> <th>球員數</th> <th>擁有者</th> <th>主場</th> <th>隊色</th> </tr></thead>";
+                    this.ltlInfo.Text += $"<tbody><tr> <td>{rowInfo.Local}</td> <td>{rowInfo.BallerCount}</td> <td>{rowInfo.Owner}</td> <td>{rowInfo.HomeCourt}</td> <td>{rowInfo.TeamColor}</td> </tr></tbody>";
+                    this.ltlInfo.Text += "</table></div>";
+                }
+                if (about == "Race")
+                {
+                    //條狀圖
+                    var rowInfo = ManageHelper.GetRaceByID(id);
+                    string date = rowInfo.Date.ToString("yyyyMMdd");
+                    this.ltlInfo.Text += $"<div class='card-header py-3'><h6 class='m-0 font-weight-bold text-primary'>第{rowInfo.RaceNum}場-{rowInfo.TeamName}-{date}</h6></div>";
+                    this.ltlInfo.Text += "<div class='card-body'>";
+                    double shootRate = rowInfo.Shoot;
+                    string barColor = GetBarColor(shootRate);
+                    this.ltlInfo.Text += $"<h4 class='small font-weight-bold'>投球率<span class='float-right'>{shootRate}%</span></h4>";
+                    this.ltlInfo.Text += $"<div class='progress mb-4'><div class='{barColor}' role='progressbar' style='width: {shootRate}%' aria-valuenow='{shootRate}' aria-valuemin='0' aria-valuemax='100'></div></div>";
+                    double threeRate = rowInfo.ThreePoint;
+                    barColor = GetBarColor(threeRate);
+                    this.ltlInfo.Text += $"<h4 class='small font-weight-bold'>三分率<span class='float-right'>{threeRate}%</span></h4>";
+                    this.ltlInfo.Text += $"<div class='progress mb-4'><div class='{barColor}' role='progressbar' style='width: {threeRate}%' aria-valuenow='{threeRate}' aria-valuemin='0' aria-valuemax='100'></div></div>";
+                    double penaltyRate = rowInfo.Penalty;
+                    barColor = GetBarColor(penaltyRate);
+                    this.ltlInfo.Text += $"<h4 class='small font-weight-bold'>罰球命中率<span class='float-right'>{penaltyRate}%</span></h4>";
+                    this.ltlInfo.Text += $"<div class='progress mb-4'><div class='{barColor}' role='progressbar' style='width: {penaltyRate}%' aria-valuenow='{penaltyRate}' aria-valuemin='0' aria-valuemax='100'></div></div>";
+                    double bBCnt = rowInfo.BackBoard;
+                    barColor = GetBarColor(bBCnt);
+                    this.ltlInfo.Text += $"<h4 class='small font-weight-bold'>籃板數<span class='float-right'>{bBCnt}</span></h4>";
+                    this.ltlInfo.Text += $"<div class='progress mb-4'><div class='{barColor}' role='progressbar' style='width: {bBCnt}%' aria-valuenow='{bBCnt}' aria-valuemin='0' aria-valuemax='100'></div></div>";
+                    double assisCnt = rowInfo.Assistance;
+                    barColor = GetBarColor(assisCnt);
+                    this.ltlInfo.Text += $"<h4 class='small font-weight-bold'>助攻數<span class='float-right'>{assisCnt}</span></h4>";
+                    this.ltlInfo.Text += $"<div class='progress mb-4'><div class='{barColor}' role='progressbar' style='width: {assisCnt}%' aria-valuenow='{assisCnt}' aria-valuemin='0' aria-valuemax='100'></div></div>";
+                    double blockCnt = rowInfo.Block;
+                    barColor = GetBarColor(blockCnt);
+                    this.ltlInfo.Text += $"<h4 class='small font-weight-bold'>阻截數<span class='float-right'>{blockCnt}</span></h4>";
+                    this.ltlInfo.Text += $"<div class='progress mb-4'><div class='{barColor}' role='progressbar' style='width: {blockCnt}%' aria-valuenow='{blockCnt}' aria-valuemin='0' aria-valuemax='100'></div></div>";
+                    double stealCnt = rowInfo.Steal;
+                    barColor = GetBarColor(stealCnt);
+                    this.ltlInfo.Text += $"<h4 class='small font-weight-bold'>抄球數<span class='float-right'>{stealCnt}</span></h4>";
+                    this.ltlInfo.Text += $"<div class='progress mb-4'><div class='{barColor}' role='progressbar' style='width: {stealCnt}%' aria-valuenow='{stealCnt}' aria-valuemin='0' aria-valuemax='100'></div></div>";
+                    double missCnt = rowInfo.Miss;
+                    barColor = GetBarColor(missCnt);
+                    this.ltlInfo.Text += $"<h4 class='small font-weight-bold'>失誤數<span class='float-right'>{missCnt}</span></h4>";
+                    this.ltlInfo.Text += $"<div class='progress mb-4'><div class='{barColor}' role='progressbar' style='width: {missCnt}%' aria-valuenow='{missCnt}' aria-valuemin='0' aria-valuemax='100'></div></div>";
+                    double raCnt = rowInfo.RestrictedArea;
+                    barColor = GetBarColor(raCnt);
+                    this.ltlInfo.Text += $"<h4 class='small font-weight-bold'>禁區得分<span class='float-right'>{raCnt}</span></h4>";
+                    this.ltlInfo.Text += $"<div class='progress mb-4'><div class='{barColor}' role='progressbar' style='width: {raCnt}%' aria-valuenow='{raCnt}' aria-valuemin='0' aria-valuemax='100'></div></div>";
+                    double foulCnt = rowInfo.Foul;
+                    barColor = GetBarColor(foulCnt);
+                    this.ltlInfo.Text += $"<h4 class='small font-weight-bold'>犯規數<span class='float-right'>{foulCnt}</span></h4>";
+                    this.ltlInfo.Text += $"<div class='progress mb-4'><div class='{barColor}' role='progressbar' style='width: {foulCnt}%' aria-valuenow='{foulCnt}' aria-valuemin='0' aria-valuemax='100'></div></div>";
+
+                }
+                if (about == "Baller") 
+                {
+                    var rowInfo = ManageHelper.GetBallerByID(id);
+                    string date = rowInfo.Birth.ToString("yyyyMMdd");
+                    this.ltlInfo.Text += $"<div class='card-header py-3'><h6 class='m-0 font-weight-bold text-primary'>{rowInfo.Name}</h6>";
+                    this.ltlInfo.Text += "<div class='card-body'><div class='table-responsive'><table class='table table-bordered' id='dataTable' width='100%' cellspacing='0'>";
+                    this.ltlInfo.Text += "<thead><tr> <th>隸屬</th> <th>位置</th> <th>背號</th> <th>生日</th> <th>大學</th> </tr></thead>";
+                    this.ltlInfo.Text += $"<tbody><tr> <td>{rowInfo.TeamName}</td> <td>{rowInfo.Position}</td> <td>{date}</td> <td>{rowInfo.University}</td> </tr></tbody>";
+                    this.ltlInfo.Text += "</table></div>";
+                    int num = rowInfo.Height;
+                    double percent = ((double)num / 250) * 100;
+                    this.ltlInfo.Text += $"<h4 class='small font-weight-bold'>身高<span class='float-right'>{rowInfo.Height}cm</span></h4>";
+                    this.ltlInfo.Text += $"<div class='progress mb-4'><div class='progress-bar bg-info' role='progressbar' style='width: {percent}%' aria-valuenow='{percent}' aria-valuemin='0' aria-valuemax='100'></div></div>";
+                    num = rowInfo.Weight;
+                    percent = ((double)num / 150) * 100;
+                    this.ltlInfo.Text += $"<h4 class='small font-weight-bold'>體重<span class='float-right'>{rowInfo.Weight}kg</span></h4>";
+                    this.ltlInfo.Text += $"<div class='progress mb-4'><div class='progress-bar' role='progressbar' style='width: {percent}%' aria-valuenow='{percent}' aria-valuemin='0' aria-valuemax='100'></div></div>";
+                }
+
+                this.ltlInfo.Text += "</div></div>";
+
+                //產生管理員PO的文章
                 var picList = ManageHelper.GetPicListByString(id, about);
-                this.ltlInfo.Text = "";
                 try
                 {
                     foreach (var item in picList)
@@ -95,6 +176,21 @@ namespace CNCTopic7309.UserPages
                     LoginHelper.WriteLog(ex);
                 }
             }
+        }
+
+        private static string GetBarColor(double shootRate)
+        {
+            string barColor = "progress-bar bg-success";
+            if (shootRate <= 25)
+            {
+                barColor = "progress-bar bg-danger";
+            }
+            else if (shootRate > 25 && shootRate < 60)
+            {
+                barColor = "progress-bar bg-warning";
+            }
+
+            return barColor;
         }
 
         private void PageInit() 

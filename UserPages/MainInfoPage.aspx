@@ -185,16 +185,15 @@
                                 <br />
                                 <asp:FileUpload ID="fuInfo" runat="server" Visible="false"/>
                                 <br />
+                                主要資訊
                                 <asp:Button Text="上傳文章或圖片" runat="server" ID="btnUpload" Visible="false" OnClick="btnUpload_Click"/>
                                 <br />
-<%--                                <img alt="" src="" />
-                                <asp:Image runat="server" ID="imgCover" Width="80" Height="50" Visible="false" />--%>
                                 <asp:Literal Text="資訊圖片等放置(最先的內容以隊伍ID1)" ID="ltlInfo" runat="server" />
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <asp:Literal Text="留言放置處" ID="ltlChatBoard" runat="server" />
+                                <asp:Literal Text="" ID="ltlChatBoard" runat="server" />
                             </td>
                         </tr>
                         <tr>
