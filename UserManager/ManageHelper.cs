@@ -540,6 +540,11 @@ namespace UserManager
             }
         }
 
+        /// <summary>
+        /// 刪除圖片
+        /// </summary>
+        /// <param name="ID"></param>
+        /// <param name="path"></param>
         public static void DeletePic(int ID, string path)
         {
             try
@@ -553,7 +558,8 @@ namespace UserManager
                         context.SaveChanges();
                     }
                 }
-                File.Delete(path);
+                //由於路徑問題會失敗
+                //File.Delete(path);
             }
             catch (Exception ex)
             {

@@ -23,11 +23,21 @@ namespace CNCTopic7309.UserPages
                 this.btnTIE.Visible = true;
                 this.btnUpload.Visible = true;
                 this.fuInfo.Visible = true;
+                this.txtPText.Visible = true;
+                this.txtPTitle.Visible = true;
+                this.txtPHref.Visible = true;
             }
+            else this.PageInit();
+
             if (userLV == 0)
             {
                 this.btnLvChange.Visible = true;
             }
+
+            string runnerText = "跑馬燈跑起來！";
+            string runner = "<MARQUEE>" + runnerText + "</MARQUEE>";
+            ltRunner.Text = runner;
+
             if (!this.IsPostBack)
             {
                 string about = GetPageQuery();
@@ -44,8 +54,11 @@ namespace CNCTopic7309.UserPages
                                                 "<div class='card-body'><table><tr><td>" +
                                                     $"<input type='hidden' class='hfIDC' value='{item.ID}'/>" +
                                                     $"<p class='card-text'>{item.Chat}</p>";
-                    if (userLV == 1) this.ltlChatBoard.Text += $"<h6 class='card-subtitle mb-2 text-muted'>來自管理員：{UserName}</h6>";
-                    else if (userLV==0) this.ltlChatBoard.Text += $"<h6 class='card-subtitle mb-2 text-muted'>來自超級管理員：{UserName}</h6>";
+
+                    int textLV = LoginHelper.GetUserInfoByString(guid, "GUID").UserLevel;
+
+                    if (textLV == 1) this.ltlChatBoard.Text += $"<h6 class='card-subtitle mb-2 text-muted'>來自管理員：{UserName}</h6>";
+                    else if (textLV == 0) this.ltlChatBoard.Text += $"<h6 class='card-subtitle mb-2 text-muted'>來自超級管理員：{UserName}</h6>";
                     else this.ltlChatBoard.Text += $"<h6 class='card-subtitle mb-2 text-muted'>來自：{UserName}</h6>";
 
                     if (userLV < 2 || guid.CompareTo(correctUserGUID) == 0)
@@ -58,18 +71,44 @@ namespace CNCTopic7309.UserPages
                 //產生圖片
                 var picList = ManageHelper.GetPicListByString(id, about);
                 this.ltlInfo.Text = "";
-                foreach (var item in picList) 
+                try
                 {
-                    this.ltlInfo.Text += $"<img src='../FileDownload/{item.About}_pic/{item.Pic}' />";
-                    this.ltlInfo.Text += $"<input type='hidden' class='hfPDC' value='{item.ID}'/>";
-                    this.ltlInfo.Text += $"<input type='hidden' class='hfPath' value='~/FileDownload/{item.About}_pic/{item.Pic}'/>";
-                    if (userLV < 2)
+                    foreach (var item in picList)
                     {
-                        this.ltlChatBoard.Text += "<button type='button' class='btnPicDel'>刪除圖片</button>";
+                        this.ltlInfo.Text += "<div class='card' style='width: 18rem; '>";
+                        this.ltlInfo.Text += $"<img src='../FileDownload/{item.About}_pic/{item.Pic}' class='card-img-top'/>";
+                        this.ltlInfo.Text += "<div class='card-body'><table><tr><td>";
+                        if (item.PicTitle != null || !string.IsNullOrWhiteSpace(item.PicTitle)) this.ltlInfo.Text += $"<h5 class='card-title'>{item.PicTitle}</h5>";
+                        if (item.PicText != null || !string.IsNullOrWhiteSpace(item.PicText)) this.ltlInfo.Text += $"<p class='card-text'>{item.PicText}</p>";
+                        if (item.HyperLink != null || !string.IsNullOrWhiteSpace(item.HyperLink)) this.ltlInfo.Text += $"<a href='{item.HyperLink}' class='btn btn-primary'>前往內容連結</a>";
+                        this.ltlInfo.Text += $"<input type='hidden' class='hfPDC' value='{item.ID}'/>";
+                        this.ltlInfo.Text += $"<input type='hidden' class='hfPath' value='~/FileDownload/{item.About}_pic/{item.Pic}'/>";
+                        if (userLV < 2)
+                        {
+                            this.ltlInfo.Text += "<button type='button' class='btnPicDel'>刪除圖片</button>";
+                        }
+                        this.ltlInfo.Text += "</td></tr></table></div></div>";
                     }
                 }
-
+                catch (Exception ex)
+                {
+                    LoginHelper.WriteLog(ex);
+                }
             }
+        }
+
+        private void PageInit() 
+        {
+            this.txtPText.Text = String.Empty;
+            this.txtPTitle.Text = String.Empty;
+            this.txtPHref.Text = String.Empty;
+            this.btnTIE.Visible = false;
+            this.btnUpload.Visible = false;
+            this.fuInfo.Visible = false;
+            this.txtPText.Visible = false;
+            this.txtPTitle.Visible = false;
+            this.txtPHref.Visible = false;
+            this.btnLvChange.Visible = false;
         }
 
         private string GetPageQuery() 
@@ -166,6 +205,14 @@ namespace CNCTopic7309.UserPages
                     InfoID = Convert.ToInt32(GetIDQuery()),
                     About = GetPageQuery()
                 };
+
+                string pText = this.txtPText.Text;
+                string pTitle = this.txtPTitle.Text;
+                string pHref = this.txtPHref.Text;
+                if (pText != null || string.IsNullOrWhiteSpace(pText)) picture.PicText = pText;
+                if (pTitle != null || string.IsNullOrWhiteSpace(pTitle)) picture.PicTitle = pTitle;
+                if (pHref != null || string.IsNullOrWhiteSpace(pHref)) picture.HyperLink = pHref;
+
                 ManageHelper.CreatePictureData(picture);
                 Response.Redirect(Request.RawUrl);
             }

@@ -19,5 +19,14 @@ namespace ORM.DBModels
         public string About { get; set; }
 
         public int InfoID { get; set; }
+
+        [StringLength(20)]
+        public string PicTitle { get; set; }
+
+        [StringLength(2000)]
+        public string PicText { get; set; }
+
+        [StringLength(100)]
+        public string HyperLink { get; set; }
     }
 }

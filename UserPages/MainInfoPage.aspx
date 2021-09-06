@@ -152,7 +152,8 @@
         <table border="1">
             <tr>
                 <td colspan="2">
-                    <span>考慮放跑馬燈</span>
+                    <asp:Literal Text="跑嗎燈位置" runat="server" ID="ltRunner"/>
+                    <br />
                     <asp:Literal Text="TEST" ID="ltlTest" runat="server" />
                     <asp:Button Text="個資編輯" runat="server" ID="btnUIE" OnClick="btnUIE_Click" CssClass="btn btn-primary"/> &nbsp
                     <asp:Button Text="冠軍賽資訊編輯(Admin)" runat="server" ID="btnTIE" Visible="false" OnClick="btnTIE_Click"/> &nbsp
@@ -176,8 +177,15 @@
                     <table>
                         <tr>
                             <td>
-                                <asp:FileUpload ID="fuInfo" runat="server" /> &nbsp
-                                <asp:Button Text="上傳圖片" runat="server" ID="btnUpload" Visible="false" OnClick="btnUpload_Click"/>
+                                標題：<asp:TextBox runat="server" ID="txtPTitle" Visible="false"/>
+                                <br />
+                                內容：<asp:TextBox runat="server" ID="txtPText" TextMode="MultiLine" Visible="false"/>
+                                <br />
+                                分享連結：<asp:TextBox runat="server" ID="txtPHref" Visible="false"/>
+                                <br />
+                                <asp:FileUpload ID="fuInfo" runat="server" Visible="false"/>
+                                <br />
+                                <asp:Button Text="上傳文章或圖片" runat="server" ID="btnUpload" Visible="false" OnClick="btnUpload_Click"/>
                                 <br />
 <%--                                <img alt="" src="" />
                                 <asp:Image runat="server" ID="imgCover" Width="80" Height="50" Visible="false" />--%>
@@ -191,7 +199,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <asp:TextBox runat="server" ID="txtChat" TextMode="MultiLine" Visible="false"/>
+                                <asp:TextBox runat="server" ID="txtChat" TextMode="MultiLine"/>
                                 <br />
                                 <asp:Button Text="發布留言" runat="server" ID="btnSaveChat" OnClick="btnSaveChat_Click"/>
                             </td>
