@@ -6,21 +6,18 @@ namespace ORM.DBModels
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("UsersTaste")]
-    public partial class UsersTaste
+    public partial class UserChat
     {
         public int ID { get; set; }
 
         public Guid UserID { get; set; }
 
-        public int? FavoriteBallerID { get; set; }
+        [Required]
+        [StringLength(2000)]
+        public string Chat { get; set; }
 
-        public int? FavoriteTeamID { get; set; }
-
-        public int? FavoriteRaceID { get; set; }
-
-        public int? BadTemperBallerID { get; set; }
-
-        public int? FoulKingBallerID { get; set; }
+        [Required]
+        [StringLength(10)]
+        public string About { get; set; }
     }
 }

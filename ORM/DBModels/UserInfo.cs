@@ -25,6 +25,7 @@ namespace ORM.DBModels
         [StringLength(50)]
         public string PWD { get; set; }
 
+        [Required]
         [StringLength(100)]
         public string Email { get; set; }
     }

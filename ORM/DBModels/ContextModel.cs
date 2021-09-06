@@ -13,8 +13,10 @@ namespace ORM.DBModels
         }
 
         public virtual DbSet<Baller> Ballers { get; set; }
+        public virtual DbSet<Picture> Pictures { get; set; }
         public virtual DbSet<Race> Races { get; set; }
         public virtual DbSet<Team> Teams { get; set; }
+        public virtual DbSet<UserChat> UserChats { get; set; }
         public virtual DbSet<UserInfo> UserInfoes { get; set; }
         public virtual DbSet<UsersTaste> UsersTastes { get; set; }
 
@@ -23,6 +25,14 @@ namespace ORM.DBModels
             modelBuilder.Entity<Baller>()
                 .Property(e => e.Position)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<Picture>()
+                .Property(e => e.About)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<UserChat>()
+                .Property(e => e.About)
+                .IsFixedLength();
 
             modelBuilder.Entity<UserInfo>()
                 .Property(e => e.Account)

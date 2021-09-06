@@ -107,6 +107,7 @@
     <Content Include="TryUpload.aspx" />
     <Content Include="UserControls\ucPager.ascx" />
     <Content Include="UserPages\AdminNCPage.aspx" />
+    <Content Include="HtmlPage1.html" />
     <Content Include="UserPages\MainInfoPage.aspx" />
     <Content Include="UserPages\PermissionChangePage.aspx" />
     <Content Include="UserPages\UserInfoEditor.aspx" />

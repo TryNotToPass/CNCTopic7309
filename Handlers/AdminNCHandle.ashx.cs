@@ -18,11 +18,11 @@ namespace CNCTopic7309.Handlers
             string actionName = context.Request.QueryString["Act"];
             string typeName = context.Request.QueryString["Type"];
 
-            if (string.IsNullOrEmpty(actionName))
+            if (string.IsNullOrEmpty(actionName) || string.IsNullOrEmpty(typeName))
             {
-                this.ProcessError(context, "無法獲取行為資料");
+                this.ProcessError(context, "無法獲取資料");
+                return;
             }
-
 
             if (actionName == "query")
             {
@@ -69,7 +69,7 @@ namespace CNCTopic7309.Handlers
             }
             else if (actionName == "create")
             {
-                if (typeName == "Team") 
+                if (typeName == "Team")
                 {
                     string teamName = context.Request.Form["TeamName"];
                     string local = context.Request.Form["Local"];
@@ -206,7 +206,7 @@ namespace CNCTopic7309.Handlers
                     }
                 }
 
-                if (typeName == "Baller") 
+                if (typeName == "Baller")
                 {
                     string teamName = context.Request.Form["TeamName"];
                     string position = context.Request.Form["Position"];
@@ -273,7 +273,7 @@ namespace CNCTopic7309.Handlers
             }
             else if (actionName == "update")
             {
-                if (typeName == "Team") 
+                if (typeName == "Team")
                 {
                     int id = Convert.ToInt32(context.Request.Form["ID"]);
                     string teamName = context.Request.Form["TeamName"];
@@ -393,7 +393,7 @@ namespace CNCTopic7309.Handlers
                     }
                 }
 
-                if (typeName == "Race") 
+                if (typeName == "Race")
                 {
                     int id = Convert.ToInt32(context.Request.Form["ID"]);
                     string teamName = context.Request.Form["TeamName"];
@@ -480,12 +480,24 @@ namespace CNCTopic7309.Handlers
                         context.Response.Write("Error");
                     }
                 }
-                
+
             }
             else if (actionName == "delete")
             {
+                if (context.Request.Form["ID"] == null || string.IsNullOrWhiteSpace(context.Request.Form["ID"]))
+                {
+                    this.ProcessError(context, "哪裡出錯了");
+                    return;
+                }
                 int id = Convert.ToInt32(context.Request.Form["ID"]);
-                if (typeName == "Team") 
+
+                if (id == 0)
+                {
+                    this.ProcessError(context, "哪裡出錯了");
+                    return;
+                }
+
+                if (typeName == "Team")
                 {
                     ManageHelper.DeleteData(id, "T");
                 }
@@ -497,9 +509,60 @@ namespace CNCTopic7309.Handlers
                 {
                     ManageHelper.DeleteData(id, "R");
                 }
+                if (typeName == "Chat")
+                {
+                    ManageHelper.DeleteData(id, "Chat");
+                }
+                if (typeName == "Pic")
+                {
+                    string path = context.Request.Form["Path"];
+                    if (path == null || string.IsNullOrWhiteSpace(path))
+                    {
+                        this.ProcessError(context, "哪裡出錯了");
+                        return;
+                    }
+                    ManageHelper.DeletePic(id, path);
+                }
             }
-
-
+            else if (actionName == "list") 
+            {
+                if (typeName == "Team")
+                {
+                    var list = ManageHelper.GetTeamList();
+                    if (list == null)
+                    {
+                        this.ProcessError(context, "無法獲取資料");
+                        return;
+                    }
+                    string jsonText = Newtonsoft.Json.JsonConvert.SerializeObject(list);
+                    context.Response.ContentType = "application/json";
+                    context.Response.Write(jsonText);
+                }
+                if (typeName == "Baller")
+                {
+                    var list = ManageHelper.GetBallerList();
+                    if (list == null)
+                    {
+                        this.ProcessError(context, "無法獲取資料");
+                        return;
+                    }
+                    string jsonText = Newtonsoft.Json.JsonConvert.SerializeObject(list);
+                    context.Response.ContentType = "application/json";
+                    context.Response.Write(jsonText);
+                }
+                if (typeName == "Race")
+                {
+                    var list = ManageHelper.GetRaceList();
+                    if (list == null)
+                    {
+                        this.ProcessError(context, "無法獲取資料");
+                        return;
+                    }
+                    string jsonText = Newtonsoft.Json.JsonConvert.SerializeObject(list);
+                    context.Response.ContentType = "application/json";
+                    context.Response.Write(jsonText);
+                }
+            }
 
         }
 

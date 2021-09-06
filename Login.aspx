@@ -61,7 +61,7 @@
             </tr>
             <asp:Literal Text="" runat="server" ID="ltlMsg" />
         </table>
-        
+        <a href="HtmlPage1.html">測試專用</a>
     </form>
 </body>
 </html>

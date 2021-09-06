@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ORM.DBModels;
+using System.IO;
 
 namespace UserManager
 {
@@ -37,7 +38,7 @@ namespace UserManager
         }
 
         /// <summary>
-        /// 獲取球隊單(管理員以上)
+        /// 獲取球隊單
         /// </summary>
         /// <returns></returns>
         public static List<Baller> GetBallerList()
@@ -62,7 +63,7 @@ namespace UserManager
             }
         }
         /// <summary>
-        /// 獲取隊伍名單(管理員以上)
+        /// 獲取隊伍名單
         /// </summary>
         /// <returns></returns>
         public static List<Team> GetTeamList()
@@ -86,6 +87,32 @@ namespace UserManager
                 return null;
             }
         }
+        /// <summary>
+        /// 獲取賽場資料
+        /// </summary>
+        /// <returns></returns>
+        public static List<Race> GetRaceList()
+        {
+            try
+            {
+                using (ContextModel context = new ContextModel())
+                {
+                    var query =
+                        (from item in context.Races
+                         orderby item.ID
+                         select item);
+
+                    var list = query.ToList();
+                    return list;
+                }
+            }
+            catch (Exception ex)
+            {
+                LoginHelper.WriteLog(ex);
+                return null;
+            }
+        }
+
         /// <summary>
         /// 由ID獲取隊伍資料
         /// </summary>
@@ -156,32 +183,6 @@ namespace UserManager
 
                     var obj = query.FirstOrDefault();
                     return obj;
-                }
-            }
-            catch (Exception ex)
-            {
-                LoginHelper.WriteLog(ex);
-                return null;
-            }
-        }
-
-        /// <summary>
-        /// 獲取賽場資料(管理員以上)
-        /// </summary>
-        /// <returns></returns>
-        public static List<Race> GetRaceList()
-        {
-            try
-            {
-                using (ContextModel context = new ContextModel())
-                {
-                    var query =
-                        (from item in context.Races
-                         orderby item.ID
-                         select item);
-
-                    var list = query.ToList();
-                    return list;
                 }
             }
             catch (Exception ex)
@@ -307,6 +308,27 @@ namespace UserManager
         }
 
         /// <summary>
+        /// 建立聊天資料
+        /// </summary>
+        /// <param name="data"></param>
+        public static void CreateChatDB(UserChat data)
+        {
+
+            try
+            {
+                using (ContextModel context = new ContextModel())
+                {
+                    context.UserChats.Add(data);
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                LoginHelper.WriteLog(ex);
+            }
+        }
+
+        /// <summary>
         /// 更新球隊資料(管理員)
         /// </summary>
         /// <param name="teamData"></param>
@@ -408,7 +430,7 @@ namespace UserManager
         /// 資訊類資料刪除(管理員)
         /// </summary>
         /// <param name="ID"></param>
-        /// <param name="type"></param>
+        /// <param name="type">T,B,R,Chat</param>
         public static void DeleteData(int ID, string type)
         {
             try
@@ -449,8 +471,18 @@ namespace UserManager
                         }
                     }
                 }
-
-
+                else if (type == "Chat")
+                {
+                    using (ContextModel context = new ContextModel())
+                    {
+                        var dbo = context.UserChats.Where(o => o.ID == ID).FirstOrDefault();
+                        if (dbo != null)
+                        {
+                            context.UserChats.Remove(dbo);
+                            context.SaveChanges();
+                        }
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -458,5 +490,75 @@ namespace UserManager
             }
         }
 
+        /// <summary>
+        /// 上傳圖片
+        /// </summary>
+        /// <param name="picture"></param>
+        public static void CreatePictureData(Picture picture)
+        {
+
+            try
+            {
+                using (ContextModel context = new ContextModel())
+                {
+                    context.Pictures.Add(picture);
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                LoginHelper.WriteLog(ex);
+            }
+        }
+
+        /// <summary>
+        /// 藉由type跟ID獲取圖片單
+        /// </summary>
+        /// <param name="ID"></param>
+        /// <param name="t"></param>
+        /// <returns></returns>
+        public static List<Picture> GetPicListByString(int ID, String t)
+        {
+            try
+            {
+                using (ContextModel context = new ContextModel())
+                {
+                    var query =
+                        (from item in context.Pictures
+                            where item.About == t && item.InfoID == ID
+                            orderby item.ID
+                            select item);
+
+                    var list = query.ToList();
+                    return list;
+                }
+            }
+            catch (Exception ex)
+            {
+                LoginHelper.WriteLog(ex);
+                return null;
+            }
+        }
+
+        public static void DeletePic(int ID, string path)
+        {
+            try
+            {
+                using (ContextModel context = new ContextModel())
+                {
+                    var dbo = context.Pictures.Where(o => o.ID == ID).FirstOrDefault();
+                    if (dbo != null)
+                    {
+                        context.Pictures.Remove(dbo);
+                        context.SaveChanges();
+                    }
+                }
+                File.Delete(path);
+            }
+            catch (Exception ex)
+            {
+                LoginHelper.WriteLog(ex);
+            }
+        }
     }
 }

@@ -52,8 +52,10 @@
   <ItemGroup>
     <Compile Include="DBModels\Baller.cs" />
     <Compile Include="DBModels\ContextModel.cs" />
+    <Compile Include="DBModels\Picture.cs" />
     <Compile Include="DBModels\Race.cs" />
     <Compile Include="DBModels\Team.cs" />
+    <Compile Include="DBModels\UserChat.cs" />
     <Compile Include="DBModels\UserInfo.cs" />
     <Compile Include="DBModels\UsersTaste.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

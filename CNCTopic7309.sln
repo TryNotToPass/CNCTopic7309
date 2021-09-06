@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserManager", "UserManager\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ORM", "ORM\ORM.csproj", "{447FAA6C-E16E-45F3-BDC6-BEDDA6AEC52C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DrawGDI", "..\DrawGDI\DrawGDI.csproj", "{767EC81E-4635-47C1-A674-17693BC53CF4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{447FAA6C-E16E-45F3-BDC6-BEDDA6AEC52C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{447FAA6C-E16E-45F3-BDC6-BEDDA6AEC52C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{447FAA6C-E16E-45F3-BDC6-BEDDA6AEC52C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{767EC81E-4635-47C1-A674-17693BC53CF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{767EC81E-4635-47C1-A674-17693BC53CF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{767EC81E-4635-47C1-A674-17693BC53CF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{767EC81E-4635-47C1-A674-17693BC53CF4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

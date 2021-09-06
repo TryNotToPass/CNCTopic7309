@@ -6,17 +6,19 @@
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>NBA冠軍賽資訊討論版</title>
-
+    <%--在這裡放的腳本會引響套用主板的傢伙--%>
+    <link href="css/bootstrap.css" rel="stylesheet" />
+    <script src="js/bootstrap.js"></script>
+    <script src="js/jQuery360.js"></script>
+    
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
 <body>
     <form id="form1" runat="server">
-        <div>
-            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-                <%--這邊放子分頁的內容--%>
-            </asp:ContentPlaceHolder>
-        </div>
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        <%--這邊放子分頁的內容--%>
+        </asp:ContentPlaceHolder>
     </form>
 </body>
 </html>
