@@ -170,6 +170,9 @@
     <Compile Include="UserPages\AdminNCPage.aspx.designer.cs">
       <DependentUpon>AdminNCPage.aspx</DependentUpon>
     </Compile>
+    <Compile Include="UserPages\AdminPageBase.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="UserPages\MainInfoPage.aspx.cs">
       <DependentUpon>MainInfoPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

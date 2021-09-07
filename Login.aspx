@@ -8,28 +8,76 @@
     <title>使用者登入</title>
     <link href="css/bootstrap.css" rel="stylesheet" />
     <script src="js/bootstrap.js"></script>
+    <style>
+        body {
+            background-color: blue;
+        }
+        .btn-user {
+            font-size:16px;
+            border-radius:10rem;
+            padding:.75rem 1rem;
+        }
+        .btn-block {
+            display:block;
+            width:100%;
+        }
+        .form-control-user{
+            font-size:16px;
+            border-radius:10rem;
+            padding:.75rem 1rem;
+        }
+        .form-group2{margin-bottom:1rem}
+        .form-group3{margin-bottom:.5rem}
+    </style>
 </head>
-<body>
+<body class="bg-gradient-primary">
     <form id="form1" runat="server">
+
+        <div class="row justify-content-center">
+            <div class="col-xl-10 col-lg-12 col-md-9">
+                <div class="card o-hidden border-0 shadow-lg my-5">
+                    <div class="card-body p-0">
+                        <!-- Nested Row within Card Body -->
+                        <div class="row">
+                            <div class="col-lg-6 d-none d-lg-block bg-login-image">圖片</div>
+                            <div class="col-lg-6">
+                                <div class="p-5">
+                                    <div class="text-center">
+                                        <h1 class="h4 text-gray-900 mb-4">一同享受一年一度的NBA冠軍賽吧！</h1>
+                                    </div>
+                                    <div class="form-group2">
+                                        <asp:TextBox runat="server" CssClass="form-control form-control-user" ID="txtAccount" placeholder="請輸入帳號"></asp:TextBox>
+                                    </div>
+                                    <div class="form-group2">
+                                        <asp:TextBox runat="server" ID="txtPassword" CssClass="form-control form-control-user" TextMode="Password" placeholder="請輸入密碼"></asp:TextBox>
+                                    </div>
+                                    <div class="form-group2">
+                                        <asp:Literal Text="" runat="server" ID="ltlMsg" />
+                                    </div>
+                                    <asp:Button runat="server" ID="btnLogin" Text="登入" OnClick ="btnLogin_Click" CssClass="btn btn-primary btn-user btn-block" />
+                                    <hr/>
+                                    <asp:Button runat="server" ID="btnForget" Text="忘記密碼" OnClick ="btnForget_Click" CssClass="btn btn-warning btn-user btn-block form-group3" />
+                                    <asp:Button runat="server" ID="btnTraveler" Text="訪客進入" OnClick ="btnTraveler_Click" CssClass="btn btn-secondary btn-user btn-block form-group3" />
+                                    
+                                    <div class="text-center">
+                                        <!-- Button trigger modal -->
+                                        <button type="button" class="btn btn-info btn-user btn-block" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                          新人註冊
+                                        </button>
+                                        <br />
+                                        <a href="#">測試專用</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <table>
             <tr>
-                <th>帳號：</th>
-                <td><asp:TextBox runat="server" ID="txtAccount"></asp:TextBox></td>
-            </tr>
-            <tr>
-                <th>密碼：</th>
-                <td><asp:TextBox runat="server" ID="txtPassword"></asp:TextBox></td>
-            </tr>
-            <tr>
                 <td colspan ="2" align="center">
-                    <asp:Button runat="server" ID="btnLogin" Text="登入" OnClick ="btnLogin_Click" Font-Size="16" /> &nbsp
-                    <asp:Button runat="server" ID="btnForget" Text="忘記密碼" OnClick ="btnForget_Click" Font-Size ="16" /> &nbsp
-                    <asp:Button runat="server" ID="btnTraveler" Text="訪客進入" OnClick ="btnTraveler_Click" Font-Size ="16" /> &nbsp
-                    
-                    <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                      新人註冊
-                    </button>
                     <!-- Modal -->
                     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                       <div class="modal-dialog">
@@ -58,9 +106,8 @@
 
                 </td>
             </tr>
-            <asp:Literal Text="" runat="server" ID="ltlMsg" />
+            
         </table>
-        <a href="#">測試專用</a>
     </form>
 </body>
 </html>

@@ -5,13 +5,11 @@ using System.Web;
 
 namespace CNCTopic7309.Models
 {
-    public class UserLevelEnum
+    //測試配合用
+    public enum UserLevelEnum
     {
-        public enum UserLevel 
-        {
-            SuperAdmin = 0,
-            Admin = 1,
-            Regular = 2
-        }
+        SuperAdmin = 0,
+        Admin = 1,
+        Regular = 2
     }
 }

@@ -8,6 +8,7 @@ using System.Web.Security;
 using UserManager;
 using ORM.DBModels;
 using System.IO;
+using CNCTopic7309.Models;
 
 namespace CNCTopic7309.UserPages
 {
