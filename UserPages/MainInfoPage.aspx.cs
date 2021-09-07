@@ -65,16 +65,15 @@ namespace CNCTopic7309.UserPages
                     //允許訪客
                     correctUserGUID = "traveler";
                 }
-                
 
+                this.ltlChatBoard.Text = "";
                 foreach (var item in list)
                 {
                     string guid = item.UserID.ToString();
                     string UserName = LoginHelper.GetUserInfoByString(guid, "GUID").Name;
-                    this.ltlChatBoard.Text += "<div class='card' style='width: 18rem;'>" +
-                                                "<div class='card-body'><table><tr><td>" +
-                                                    $"<input type='hidden' class='hfIDC' value='{item.ID}'/>" +
-                                                    $"<p class='card-text'>{item.Chat}</p>";
+                    this.ltlChatBoard.Text += "<div class='card text-center'>" +
+                                                $"<div class='card-body'><p class='card-text'>{item.Chat}</p><table align='center'><tr><td>" +
+                                                $"<input type='hidden' class='hfIDC' value='{item.ID}'/>";
 
                     int textLV = LoginHelper.GetUserInfoByString(guid, "GUID").UserLevel;
 
@@ -82,11 +81,13 @@ namespace CNCTopic7309.UserPages
                     else if (textLV == 0) this.ltlChatBoard.Text += $"<h6 class='card-subtitle mb-2 text-muted'>來自超級管理員：{UserName}</h6>";
                     else this.ltlChatBoard.Text += $"<h6 class='card-subtitle mb-2 text-muted'>來自：{UserName}</h6>";
 
+                    this.ltlChatBoard.Text += $"<div class='card-footer text-muted'>留言日期：{item.Date.ToString("g")}</div>";
+
                     if (userLV < 2 || guid.CompareTo(correctUserGUID) == 0)
                     {
                         this.ltlChatBoard.Text += "<button type='button' class='btnChatDel'>刪除留言</button>";
                     }
-                    this.ltlChatBoard.Text += "</td></tr></table></div></div><br />";
+                    this.ltlChatBoard.Text += "</td></tr></table></div></div>";
                 }
 
                 //產生基礎資訊
@@ -175,9 +176,10 @@ namespace CNCTopic7309.UserPages
                 var picList = ManageHelper.GetPicListByString(id, about);
                 try
                 {
+                    this.ltlInfo.Text += "<div class='row row-cols-1 row-cols-md-2'>";
                     foreach (var item in picList)
                     {
-                        this.ltlInfo.Text += "<div class='card' style='width: 18rem; '>";
+                        this.ltlInfo.Text += "<div class='col'><div class='card' style='max-width: 18rem;'>";
                         this.ltlInfo.Text += $"<img src='../FileDownload/{item.About}_pic/{item.Pic}' class='card-img-top'/>";
                         this.ltlInfo.Text += "<div class='card-body'><table><tr><td>";
                         if (item.PicTitle != null || !string.IsNullOrWhiteSpace(item.PicTitle)) this.ltlInfo.Text += $"<h5 class='card-title'>{item.PicTitle}</h5>";
@@ -189,8 +191,9 @@ namespace CNCTopic7309.UserPages
                         {
                             this.ltlInfo.Text += "<button type='button' class='btnPicDel'>刪除圖片</button>";
                         }
-                        this.ltlInfo.Text += "</td></tr></table></div></div>";
+                        this.ltlInfo.Text += "</td></tr></table></div></div></div>";
                     }
+                    this.ltlInfo.Text += "</div>";
                 }
                 catch (Exception ex)
                 {

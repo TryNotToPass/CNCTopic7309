@@ -318,6 +318,7 @@ namespace UserManager
             {
                 using (ContextModel context = new ContextModel())
                 {
+                    data.Date = DateTime.Now;
                     context.UserChats.Add(data);
                     context.SaveChanges();
                 }

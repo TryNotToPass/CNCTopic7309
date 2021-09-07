@@ -19,5 +19,7 @@ namespace ORM.DBModels
         [Required]
         [StringLength(10)]
         public string About { get; set; }
+
+        public DateTime Date { get; set; }
     }
 }

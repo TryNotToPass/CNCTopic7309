@@ -96,6 +96,7 @@
     <Content Include="css\bootstrap.rtl.min.css" />
     <Content Include="GetPWDBack.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="images\NBA_logo.jpg" />
     <Content Include="js\bootstrap.bundle.js" />
     <Content Include="js\bootstrap.bundle.min.js" />
     <Content Include="js\bootstrap.esm.js" />
@@ -103,6 +104,7 @@
     <Content Include="js\bootstrap.js" />
     <Content Include="js\bootstrap.min.js" />
     <Content Include="js\jQuery360.js" />
+    <Content Include="js\popper.min.js" />
     <Content Include="Login.aspx" />
     <Content Include="TryUpload.aspx" />
     <Content Include="UserControls\ucPager.ascx" />
