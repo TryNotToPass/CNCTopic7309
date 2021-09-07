@@ -23,11 +23,20 @@ namespace CNCTopic7309.UserPages
                 this.btnTIE.Visible = true;
                 this.btnUpload.Visible = true;
                 this.fuInfo.Visible = true;
-                this.txtPText.Visible = true;
-                this.txtPTitle.Visible = true;
-                this.txtPHref.Visible = true;
+                this.ph_admin.Visible = true;
             }
             else this.PageInit();
+
+            if (userLV > 2)
+            {
+                //封鎖訪客不應該看到的東西
+                this.txtChat.Visible = false;
+                this.btnSaveChat.Visible = false;
+                this.btnUIE.Visible = false;
+                this.btnLogOut.Visible = false;
+
+                this.aBackToLogin.Text = "前往登入";
+            }
 
             if (userLV == 0)
             {
@@ -45,7 +54,18 @@ namespace CNCTopic7309.UserPages
                 var list = UserPersonalHelper.GetUserChatListByString(about, "Type");
 
                 //產生留言
-                string correctUserGUID = LoginHelper.GetCurrentUserInfo().ID.ToString();
+                string correctUserGUID;
+                if (LoginHelper.GetCurrentUserInfo() != null)
+                {
+                    correctUserGUID = LoginHelper.GetCurrentUserInfo().ID.ToString();
+                }
+                else 
+                {
+                    //允許訪客
+                    correctUserGUID = "traveler";
+                }
+                
+
                 foreach (var item in list)
                 {
                     string guid = item.UserID.ToString();
@@ -201,9 +221,7 @@ namespace CNCTopic7309.UserPages
             this.btnTIE.Visible = false;
             this.btnUpload.Visible = false;
             this.fuInfo.Visible = false;
-            this.txtPText.Visible = false;
-            this.txtPTitle.Visible = false;
-            this.txtPHref.Visible = false;
+            this.ph_admin.Visible = false;
             this.btnLvChange.Visible = false;
         }
 

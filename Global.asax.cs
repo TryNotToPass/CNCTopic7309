@@ -21,7 +21,7 @@ namespace CNCTopic7309
             string path = request.Url.PathAndQuery;
 
             //限制某資料夾的東西全部都要登入驗證
-            if (path.StartsWith("/UserPages", StringComparison.InvariantCultureIgnoreCase))
+            if (path.StartsWith("/UserPages", StringComparison.InvariantCultureIgnoreCase) && !path.Contains("MainInfoPage.aspx"))
             {
                 bool isAuth = HttpContext.Current.Request.IsAuthenticated;
                 var user = HttpContext.Current.User;

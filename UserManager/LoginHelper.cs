@@ -124,13 +124,13 @@ namespace UserManager
                 }
                 else
                 {
-                    return 2;
+                    return 3;
                 }
             }
             catch (Exception ex)
             {
                 WriteLog(ex);
-                return 2;
+                return 3;
             }
         }
 

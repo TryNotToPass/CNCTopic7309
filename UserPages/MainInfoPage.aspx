@@ -158,7 +158,8 @@
                     <asp:Button Text="個資編輯" runat="server" ID="btnUIE" OnClick="btnUIE_Click" CssClass="btn btn-primary"/> &nbsp
                     <asp:Button Text="冠軍賽資訊編輯(Admin)" runat="server" ID="btnTIE" Visible="false" OnClick="btnTIE_Click"/> &nbsp
                     <asp:Button Text="權限變更(SuperAdmin)" runat="server" ID="btnLvChange" OnClick="btnLvChange_Click" Visible="false"/> &nbsp
-                    <asp:Button Text="LogOut" ID="btnLogOut" runat="server" OnClick="btnLogOut_Click"/>
+                    <asp:Button Text="登出" ID="btnLogOut" runat="server" OnClick="btnLogOut_Click"/>
+                    <a href="../Login.aspx"><asp:Label Text="" runat="server" ID="aBackToLogin"/></a>
                 </td>
             </tr>
             <tr>
@@ -177,16 +178,18 @@
                     <table>
                         <tr>
                             <td>
-                                標題：<asp:TextBox runat="server" ID="txtPTitle" Visible="false"/>
-                                <br />
-                                內容：<asp:TextBox runat="server" ID="txtPText" TextMode="MultiLine" Visible="false"/>
-                                <br />
-                                分享連結：<asp:TextBox runat="server" ID="txtPHref" Visible="false"/>
-                                <br />
-                                <asp:FileUpload ID="fuInfo" runat="server" Visible="false"/>
-                                <br />
-                                主要資訊
-                                <asp:Button Text="上傳文章或圖片" runat="server" ID="btnUpload" Visible="false" OnClick="btnUpload_Click"/>
+                                <asp:PlaceHolder ID="ph_admin" runat="server"  Visible="false">
+                                    標題：<asp:TextBox runat="server" ID="txtPTitle"/>
+                                    <br />
+                                    內容：<asp:TextBox runat="server" ID="txtPText" TextMode="MultiLine" />
+                                    <br />
+                                    分享連結：<asp:TextBox runat="server" ID="txtPHref" />
+                                    <br />
+                                    <asp:FileUpload ID="fuInfo" runat="server" />
+                                    <br />
+                                    主要資訊
+                                    <asp:Button Text="上傳文章或圖片" runat="server" ID="btnUpload" OnClick="btnUpload_Click"/>
+                                </asp:PlaceHolder>
                                 <br />
                                 <asp:Literal Text="資訊圖片等放置(最先的內容以隊伍ID1)" ID="ltlInfo" runat="server" />
                             </td>

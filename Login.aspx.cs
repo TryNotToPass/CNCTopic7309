@@ -55,7 +55,7 @@ namespace CNCTopic7309
 
         protected void btnTraveler_Click(object sender, EventArgs e)
         {
-
+            Response.Redirect("UserPages/MainInfoPage.aspx");
         }
 
         protected void btnSave_Click(object sender, EventArgs e)

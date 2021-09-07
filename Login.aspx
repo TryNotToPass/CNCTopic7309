@@ -11,7 +11,6 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <a href="CssTemp.aspx">GOGO</a>
         <table>
             <tr>
                 <th>帳號：</th>
@@ -61,7 +60,7 @@
             </tr>
             <asp:Literal Text="" runat="server" ID="ltlMsg" />
         </table>
-        <a href="HtmlPage1.html">測試專用</a>
+        <a href="#">測試專用</a>
     </form>
 </body>
 </html>

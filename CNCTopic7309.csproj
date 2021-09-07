@@ -107,7 +107,6 @@
     <Content Include="TryUpload.aspx" />
     <Content Include="UserControls\ucPager.ascx" />
     <Content Include="UserPages\AdminNCPage.aspx" />
-    <Content Include="HtmlPage1.html" />
     <Content Include="UserPages\MainInfoPage.aspx" />
     <Content Include="UserPages\PermissionChangePage.aspx" />
     <Content Include="UserPages\UserInfoEditor.aspx" />
@@ -148,6 +147,7 @@
     <Compile Include="Main.Master.designer.cs">
       <DependentUpon>Main.Master</DependentUpon>
     </Compile>
+    <Compile Include="Models\UserLevelEnum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TryUpload.aspx.cs">
       <DependentUpon>TryUpload.aspx</DependentUpon>
@@ -228,7 +228,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="FileDownload\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="ORM\ORM.csproj">
