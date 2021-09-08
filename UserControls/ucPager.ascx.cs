@@ -39,7 +39,7 @@ namespace CNCTopic7309.UserControls
                 //if (i == firstP + 1) this.ltlPager.Text += $"&nbsp {i} &nbsp";
                 else if (i <= 0) cp += 1;
                 else if (i > totalPages) break;
-                else this.ltlPager.Text += $"<a href='{this.Url}?page={i}' class='btn btn-outline-secondary'>{i}</a> &nbsp;";
+                else this.ltlPager.Text += $"<a href='{this.Url}?page={i}' class='btn btn-outline-secondary'>{i}</a>";
                 //else this.ltlPager.Text += $"<a href='{this.Url}?page={i}' >{i}</a> &nbsp;";
             }
         
@@ -47,7 +47,7 @@ namespace CNCTopic7309.UserControls
 
         public int GetCurrentPage() 
         {
-            string pageText = Request.QueryString["Page"];
+            string pageText = Request.QueryString["page"];
             if (string.IsNullOrWhiteSpace(pageText)) return 1;
             int page;
             if (!int.TryParse(pageText, out page)) return 1;

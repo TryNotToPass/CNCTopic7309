@@ -44,8 +44,8 @@ namespace CNCTopic7309.UserPages
                 this.btnLvChange.Visible = true;
             }
 
-            string runnerText = "歡迎各位NBA粉絲來此交流！登入才可以盡情發言喔！                                     ";
-            runnerText += "發言時請遵守社會準則，請勿在聊天室引戰、談政治、無關緊要的話題、洗版等等，請尊重社會聊天準則                                      ";
+            string runnerText = "歡迎各位NBA粉絲來此交流！登入才可以盡情發言喔！";
+            runnerText += "發言時請遵守社會準則，請勿在聊天室引戰、談政治、無關緊要的話題、洗版等等，請尊重社會聊天準則";
             string runner = "<MARQUEE style='font-weight: 700; background-color: whitesmoke;'>" + runnerText + "</MARQUEE>";
             ltRunner.Text = runner;
 
@@ -54,42 +54,49 @@ namespace CNCTopic7309.UserPages
                 string about = GetPageQuery();
                 int id = Convert.ToInt32(GetIDQuery()); 
                 var list = UserPersonalHelper.GetUserChatListByString(about, "Type");
-
-                //產生留言
                 string correctUserGUID;
                 if (LoginHelper.GetCurrentUserInfo() != null)
                 {
                     correctUserGUID = LoginHelper.GetCurrentUserInfo().ID.ToString();
                 }
-                else 
+                else
                 {
                     //允許訪客
                     correctUserGUID = "traveler";
                 }
-
-                this.ltlChatBoard.Text = "";
-                foreach (var item in list)
+                //產生留言
+                if (list.Count > 0)
                 {
-                    string guid = item.UserID.ToString();
-                    string UserName = LoginHelper.GetUserInfoByString(guid, "GUID").Name;
-                    this.ltlChatBoard.Text += "<div class='card text-center'>" +
-                                                $"<div class='card-body'><p class='card-text'>{item.Chat}</p><table align='center'><tr><td>" +
-                                                $"<input type='hidden' class='hfIDC' value='{item.ID}'/>";
+                    //套用分頁
+                    var ucpagerChatList = this.GetPageDataOfChat(list);
+                    this.ucPager.TotalSize = list.Count;
+                    this.ucPager.Bind();
 
-                    int textLV = LoginHelper.GetUserInfoByString(guid, "GUID").UserLevel;
-
-                    if (textLV == 1) this.ltlChatBoard.Text += $"<h6 class='card-subtitle mb-2 text-muted'>來自管理員：{UserName}</h6>";
-                    else if (textLV == 0) this.ltlChatBoard.Text += $"<h6 class='card-subtitle mb-2 text-muted'>來自超級管理員：{UserName}</h6>";
-                    else this.ltlChatBoard.Text += $"<h6 class='card-subtitle mb-2 text-muted'>來自：{UserName}</h6>";
-
-                    this.ltlChatBoard.Text += $"<div class='card-footer text-muted'>留言日期：{item.Date.ToString("g")}</div>";
-
-                    if (userLV < 2 || guid.CompareTo(correctUserGUID) == 0)
+                    this.ltlChatBoard.Text = "";
+                    foreach (var item in ucpagerChatList)
                     {
-                        this.ltlChatBoard.Text += "<button type='button' class='btnChatDel'>刪除留言</button>";
+                        string guid = item.UserID.ToString();
+                        string UserName = LoginHelper.GetUserInfoByString(guid, "GUID").Name;
+                        this.ltlChatBoard.Text += "<div class='card text-center'>" +
+                                                    $"<div class='card-body'><p class='card-text'>{item.Chat}</p><table align='center'><tr><td>" +
+                                                    $"<input type='hidden' class='hfIDC' value='{item.ID}'/>";
+
+                        int textLV = LoginHelper.GetUserInfoByString(guid, "GUID").UserLevel;
+
+                        if (textLV == 1) this.ltlChatBoard.Text += $"<h6 class='card-subtitle mb-2 text-muted'>來自管理員：{UserName}</h6>";
+                        else if (textLV == 0) this.ltlChatBoard.Text += $"<h6 class='card-subtitle mb-2 text-muted'>來自超級管理員：{UserName}</h6>";
+                        else this.ltlChatBoard.Text += $"<h6 class='card-subtitle mb-2 text-muted'>來自：{UserName}</h6>";
+
+                        this.ltlChatBoard.Text += $"<div class='card-footer text-muted'>留言日期：{item.Date.ToString("g")}</div>";
+
+                        if (userLV < 2 || guid.CompareTo(correctUserGUID) == 0)
+                        {
+                            this.ltlChatBoard.Text += "<button type='button' class='btnChatDel btn btn-outline-dark'>刪除留言</button>";
+                        }
+                        this.ltlChatBoard.Text += "</td></tr></table></div></div>";
                     }
-                    this.ltlChatBoard.Text += "</td></tr></table></div></div>";
                 }
+
 
                 //產生基礎資訊
                 this.ltlInfo.Text = "<div class='card shadow mb-4'>";
@@ -185,12 +192,12 @@ namespace CNCTopic7309.UserPages
                         this.ltlInfo.Text += "<div class='card-body'><table><tr><td>";
                         if (item.PicTitle != null || !string.IsNullOrWhiteSpace(item.PicTitle)) this.ltlInfo.Text += $"<h5 class='card-title'>{item.PicTitle}</h5>";
                         if (item.PicText != null || !string.IsNullOrWhiteSpace(item.PicText)) this.ltlInfo.Text += $"<p class='card-text'>{item.PicText}</p>";
-                        if (item.HyperLink != null || !string.IsNullOrWhiteSpace(item.HyperLink)) this.ltlInfo.Text += $"<a href='{item.HyperLink}' class='btn btn-primary'>前往內容連結</a>";
+                        if (item.HyperLink != null || !string.IsNullOrWhiteSpace(item.HyperLink)) this.ltlInfo.Text += $"<a href='{item.HyperLink}' class='btn btn-outline-info'>前往內容連結</a>";
                         this.ltlInfo.Text += $"<input type='hidden' class='hfPDC' value='{item.ID}'/>";
                         this.ltlInfo.Text += $"<input type='hidden' class='hfPath' value='~/FileDownload/{item.About}_pic/{item.Pic}'/>";
                         if (userLV < 2)
                         {
-                            this.ltlInfo.Text += "<button type='button' class='btnPicDel'>刪除圖片</button>";
+                            this.ltlInfo.Text += "<button type='button' class='btnPicDel btn btn-outline-dark'>刪除圖片</button>";
                         }
                         this.ltlInfo.Text += "</td></tr></table></div></div></div>";
                     }
@@ -234,6 +241,14 @@ namespace CNCTopic7309.UserPages
                 }
 
             }
+        }
+
+        private List<UserChat> GetPageDataOfChat(List<UserChat> list)
+        {
+            int ps = this.ucPager.PageSize;
+            //阻止前面資料的顯示
+            int startIndex = (this.ucPager.GetCurrentPage() - 1) * ps;
+            return list.Skip(startIndex).Take(ps).ToList();
         }
 
         private void UTAllFalse()

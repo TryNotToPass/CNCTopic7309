@@ -168,6 +168,15 @@ namespace CNCTopic7309.UserPages
         protected global::System.Web.UI.WebControls.Literal ltlChatBoard;
 
         /// <summary>
+        /// ucPager 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::CNCTopic7309.UserControls.ucPager ucPager;
+
+        /// <summary>
         /// txtChat 控制項。
         /// </summary>
         /// <remarks>

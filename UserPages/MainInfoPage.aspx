@@ -1,5 +1,8 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="MainInfoPage.aspx.cs" Inherits="CNCTopic7309.UserPages.MainInfoPage" %>
 
+<%@ Register Src="~/UserControls/ucPager.ascx" TagPrefix="uc1" TagName="ucPager" %>
+
+
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -225,7 +228,7 @@
                     <asp:Literal Text="" ID="ltlChatBoard" runat="server"/>
                     <hr />
 
-
+                    <uc1:ucPager runat="server" ID="ucPager" PageSize="5" CurrentPage="1" TotalSize="2" Url="/UserPages/MainInfoPage.aspx"/>
 
                     <div class="input-group mb-2">
                         <span class="input-group-text" id="basic-addon-chat">留言</span>
