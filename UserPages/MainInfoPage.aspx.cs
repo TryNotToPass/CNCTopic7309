@@ -17,7 +17,7 @@ namespace CNCTopic7309.UserPages
         protected void Page_Load(object sender, EventArgs e)
         {
             //確認權限啟用功能
-            this.ltlTest.Text = LoginHelper.GetUserType().ToString();
+            //this.ltlTest.Text = LoginHelper.GetUserType().ToString();
             int userLV = LoginHelper.GetUserType();
             if (userLV < 2)
             {
@@ -44,8 +44,9 @@ namespace CNCTopic7309.UserPages
                 this.btnLvChange.Visible = true;
             }
 
-            string runnerText = "跑馬燈跑起來！";
-            string runner = "<MARQUEE>" + runnerText + "</MARQUEE>";
+            string runnerText = "歡迎各位NBA粉絲來此交流！登入才可以盡情發言喔！                                     ";
+            runnerText += "發言時請遵守社會準則，請勿在聊天室引戰、談政治、無關緊要的話題、洗版等等，請尊重社會聊天準則                                      ";
+            string runner = "<MARQUEE style='font-weight: 700; background-color: whitesmoke;'>" + runnerText + "</MARQUEE>";
             ltRunner.Text = runner;
 
             if (!this.IsPostBack)

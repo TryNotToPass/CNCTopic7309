@@ -120,20 +120,17 @@
         body {
             background-color: #3AB0FA;
         }
-/*        div {
-            float: left;
-        }*/
     </style>
 </head>
 <body>
     <form id="form1" runat="server">
         <div class="container-fliud">
             <%--折疊式選單--%>
-            <div class="row">
+            <div class="row sticky-top">
                 <nav class="navbar navbar-expand-md navbar-light bg-light">
                     <a class="navbar navbar-brand">
                         <img src="../images/NBA_logo.jpg" alt="" width="100" height="50" />
-                        <asp:Literal Text="TEST" ID="ltlTest" runat="server" />
+                        <%--<asp:Literal Text="TEST" ID="ltlTest" runat="server" />--%>
                     </a>
 
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -215,16 +212,21 @@
                         </div>
                     </asp:PlaceHolder>
                     <hr />
-                    <asp:Literal Text="資訊圖片等放置(最先的內容以隊伍ID1)" ID="ltlInfo" runat="server" />
-
-                    <br />
-                    <%--我的最愛--%>
-                    <asp:ImageButton ImageUrl="~/images/heartBtn.png" runat="server" ID="btnHeartHole" Width="50px" Height="50px" OnClick="btnHeartHole_Click"/>
-                    <asp:ImageButton ImageUrl="~/images/heartBtnFilled.png" runat="server" ID="btnHeart" Width="50px" Height="50px" OnClick="btnHeart_Click"/>
                     
+                    <asp:Literal Text="資訊圖片等放置(最先的內容以隊伍ID1)" ID="ltlInfo" runat="server" />
+                    <%--我的最愛--%>
+                    <div class="card">
+                        <div class="card-body">
+                            <asp:ImageButton ImageUrl="~/images/heartBtn.png" runat="server" ID="btnHeartHole" Width="25px" Height="25px" OnClick="btnHeartHole_Click"/>
+                            <asp:ImageButton ImageUrl="~/images/heartBtnFilled.png" runat="server" ID="btnHeart" Width="25px" Height="25px" OnClick="btnHeart_Click"/>
+                        </div>
+                    </div>
                     <hr />
                     <asp:Literal Text="" ID="ltlChatBoard" runat="server"/>
                     <hr />
+
+
+
                     <div class="input-group mb-2">
                         <span class="input-group-text" id="basic-addon-chat">留言</span>
                         <asp:TextBox runat="server" ID="txtChat" TextMode="MultiLine" CssClass="form-control" placeholder="請輸入留言"/>

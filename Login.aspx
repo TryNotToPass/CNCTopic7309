@@ -39,7 +39,10 @@
                     <div class="card-body p-0">
                         <!-- Nested Row within Card Body -->
                         <div class="row">
-                            <div class="col-lg-6 d-none d-lg-block bg-login-image">圖片</div>
+                            <div class="col-lg-6 d-none d-lg-block bg-login-image">
+                                <img src="images/NBA_face.png" style="width:100%; height:auto;"/>
+                                <img src="images/NBA_face.png" style="width:100%; height:auto;"/>
+                            </div>
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="text-center">

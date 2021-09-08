@@ -35,10 +35,12 @@ namespace CNCTopic7309.UserControls
             this.ltlMsg.Text = $"共 {this.TotalSize} 筆，共 {totalPages} 頁，目前在第 {cp} 頁。";
             for (var i = firstP; i <= cp + 1; i++) 
             {
-                if (i == firstP + 1) this.ltlPager.Text += $"&nbsp {i} &nbsp";
+                if (i == firstP + 1) this.ltlPager.Text += $"<a class='btn btn-outline-secondary btn-lg disabled' role='button' aria-disabled='true'>{i}</a>";
+                //if (i == firstP + 1) this.ltlPager.Text += $"&nbsp {i} &nbsp";
                 else if (i <= 0) cp += 1;
                 else if (i > totalPages) break;
-                else this.ltlPager.Text += $"<a href='{this.Url}?page={i}'>{i}</a> &nbsp;";
+                else this.ltlPager.Text += $"<a href='{this.Url}?page={i}' class='btn btn-outline-secondary'>{i}</a> &nbsp;";
+                //else this.ltlPager.Text += $"<a href='{this.Url}?page={i}' >{i}</a> &nbsp;";
             }
         
         }

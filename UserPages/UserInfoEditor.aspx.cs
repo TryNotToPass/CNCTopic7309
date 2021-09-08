@@ -17,7 +17,7 @@ namespace CNCTopic7309.UserPages
             if (!this.IsPostBack)
             {
                 var userinfo = LoginHelper.GetCurrentUserInfo();
-                this.Literal1.Text = userinfo.ID.ToString();
+                //this.Literal1.Text = userinfo.ID.ToString();
                 this.txtAccount.Text = userinfo.Account;
                 this.txtName.Text = userinfo.Name;
                 this.txtEmail.Text = userinfo.Email;
