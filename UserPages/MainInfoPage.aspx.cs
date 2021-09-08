@@ -204,29 +204,41 @@ namespace CNCTopic7309.UserPages
                 if (correctUserGUID != null || correctUserGUID != "traveler")
                 {
                     var userTaste = ManageHelper.GetUsersTasteByGUID(correctUserGUID);
-                    if (about == "Team")
+                    if (userTaste != null)
                     {
-                        if (userTaste.FavoriteTeamID == id) this.UTLike();
-                        else this.UTUnlike();
+                        if (about == "Team")
+                        {
+                            if (userTaste.FavoriteTeamID == id) this.UTLike();
+                            else this.UTUnlike();
+                        }
+                        else if (about == "Baller")
+                        {
+                            if (userTaste.FavoriteBallerID == id) this.UTLike();
+                            else this.UTUnlike();
+                        }
+                        else if (about == "Race")
+                        {
+                            if (userTaste.FavoriteRaceID == id) this.UTLike();
+                            else this.UTUnlike();
+                        }
                     }
-                    else if (about == "Baller")
+                    else
                     {
-                        if (userTaste.FavoriteBallerID == id) this.UTLike();
-                        else this.UTUnlike();
-                    }
-                    else if (about == "Race")
-                    {
-                        if (userTaste.FavoriteRaceID == id) this.UTLike();
-                        else this.UTUnlike();
+                        this.UTUnlike();
                     }
                 }
                 else 
                 {
-                    this.btnHeartHole.Visible = false;
-                    this.btnHeart.Visible = false;
+                    this.UTAllFalse();
                 }
 
             }
+        }
+
+        private void UTAllFalse()
+        {
+            this.btnHeartHole.Visible = false;
+            this.btnHeart.Visible = false;
         }
 
         private void UTUnlike()
@@ -399,18 +411,20 @@ namespace CNCTopic7309.UserPages
                         if (about == "Baller") ut.FavoriteBallerID = id;
                         if (about == "Race") ut.FavoriteRaceID = id;
                         ManageHelper.UpdateUserTaste(ut);
+                        this.UTLike();
                     }
                     else
                     {
                         //第一次喜歡
                         UsersTaste newUt = new UsersTaste();
-                        ut.UserID = user.ID;
-                        if (about == "Team") ut.FavoriteTeamID = id;
-                        if (about == "Baller") ut.FavoriteBallerID = id;
-                        if (about == "Race") ut.FavoriteRaceID = id;
+                        newUt.UserID = user.ID;
+                        if (about == "Team") newUt.FavoriteTeamID = id;
+                        if (about == "Baller") newUt.FavoriteBallerID = id;
+                        if (about == "Race") newUt.FavoriteRaceID = id;
                         ManageHelper.CreateUserTaste(newUt);
+                        this.UTLike();
                     }
-                    Response.Redirect(Request.RawUrl);
+                    //Response.Redirect(Request.RawUrl);
                 }
 
             } 
@@ -439,9 +453,9 @@ namespace CNCTopic7309.UserPages
                         if (about == "Baller") ut.FavoriteBallerID = null;
                         if (about == "Race") ut.FavoriteRaceID = null;
                         ManageHelper.UpdateUserTaste(ut);
+                        this.UTUnlike();
                     }
                 }
-                Response.Redirect(Request.RawUrl);
             }
             catch (Exception ex)
             {
