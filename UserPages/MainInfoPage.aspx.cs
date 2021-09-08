@@ -199,7 +199,46 @@ namespace CNCTopic7309.UserPages
                 {
                     LoginHelper.WriteLog(ex);
                 }
+
+                //個性標籤確認
+                if (correctUserGUID != null || correctUserGUID != "traveler")
+                {
+                    var userTaste = ManageHelper.GetUsersTasteByGUID(correctUserGUID);
+                    if (about == "Team")
+                    {
+                        if (userTaste.FavoriteTeamID == id) this.UTLike();
+                        else this.UTUnlike();
+                    }
+                    else if (about == "Baller")
+                    {
+                        if (userTaste.FavoriteBallerID == id) this.UTLike();
+                        else this.UTUnlike();
+                    }
+                    else if (about == "Race")
+                    {
+                        if (userTaste.FavoriteRaceID == id) this.UTLike();
+                        else this.UTUnlike();
+                    }
+                }
+                else 
+                {
+                    this.btnHeartHole.Visible = false;
+                    this.btnHeart.Visible = false;
+                }
+
             }
+        }
+
+        private void UTUnlike()
+        {
+            this.btnHeartHole.Visible = true;
+            this.btnHeart.Visible = false;
+        }
+
+        private void UTLike()
+        {
+            this.btnHeartHole.Visible = false;
+            this.btnHeart.Visible = true;
         }
 
         private static string GetBarColor(double shootRate)
@@ -339,6 +378,76 @@ namespace CNCTopic7309.UserPages
         {
             string page = GetPageQuery();
             return Server.MapPath($"~/FileDownload/{page}_pic");
+        }
+
+        //第一次喜歡、再喜歡
+        protected void btnHeartHole_Click(object sender, ImageClickEventArgs e)
+        {
+            try 
+            {
+                var user = LoginHelper.GetCurrentUserInfo();
+                if (user != null)
+                {
+                    //再喜歡
+                    string guidText = user.ID.ToString();
+                    var ut = ManageHelper.GetUsersTasteByGUID(guidText);
+                    string about = this.GetPageQuery();
+                    int id = Convert.ToInt32(this.GetIDQuery());
+                    if (ut != null)
+                    {
+                        if (about == "Team") ut.FavoriteTeamID = id;
+                        if (about == "Baller") ut.FavoriteBallerID = id;
+                        if (about == "Race") ut.FavoriteRaceID = id;
+                        ManageHelper.UpdateUserTaste(ut);
+                    }
+                    else
+                    {
+                        //第一次喜歡
+                        UsersTaste newUt = new UsersTaste();
+                        ut.UserID = user.ID;
+                        if (about == "Team") ut.FavoriteTeamID = id;
+                        if (about == "Baller") ut.FavoriteBallerID = id;
+                        if (about == "Race") ut.FavoriteRaceID = id;
+                        ManageHelper.CreateUserTaste(newUt);
+                    }
+                    Response.Redirect(Request.RawUrl);
+                }
+
+            } 
+            catch (Exception ex)
+            {
+                LoginHelper.WriteLog(ex);
+                return;
+            }
+
+        }
+
+        //取消喜歡
+        protected void btnHeart_Click(object sender, ImageClickEventArgs e)
+        {
+            try
+            {
+                var user = LoginHelper.GetCurrentUserInfo();
+                if (user != null)
+                {
+                    string guidText = user.ID.ToString();
+                    var ut = ManageHelper.GetUsersTasteByGUID(guidText);
+                    string about = this.GetPageQuery();
+                    if (ut != null)
+                    {
+                        if (about == "Team") ut.FavoriteTeamID = null;
+                        if (about == "Baller") ut.FavoriteBallerID = null;
+                        if (about == "Race") ut.FavoriteRaceID = null;
+                        ManageHelper.UpdateUserTaste(ut);
+                    }
+                }
+                Response.Redirect(Request.RawUrl);
+            }
+            catch (Exception ex)
+            {
+                LoginHelper.WriteLog(ex);
+                return;
+            }
         }
     }
 }

@@ -13,9 +13,6 @@
     <script>
         $(function () {
             //alert("JQ成功");
-            $("#divBallerList").hide();
-            $("#divTeamList").hide();
-            $("#divRaceList").hide();
             //刪除留言
             $(".btnChatDel").click(function () {
                 var td = $(this).closest("td");
@@ -114,19 +111,6 @@
                     $("#liRaceList").append(table);
                 }
             });
-
-            //顯示列表
-            $("#btnTeamList").click(function () {
-                $("#divTeamList").toggle(300);
-            });
-            $("#btnBallerList").click(function () {
-                $("#divBallerList").toggle(300);
-            });
-            $("#btnRaceList").click(function () {
-                $("#divRaceList").toggle(300);
-            });
-
-
         });
     </script>
     <style>
@@ -144,66 +128,67 @@
 <body>
     <form id="form1" runat="server">
         <div class="container-fliud">
+            <%--折疊式選單--%>
             <div class="row">
-            <!-- 漢堡選單 -->
-            <nav class="navbar navbar-expand-md navbar-light bg-light">
-                <a class="navbar navbar-brand">
-                    <img src="../images/NBA_logo.jpg" alt="" width="100" height="50" />
-                    <asp:Literal Text="TEST" ID="ltlTest" runat="server" />
-                </a>
+                <nav class="navbar navbar-expand-md navbar-light bg-light">
+                    <a class="navbar navbar-brand">
+                        <img src="../images/NBA_logo.jpg" alt="" width="100" height="50" />
+                        <asp:Literal Text="TEST" ID="ltlTest" runat="server" />
+                    </a>
 
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
 
-                <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <asp:Button Text="個資編輯" runat="server" ID="btnUIE" OnClick="btnUIE_Click" CssClass="btn btn-outline-primary"/>
-                        </li>
-                        <li class="nav-item">
-                            <asp:Button Text="冠軍賽資訊編輯" runat="server" ID="btnTIE" Visible="false" OnClick="btnTIE_Click" CssClass="btn btn-outline-primary"/>
-                        </li>
-                        <li class="nav-item">
-                            <asp:Button Text="權限變更(SuperAdmin)" runat="server" ID="btnLvChange" OnClick="btnLvChange_Click" Visible="false" CssClass="btn btn-outline-danger"/>
-                        </li>                        
-                        <li class="nav-item">
-                            <asp:Button Text="登出" ID="btnLogOut" runat="server" OnClick="btnLogOut_Click" CssClass="btn btn-outline-secondary"/>
-                        </li>
-                        <li class="nav-item">
-                            <a href="../Login.aspx"><asp:Label Text="" runat="server" ID="aBackToLogin"/></a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                球隊
-                            </a>
-                            <ul class="dropdown-menu" id="liTeamList" aria-labelledby="navbarDropdownMenuLink">
-                            </ul>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink2" role="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                球員
-                            </a>
-                            <ul class="dropdown-menu" id="liBallerList" aria-labelledby="navbarDropdownMenuLink2">
-                            </ul>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink3" role="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                賽事
-                            </a>
-                            <ul class="dropdown-menu" id="liRaceList" aria-labelledby="navbarDropdownMenuLink3">
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
+                    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <asp:Button Text="個資編輯" runat="server" ID="btnUIE" OnClick="btnUIE_Click" CssClass="btn btn-outline-primary"/>
+                            </li>
+                            <li class="nav-item">
+                                <asp:Button Text="冠軍賽資訊編輯" runat="server" ID="btnTIE" Visible="false" OnClick="btnTIE_Click" CssClass="btn btn-outline-primary"/>
+                            </li>
+                            <li class="nav-item">
+                                <asp:Button Text="權限變更(SuperAdmin)" runat="server" ID="btnLvChange" OnClick="btnLvChange_Click" Visible="false" CssClass="btn btn-outline-danger"/>
+                            </li>                        
+                            <li class="nav-item">
+                                <asp:Button Text="登出" ID="btnLogOut" runat="server" OnClick="btnLogOut_Click" CssClass="btn btn-outline-secondary"/>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../Login.aspx"><asp:Label Text="" runat="server" ID="aBackToLogin"/></a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    球隊
+                                </a>
+                                <ul class="dropdown-menu" id="liTeamList" aria-labelledby="navbarDropdownMenuLink">
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink2" role="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    球員
+                                </a>
+                                <ul class="dropdown-menu" id="liBallerList" aria-labelledby="navbarDropdownMenuLink2">
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink3" role="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    賽事
+                                </a>
+                                <ul class="dropdown-menu" id="liRaceList" aria-labelledby="navbarDropdownMenuLink3">
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
                 <asp:Literal Text="跑嗎燈位置" runat="server" ID="ltRunner"/>
             </div>
+
             <div class="row">
                 <div class="col-md-2 col-sm-12 col-lg-3">
                 </div>
@@ -231,6 +216,12 @@
                     </asp:PlaceHolder>
                     <hr />
                     <asp:Literal Text="資訊圖片等放置(最先的內容以隊伍ID1)" ID="ltlInfo" runat="server" />
+
+                    <br />
+                    <%--我的最愛--%>
+                    <asp:ImageButton ImageUrl="~/images/heartBtn.png" runat="server" ID="btnHeartHole" Width="50px" Height="50px" OnClick="btnHeartHole_Click"/>
+                    <asp:ImageButton ImageUrl="~/images/heartBtnFilled.png" runat="server" ID="btnHeart" Width="50px" Height="50px" OnClick="btnHeart_Click"/>
+                    
                     <hr />
                     <asp:Literal Text="" ID="ltlChatBoard" runat="server"/>
                     <hr />

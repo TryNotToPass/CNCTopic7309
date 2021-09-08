@@ -567,5 +567,69 @@ namespace UserManager
                 LoginHelper.WriteLog(ex);
             }
         }
+
+        public static UsersTaste GetUsersTasteByGUID(string Str)
+        {
+            try
+            {
+                Guid guid = new Guid(Str);
+                using (ContextModel context = new ContextModel())
+                {
+                    var query =
+                        (from item in context.UsersTastes
+                            where item.UserID == guid
+                            select item);
+                    var obj = query.FirstOrDefault();
+                    return obj;
+                }
+            }
+            catch (Exception ex)
+            {
+                LoginHelper.WriteLog(ex);
+                return null;
+            }
+        }
+
+        public static void CreateUserTaste(UsersTaste data)
+        {
+            try
+            {
+                using (ContextModel context = new ContextModel())
+                {
+                    context.UsersTastes.Add(data);
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                LoginHelper.WriteLog(ex);
+            }
+        }
+
+        public static bool UpdateUserTaste(UsersTaste data)
+        {
+            try
+            {
+                using (ContextModel context = new ContextModel())
+                {
+                    var dbObject = context.UsersTastes.Where(obj => obj.UserID == data.UserID).FirstOrDefault();
+                    dbObject.FavoriteBallerID = data.FavoriteBallerID;
+                    dbObject.FavoriteRaceID = data.FavoriteRaceID;
+                    dbObject.FavoriteTeamID = data.FavoriteTeamID;
+
+                    dbObject.BadTemperBallerID = data.BadTemperBallerID;
+                    dbObject.FoulKingBallerID = data.FoulKingBallerID;
+                    context.SaveChanges();
+
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                LoginHelper.WriteLog(ex);
+                return false;
+            }
+
+        }
     }
 }

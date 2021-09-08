@@ -96,6 +96,8 @@
     <Content Include="css\bootstrap.rtl.min.css" />
     <Content Include="GetPWDBack.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="images\heartBtn.png" />
+    <Content Include="images\heartBtnFilled.png" />
     <Content Include="images\NBA_logo.jpg" />
     <Content Include="js\bootstrap.bundle.js" />
     <Content Include="js\bootstrap.bundle.min.js" />

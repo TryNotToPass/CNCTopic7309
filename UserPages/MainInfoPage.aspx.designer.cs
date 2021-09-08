@@ -150,6 +150,24 @@ namespace CNCTopic7309.UserPages
         protected global::System.Web.UI.WebControls.Literal ltlInfo;
 
         /// <summary>
+        /// btnHeartHole 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton btnHeartHole;
+
+        /// <summary>
+        /// btnHeart 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton btnHeart;
+
+        /// <summary>
         /// ltlChatBoard 控制項。
         /// </summary>
         /// <remarks>
