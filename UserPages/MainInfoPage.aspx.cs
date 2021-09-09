@@ -45,8 +45,8 @@ namespace CNCTopic7309.UserPages
             }
 
             #region 跑馬燈
-            string runnerText = "歡迎各位NBA粉絲來此交流！登入才可以盡情發言喔！";
-            runnerText += "發言時請遵守社會準則，請勿在聊天室引戰、談政治、無關緊要的話題、洗版等等，請尊重社會聊天準則";
+            string runnerText = "歡迎各位NBA粉絲來此交流！登入才可以發言、投票喔！";
+            runnerText += "發言時請遵守社會準則，請勿在聊天室引戰、論政治、無關緊要的話題、洗版等等。";
             List<PopViewModel> popBallerList = UserPersonalHelper.GetPopBallerList("Baller");
             List<PopViewModel> popTeamList = UserPersonalHelper.GetPopBallerList("Team");
             List<PopViewModel> popRaceList = UserPersonalHelper.GetPopBallerList("Race");
@@ -79,7 +79,6 @@ namespace CNCTopic7309.UserPages
             if (popBFoulKingList != null && popBFoulKingList.Count > 0)
             {
                 runnerText += "★☆★☆★☆★☆★☆★☆★☆★☆──────究竟誰才是犯規之鬼？";
-                
                 runnerText += $"球星 {popBFoulKingList.Last().Name}是多數人心中的犯規瘋狗，共有{popBFoulKingList.Last().PopCount}人認同。";
             }
             if (popBBadTempList != null && popBBadTempList.Count > 0)

@@ -49,7 +49,8 @@ namespace CNCTopic7309
             }
 
             string mail = list.Email;
-            LoginHelper.SendGmail("markzmarkz725@gmail.com", list.ID);
+            //LoginHelper.SendGmail("markzmarkz725@gmail.com", list.ID);
+            LoginHelper.SendGmail(mail, list.ID);
             this.ltlMsg.Text = "已經將取回密碼的信件寄送至你的信箱，請注意查收";
         }
 
