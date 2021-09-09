@@ -44,10 +44,52 @@ namespace CNCTopic7309.UserPages
                 this.btnLvChange.Visible = true;
             }
 
+            #region 跑馬燈
             string runnerText = "歡迎各位NBA粉絲來此交流！登入才可以盡情發言喔！";
             runnerText += "發言時請遵守社會準則，請勿在聊天室引戰、談政治、無關緊要的話題、洗版等等，請尊重社會聊天準則";
+            List<PopViewModel> popBallerList = UserPersonalHelper.GetPopBallerList("Baller");
+            List<PopViewModel> popTeamList = UserPersonalHelper.GetPopBallerList("Team");
+            List<PopViewModel> popRaceList = UserPersonalHelper.GetPopBallerList("Race");
+            List<PopViewModel> popBBadTempList = UserPersonalHelper.GetPopBallerList("BBadTemp");
+            List<PopViewModel> popBFoulKingList = UserPersonalHelper.GetPopBallerList("BFoul");
+            if (popBallerList != null && popBallerList.Count > 0) 
+            {
+                runnerText += "★☆★☆★☆★☆★☆★☆★☆★☆──────最受喜愛球星投票！";
+                foreach (var item in popBallerList)
+                {
+                    runnerText += $"球星 {item.Name}：獲得{item.PopCount}人喜愛。";
+                }
+            }
+            if (popTeamList != null && popTeamList.Count > 0)
+            {
+                runnerText += "★☆★☆★☆★☆★☆★☆★☆★☆──────最受喜愛球隊投票！";
+                foreach (var item in popTeamList)
+                {
+                    runnerText += $"球隊 {item.Name}：獲得{item.PopCount}人喜愛。";
+                }
+            }
+            if (popRaceList != null && popRaceList.Count > 0)
+            {
+                runnerText += "★☆★☆★☆★☆★☆★☆★☆★☆──────萬眾矚目賽事投票！";
+                foreach (var item in popRaceList)
+                {
+                    runnerText += $"{item.Name}：獲得{item.PopCount}人讚揚。";
+                }
+            }
+            if (popBFoulKingList != null && popBFoulKingList.Count > 0)
+            {
+                runnerText += "★☆★☆★☆★☆★☆★☆★☆★☆──────究竟誰才是犯規之鬼？";
+                
+                runnerText += $"球星 {popBFoulKingList.Last().Name}是多數人心中的犯規瘋狗，共有{popBFoulKingList.Last().PopCount}人認同。";
+            }
+            if (popBBadTempList != null && popBBadTempList.Count > 0)
+            {
+                runnerText += "★☆★☆★☆★☆★☆★☆★☆★☆──────被打手就暴怒整場！脾氣最差的球員是......";
+                runnerText += $"球星 {popBBadTempList.Last().Name}是多數人心中的統神，共有{popBBadTempList.Last().PopCount}人認同。";
+            }
             string runner = "<MARQUEE style='font-weight: 700; background-color: whitesmoke;'>" + runnerText + "</MARQUEE>";
             ltRunner.Text = runner;
+            #endregion
 
             if (!this.IsPostBack)
             {
@@ -95,6 +137,10 @@ namespace CNCTopic7309.UserPages
                         }
                         this.ltlChatBoard.Text += "</td></tr></table></div></div>";
                     }
+                }
+                else 
+                {
+                    this.ucPager.UCCloser();
                 }
 
 
@@ -209,9 +255,16 @@ namespace CNCTopic7309.UserPages
                 }
 
                 //個性標籤確認
+
+                //球員才會顯示得先鎖
+                this.btnBadTemp.Visible = false;
+                this.btnBadTempFilled.Visible = false;
+                this.btnFoulKing.Visible = false;
+                this.btnFoulKingFilled.Visible = false;
+
                 if (correctUserGUID != null || correctUserGUID != "traveler")
                 {
-                    var userTaste = ManageHelper.GetUsersTasteByGUID(correctUserGUID);
+                    var userTaste = UserPersonalHelper.GetUsersTasteByGUID(correctUserGUID);
                     if (userTaste != null)
                     {
                         if (about == "Team")
@@ -223,6 +276,14 @@ namespace CNCTopic7309.UserPages
                         {
                             if (userTaste.FavoriteBallerID == id) this.UTLike();
                             else this.UTUnlike();
+
+                            this.btnBadTemp.Visible = true;
+                            if (userTaste.BadTemperBallerID == id) this.UTbadTemp();
+                            else this.UTUnbadTemp();
+
+                            this.btnFoulKing.Visible = true;
+                            if (userTaste.FoulKingBallerID == id) this.UTFoulKing();
+                            else this.UTUnFoulKing();
                         }
                         else if (about == "Race")
                         {
@@ -232,6 +293,11 @@ namespace CNCTopic7309.UserPages
                     }
                     else
                     {
+                        if (about == "Baller") 
+                        {
+                            this.UTUnFoulKing();
+                            this.UTUnbadTemp();
+                        }
                         this.UTUnlike();
                     }
                 }
@@ -251,12 +317,38 @@ namespace CNCTopic7309.UserPages
             return list.Skip(startIndex).Take(ps).ToList();
         }
 
+#region 快速情緒按鈕顯示方法集
         private void UTAllFalse()
         {
             this.btnHeartHole.Visible = false;
             this.btnHeart.Visible = false;
+            this.btnBadTemp.Visible = false;
+            this.btnBadTempFilled.Visible = false;
+            this.btnFoulKing.Visible = false;
+            this.btnFoulKingFilled.Visible = false;
+        }
+        private void UTUnFoulKing()
+        {
+            this.btnFoulKing.Visible = true;
+            this.btnFoulKingFilled.Visible = false;
         }
 
+        private void UTFoulKing()
+        {
+            this.btnFoulKing.Visible = false;
+            this.btnFoulKingFilled.Visible = true;
+        }
+
+        private void UTUnbadTemp()
+        {
+            this.btnBadTemp.Visible = true;
+            this.btnBadTempFilled.Visible = false;
+        }
+        private void UTbadTemp()
+        {
+            this.btnBadTemp.Visible = false;
+            this.btnBadTempFilled.Visible = true;
+        }
         private void UTUnlike()
         {
             this.btnHeartHole.Visible = true;
@@ -268,6 +360,7 @@ namespace CNCTopic7309.UserPages
             this.btnHeartHole.Visible = false;
             this.btnHeart.Visible = true;
         }
+#endregion
 
         private static string GetBarColor(double shootRate)
         {
@@ -418,7 +511,7 @@ namespace CNCTopic7309.UserPages
                 {
                     //再喜歡
                     string guidText = user.ID.ToString();
-                    var ut = ManageHelper.GetUsersTasteByGUID(guidText);
+                    var ut = UserPersonalHelper.GetUsersTasteByGUID(guidText);
                     string about = this.GetPageQuery();
                     int id = Convert.ToInt32(this.GetIDQuery());
                     if (ut != null)
@@ -426,7 +519,7 @@ namespace CNCTopic7309.UserPages
                         if (about == "Team") ut.FavoriteTeamID = id;
                         if (about == "Baller") ut.FavoriteBallerID = id;
                         if (about == "Race") ut.FavoriteRaceID = id;
-                        ManageHelper.UpdateUserTaste(ut);
+                        UserPersonalHelper.UpdateUserTaste(ut);
                         this.UTLike();
                     }
                     else
@@ -437,7 +530,7 @@ namespace CNCTopic7309.UserPages
                         if (about == "Team") newUt.FavoriteTeamID = id;
                         if (about == "Baller") newUt.FavoriteBallerID = id;
                         if (about == "Race") newUt.FavoriteRaceID = id;
-                        ManageHelper.CreateUserTaste(newUt);
+                        UserPersonalHelper.CreateUserTaste(newUt);
                         this.UTLike();
                     }
                     //Response.Redirect(Request.RawUrl);
@@ -461,15 +554,141 @@ namespace CNCTopic7309.UserPages
                 if (user != null)
                 {
                     string guidText = user.ID.ToString();
-                    var ut = ManageHelper.GetUsersTasteByGUID(guidText);
+                    var ut = UserPersonalHelper.GetUsersTasteByGUID(guidText);
                     string about = this.GetPageQuery();
                     if (ut != null)
                     {
                         if (about == "Team") ut.FavoriteTeamID = null;
                         if (about == "Baller") ut.FavoriteBallerID = null;
                         if (about == "Race") ut.FavoriteRaceID = null;
-                        ManageHelper.UpdateUserTaste(ut);
+                        UserPersonalHelper.UpdateUserTaste(ut);
                         this.UTUnlike();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                LoginHelper.WriteLog(ex);
+                return;
+            }
+        }
+
+        protected void btnBadTemp_Click(object sender, ImageClickEventArgs e)
+        {
+            try
+            {
+                var user = LoginHelper.GetCurrentUserInfo();
+                if (user != null)
+                {
+                    //再喜歡
+                    string guidText = user.ID.ToString();
+                    var ut = UserPersonalHelper.GetUsersTasteByGUID(guidText);
+                    string about = this.GetPageQuery();
+                    int id = Convert.ToInt32(this.GetIDQuery());
+                    if (ut != null)
+                    {
+                        if (about == "Baller") ut.BadTemperBallerID = id;
+                        UserPersonalHelper.UpdateUserTaste(ut);
+                        this.UTbadTemp();
+                    }
+                    else
+                    {
+                        //第一次喜歡
+                        UsersTaste newUt = new UsersTaste();
+                        newUt.UserID = user.ID;
+                        if (about == "Baller") newUt.BadTemperBallerID = id;
+                        UserPersonalHelper.CreateUserTaste(newUt);
+                        this.UTbadTemp();
+                    }
+                    //Response.Redirect(Request.RawUrl);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                LoginHelper.WriteLog(ex);
+                return;
+            }
+        }
+
+        protected void btnBadTempFilled_Click(object sender, ImageClickEventArgs e)
+        {
+            try
+            {
+                var user = LoginHelper.GetCurrentUserInfo();
+                if (user != null)
+                {
+                    string guidText = user.ID.ToString();
+                    var ut = UserPersonalHelper.GetUsersTasteByGUID(guidText);
+                    string about = this.GetPageQuery();
+                    if (ut != null)
+                    {
+                        if (about == "Baller") ut.BadTemperBallerID = null;
+                        UserPersonalHelper.UpdateUserTaste(ut);
+                        this.UTUnbadTemp();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                LoginHelper.WriteLog(ex);
+                return;
+            }
+        }
+
+        protected void btnFoulKing_Click(object sender, ImageClickEventArgs e)
+        {
+            try
+            {
+                var user = LoginHelper.GetCurrentUserInfo();
+                if (user != null)
+                {
+                    //再喜歡
+                    string guidText = user.ID.ToString();
+                    var ut = UserPersonalHelper.GetUsersTasteByGUID(guidText);
+                    string about = this.GetPageQuery();
+                    int id = Convert.ToInt32(this.GetIDQuery());
+                    if (ut != null)
+                    {
+                        if (about == "Baller") ut.FoulKingBallerID = id;
+                        UserPersonalHelper.UpdateUserTaste(ut);
+                        this.UTFoulKing();
+                    }
+                    else
+                    {
+                        //第一次喜歡
+                        UsersTaste newUt = new UsersTaste();
+                        newUt.UserID = user.ID;
+                        if (about == "Baller") newUt.FoulKingBallerID = id;
+                        UserPersonalHelper.CreateUserTaste(newUt);
+                        this.UTFoulKing();
+                    }
+                    //Response.Redirect(Request.RawUrl);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                LoginHelper.WriteLog(ex);
+                return;
+            }
+        }
+
+        protected void btnFoulKingFilled_Click(object sender, ImageClickEventArgs e)
+        {
+            try
+            {
+                var user = LoginHelper.GetCurrentUserInfo();
+                if (user != null)
+                {
+                    string guidText = user.ID.ToString();
+                    var ut = UserPersonalHelper.GetUsersTasteByGUID(guidText);
+                    string about = this.GetPageQuery();
+                    if (ut != null)
+                    {
+                        if (about == "Baller") ut.FoulKingBallerID = null;
+                        UserPersonalHelper.UpdateUserTaste(ut);
+                        this.UTUnFoulKing();
                     }
                 }
             }

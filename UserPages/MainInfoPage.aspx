@@ -123,6 +123,15 @@
         body {
             background-color: #3AB0FA;
         }
+        .light_btn{
+            transition: 500ms;
+        }
+        .light_btn:hover{
+            border-radius: 20px;
+            box-shadow: 0px 0px 6px 1px #FA9A89, inset 10em 10em #FA9A89;
+            transition: 200ms;
+        }
+
     </style>
 </head>
 <body>
@@ -220,8 +229,12 @@
                     <%--我的最愛--%>
                     <div class="card">
                         <div class="card-body">
-                            <asp:ImageButton ImageUrl="~/images/heartBtn.png" runat="server" ID="btnHeartHole" Width="25px" Height="25px" OnClick="btnHeartHole_Click"/>
-                            <asp:ImageButton ImageUrl="~/images/heartBtnFilled.png" runat="server" ID="btnHeart" Width="25px" Height="25px" OnClick="btnHeart_Click"/>
+                            <asp:ImageButton ImageUrl="~/images/heartBtn.png" runat="server" ID="btnHeartHole" Width="25px" Height="25px" OnClick="btnHeartHole_Click" CssClass="light_btn" ToolTip="成為最愛"/>
+                            <asp:ImageButton ImageUrl="~/images/heartBtnFilled.png" runat="server" ID="btnHeart" Width="25px" Height="25px" OnClick="btnHeart_Click" CssClass="light_btn" ToolTip="取消最愛"/>
+                            <asp:ImageButton ImageUrl="~/images/badTemp.png" runat="server" ID="btnBadTemp" Width="25px" Height="25px" OnClick="btnBadTemp_Click" CssClass="light_btn" ToolTip="壞脾最壞"/>
+                            <asp:ImageButton ImageUrl="~/images/badTempFilled.png" runat="server" ID="btnBadTempFilled" Width="25px" Height="25px" OnClick="btnBadTempFilled_Click" CssClass="light_btn" ToolTip="取消壞脾氣"/>
+                            <asp:ImageButton ImageUrl="~/images/FoulKing.png" runat="server" ID="btnFoulKing" Width="30px" Height="30px" OnClick="btnFoulKing_Click" CssClass="light_btn" ToolTip="犯規之王"/>
+                            <asp:ImageButton ImageUrl="~/images/FoulKingFilled.png" runat="server" ID="btnFoulKingFilled" Width="30px" Height="30px" OnClick="btnFoulKingFilled_Click" CssClass="light_btn" ToolTip="取消犯規王名號"/>
                         </div>
                     </div>
                     <hr />

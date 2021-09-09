@@ -96,6 +96,10 @@
     <Content Include="css\bootstrap.rtl.min.css" />
     <Content Include="GetPWDBack.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="images\badTemp.png" />
+    <Content Include="images\badTempFilled.png" />
+    <Content Include="images\FoulKing.png" />
+    <Content Include="images\FoulKingFilled.png" />
     <Content Include="images\heartBtn.png" />
     <Content Include="images\heartBtnFilled.png" />
     <Content Include="images\NBA_face.png" />
