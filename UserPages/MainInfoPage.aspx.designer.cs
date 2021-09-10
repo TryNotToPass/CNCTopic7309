@@ -24,6 +24,15 @@ namespace CNCTopic7309.UserPages
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
+        /// ltRunner 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal ltRunner;
+
+        /// <summary>
         /// btnUIE 控制項。
         /// </summary>
         /// <remarks>
@@ -67,15 +76,6 @@ namespace CNCTopic7309.UserPages
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label aBackToLogin;
-
-        /// <summary>
-        /// ltRunner 控制項。
-        /// </summary>
-        /// <remarks>
-        /// 自動產生的欄位。
-        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal ltRunner;
 
         /// <summary>
         /// ph_admin 控制項。
@@ -130,6 +130,15 @@ namespace CNCTopic7309.UserPages
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnUpload;
+
+        /// <summary>
+        /// Panel1 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel Panel1;
 
         /// <summary>
         /// ltlInfo 控制項。
@@ -211,6 +220,15 @@ namespace CNCTopic7309.UserPages
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
         protected global::CNCTopic7309.UserControls.ucPager ucPager;
+
+        /// <summary>
+        /// phChat 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.PlaceHolder phChat;
 
         /// <summary>
         /// txtChat 控制項。

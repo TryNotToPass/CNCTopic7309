@@ -31,11 +31,11 @@ namespace CNCTopic7309.UserPages
             if (userLV > 2)
             {
                 //封鎖訪客不應該看到的東西
-                this.txtChat.Visible = false;
-                this.btnSaveChat.Visible = false;
+                this.phChat.Visible = false;
                 this.btnUIE.Visible = false;
                 this.btnLogOut.Visible = false;
 
+                this.aBackToLogin.Visible = true;
                 this.aBackToLogin.Text = "前往登入";
             }
 
@@ -207,11 +207,11 @@ namespace CNCTopic7309.UserPages
                 if (about == "Baller") 
                 {
                     var rowInfo = ManageHelper.GetBallerByID(id);
-                    string date = rowInfo.Birth.ToString("yyyyMMdd");
+                    string date = rowInfo.Birth.ToString("yyyy/MM/dd");
                     this.ltlInfo.Text += $"<div class='card-header py-3'><h6 class='m-0 font-weight-bold text-primary'>{rowInfo.Name}</h6>";
                     this.ltlInfo.Text += "<div class='card-body'><div class='table-responsive'><table class='table table-bordered' id='dataTable' width='100%' cellspacing='0'>";
                     this.ltlInfo.Text += "<thead><tr> <th>隸屬</th> <th>位置</th> <th>背號</th> <th>生日</th> <th>大學</th> </tr></thead>";
-                    this.ltlInfo.Text += $"<tbody><tr> <td>{rowInfo.TeamName}</td> <td>{rowInfo.Position}</td> <td>{date}</td> <td>{rowInfo.University}</td> </tr></tbody>";
+                    this.ltlInfo.Text += $"<tbody><tr> <td>{rowInfo.TeamName}</td> <td>{rowInfo.Position}</td> <td>{rowInfo.Number}</td> <td>{date}</td> <td>{rowInfo.University}</td> </tr></tbody>";
                     this.ltlInfo.Text += "</table></div>";
                     int num = rowInfo.Height;
                     double percent = ((double)num / 250) * 100;
@@ -235,9 +235,9 @@ namespace CNCTopic7309.UserPages
                         this.ltlInfo.Text += "<div class='col'><div class='card' style='max-width: 18rem;'>";
                         this.ltlInfo.Text += $"<img src='../FileDownload/{item.About}_pic/{item.Pic}' class='card-img-top'/>";
                         this.ltlInfo.Text += "<div class='card-body'><table><tr><td>";
-                        if (item.PicTitle != null || !string.IsNullOrWhiteSpace(item.PicTitle)) this.ltlInfo.Text += $"<h5 class='card-title'>{item.PicTitle}</h5>";
-                        if (item.PicText != null || !string.IsNullOrWhiteSpace(item.PicText)) this.ltlInfo.Text += $"<p class='card-text'>{item.PicText}</p>";
-                        if (item.HyperLink != null || !string.IsNullOrWhiteSpace(item.HyperLink)) this.ltlInfo.Text += $"<a href='{item.HyperLink}' class='btn btn-outline-info'>前往內容連結</a>";
+                        if (item.PicTitle != null && !string.IsNullOrWhiteSpace(item.PicTitle)) this.ltlInfo.Text += $"<h5 class='card-title'>{item.PicTitle}</h5>";
+                        if (item.PicText != null && !string.IsNullOrWhiteSpace(item.PicText)) this.ltlInfo.Text += $"<p class='card-text'>{item.PicText}</p>";
+                        if (item.HyperLink != null && !string.IsNullOrWhiteSpace(item.HyperLink)) this.ltlInfo.Text += $"<a href='{item.HyperLink}' class='btn btn-outline-info'>前往內容連結</a>";
                         this.ltlInfo.Text += $"<input type='hidden' class='hfPDC' value='{item.ID}'/>";
                         this.ltlInfo.Text += $"<input type='hidden' class='hfPath' value='~/FileDownload/{item.About}_pic/{item.Pic}'/>";
                         if (userLV < 2)
@@ -261,7 +261,7 @@ namespace CNCTopic7309.UserPages
                 this.btnFoulKing.Visible = false;
                 this.btnFoulKingFilled.Visible = false;
 
-                if (correctUserGUID != null || correctUserGUID != "traveler")
+                if (correctUserGUID != null && correctUserGUID != "traveler")
                 {
                     var userTaste = UserPersonalHelper.GetUsersTasteByGUID(correctUserGUID);
                     if (userTaste != null)

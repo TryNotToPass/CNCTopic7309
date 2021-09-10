@@ -114,6 +114,23 @@
                     $("#liRaceList").append(table);
                 }
             });
+
+            var $win = $(window);
+            var $backToTop = $('.js-back-to-top');
+            $backToTop.hide();
+            $win.scroll(function () {
+                if ($win.scrollTop() > 100) {
+                    $backToTop.show();
+                } else {
+                    $backToTop.hide();
+                }
+            });
+            $backToTop.click(function () {
+                $('html, body').animate({ scrollTop: 0 }, 10);
+                $backToTop.hide();
+            });
+
+
         });
     </script>
     <style>
@@ -131,14 +148,17 @@
             box-shadow: 0px 0px 6px 1px #FA9A89, inset 10em 10em #FA9A89;
             transition: 200ms;
         }
-
     </style>
 </head>
 <body>
     <form id="form1" runat="server">
         <div class="container-fliud">
+            <div class="row sticky-top justify-content-center">
+                <asp:Literal Text="跑嗎燈位置" runat="server" ID="ltRunner"/>
+                <button class="js-back-to-top btn btn-secondary w-25" id="btnToTop">回到頂部</button>
+            </div>
             <%--折疊式選單--%>
-            <div class="row sticky-top">
+            <div class="row">
                 <nav class="navbar navbar-expand-md navbar-light bg-light">
                     <a class="navbar navbar-brand">
                         <img src="../images/NBA_logo.jpg" alt="" width="100" height="50" />
@@ -151,8 +171,9 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
 
-                    <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                        <ul class="navbar-nav">
+                    <div class="collapse navbar-collapse" id="navbarNavDropdown" >
+                        <%--<ul class="navbar-nav">--%>
+                        <ul class="navbar-nav" style="--bs-scroll-height: 100px;">
                             <li class="nav-item">
                                 <asp:Button Text="個資編輯" runat="server" ID="btnUIE" OnClick="btnUIE_Click" CssClass="btn btn-outline-primary"/>
                             </li>
@@ -166,7 +187,7 @@
                                 <asp:Button Text="登出" ID="btnLogOut" runat="server" OnClick="btnLogOut_Click" CssClass="btn btn-outline-secondary"/>
                             </li>
                             <li class="nav-item">
-                                <a href="../Login.aspx"><asp:Label Text="" runat="server" ID="aBackToLogin"/></a>
+                                <a href="../Login.aspx"><asp:Label Text="" runat="server" ID="aBackToLogin" CssClass="btn btn-outline-info" Visible="false"/></a>
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
@@ -195,10 +216,11 @@
                         </ul>
                     </div>
                 </nav>
-                <asp:Literal Text="跑嗎燈位置" runat="server" ID="ltRunner"/>
+                
             </div>
 
             <div class="row">
+                
                 <div class="col-md-2 col-sm-12 col-lg-3">
                 </div>
                 <div class="col-md-8 col-sm-12 col-lg-6">
@@ -224,7 +246,7 @@
                         </div>
                     </asp:PlaceHolder>
                     <hr />
-                    
+                    <asp:Panel ID="Panel1" runat="server"></asp:Panel>
                     <asp:Literal Text="資訊圖片等放置(最先的內容以隊伍ID1)" ID="ltlInfo" runat="server" />
                     <%--我的最愛--%>
                     <div class="card">
@@ -243,13 +265,16 @@
 
                     <uc1:ucPager runat="server" ID="ucPager" PageSize="5" CurrentPage="1" TotalSize="2" Url="/UserPages/MainInfoPage.aspx"/>
 
-                    <div class="input-group mb-2">
-                        <span class="input-group-text" id="basic-addon-chat">留言</span>
-                        <asp:TextBox runat="server" ID="txtChat" TextMode="MultiLine" CssClass="form-control" placeholder="請輸入留言"/>
-                    </div>
-                    <div class="d-grid col-6 mx-auto">
-                        <asp:Button Text="發布留言" runat="server" ID="btnSaveChat" OnClick="btnSaveChat_Click" CssClass="btn btn-dark"/>
-                    </div>
+                    <asp:PlaceHolder ID="phChat" runat="server">
+                        <div class="input-group mb-2">
+                            <span class="input-group-text" id="basic-addon-chat">留言</span>
+                            <asp:TextBox runat="server" ID="txtChat" TextMode="MultiLine" CssClass="form-control" placeholder="請輸入留言"/>
+                        </div>
+                        <div class="d-grid col-6 mx-auto">
+                            <asp:Button Text="發布留言" runat="server" ID="btnSaveChat" OnClick="btnSaveChat_Click" CssClass="btn btn-dark"/>
+                        </div>
+                    </asp:PlaceHolder>
+
                 </div>
                 <div class="col-md-2 col-sm-12 col-lg-3">
 

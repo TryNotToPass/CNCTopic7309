@@ -27,7 +27,12 @@
     </div>
     <div class="col-4"></div>
 
-    <div class="col-12">
+
+</div>
+<div class="row">
+    <div class="col-3"></div>
+    <div class="col-6 text-center" style="background-color: whitesmoke;">
         <asp:Literal runat="server" ID="ltlMsg"></asp:Literal>
     </div>
+    <div class="col-3"></div>
 </div>
