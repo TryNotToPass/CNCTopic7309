@@ -24,6 +24,15 @@ namespace CNCTopic7309.UserPages
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
+        /// ltAlert 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal ltAlert;
+
+        /// <summary>
         /// ltRunner 控制項。
         /// </summary>
         /// <remarks>
@@ -60,13 +69,13 @@ namespace CNCTopic7309.UserPages
         protected global::System.Web.UI.WebControls.Button btnLvChange;
 
         /// <summary>
-        /// btnLogOut 控制項。
+        /// btnVote 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnLogOut;
+        protected global::System.Web.UI.WebControls.Button btnVote;
 
         /// <summary>
         /// aBackToLogin 控制項。
@@ -76,6 +85,15 @@ namespace CNCTopic7309.UserPages
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label aBackToLogin;
+
+        /// <summary>
+        /// btnLogOut 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnLogOut;
 
         /// <summary>
         /// ph_admin 控制項。
@@ -130,15 +148,6 @@ namespace CNCTopic7309.UserPages
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnUpload;
-
-        /// <summary>
-        /// Panel1 控制項。
-        /// </summary>
-        /// <remarks>
-        /// 自動產生的欄位。
-        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel Panel1;
 
         /// <summary>
         /// ltlInfo 控制項。

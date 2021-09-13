@@ -560,7 +560,7 @@ namespace UserManager
                     }
                 }
                 //由於路徑問題會失敗
-                //File.Delete(path);
+                File.Delete(path);
             }
             catch (Exception ex)
             {

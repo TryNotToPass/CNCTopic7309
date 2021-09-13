@@ -78,6 +78,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ErrorPages\403.html" />
+    <Content Include="ErrorPages\404.html" />
     <Content Include="CssTemp.aspx" />
     <Content Include="css\bootstrap-grid.css" />
     <Content Include="css\bootstrap-grid.min.css" />
@@ -111,6 +113,9 @@
     <Content Include="js\bootstrap.esm.min.js" />
     <Content Include="js\bootstrap.js" />
     <Content Include="js\bootstrap.min.js" />
+    <Content Include="js\excanvas.min.js" />
+    <Content Include="js\jquery.flot.min.js" />
+    <Content Include="js\jquery.flot.pie.min.js" />
     <Content Include="js\jQuery360.js" />
     <Content Include="js\popper.min.js" />
     <Content Include="Login.aspx" />
@@ -120,6 +125,7 @@
     <Content Include="UserPages\MainInfoPage.aspx" />
     <Content Include="UserPages\PermissionChangePage.aspx" />
     <Content Include="UserPages\UserInfoEditor.aspx" />
+    <Content Include="UserPages\VoteInfoPage.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -203,6 +209,13 @@
     </Compile>
     <Compile Include="UserPages\UserInfoEditor.aspx.designer.cs">
       <DependentUpon>UserInfoEditor.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UserPages\VoteInfoPage.aspx.cs">
+      <DependentUpon>VoteInfoPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserPages\VoteInfoPage.aspx.designer.cs">
+      <DependentUpon>VoteInfoPage.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

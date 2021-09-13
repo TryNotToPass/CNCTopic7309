@@ -11,7 +11,7 @@
     <title>NBA資訊主頁</title>
     <link href="../css/bootstrap.css" rel="stylesheet" />
     <script src="../js/bootstrap.js"></script>
-    <script src="../js/popper.min.js"></script>
+    <%--<script src="../js/popper.min.js"></script>--%>
     <script src="../js/jQuery360.js"></script>
     <script>
         $(function () {
@@ -31,6 +31,10 @@
                         success: function (result) {
                             alert("刪除成功");
                             window.location.reload();
+                        },
+                        error: function (jqXHR, exception) {
+                            var msg = jqXHR.responseText;
+                            alert(msg);
                         }
                     });
                 }
@@ -57,6 +61,10 @@
                         success: function (result) {
                             alert("刪除成功");
                             window.location.reload();
+                        },
+                        error: function (jqXHR, exception) {
+                            var msg = jqXHR.responseText;
+                            alert(msg);
                         }
                     });
                 }
@@ -80,6 +88,10 @@
                         table += htmlText;
                     }
                     $("#liTeamList").append(table);
+                },
+                error: function (jqXHR, exception) {
+                    var msg = jqXHR.responseText;
+                    alert(msg);
                 }
             });
             $.ajax({
@@ -96,6 +108,10 @@
                         table += htmlText;
                     }
                     $("#liBallerList").append(table);
+                },
+                error: function (jqXHR, exception) {
+                    var msg = jqXHR.responseText;
+                    alert(msg);
                 }
             });
             $.ajax({
@@ -112,6 +128,10 @@
                         table += htmlText;
                     }
                     $("#liRaceList").append(table);
+                },
+                error: function (jqXHR, exception) {
+                    var msg = jqXHR.responseText;
+                    alert(msg);
                 }
             });
 
@@ -148,44 +168,41 @@
             box-shadow: 0px 0px 6px 1px #FA9A89, inset 10em 10em #FA9A89;
             transition: 200ms;
         }
+s
     </style>
 </head>
 <body>
     <form id="form1" runat="server">
+        <asp:Literal ID="ltAlert" runat="server" Text=""/>
         <div class="container-fliud">
             <div class="row sticky-top justify-content-center">
                 <asp:Literal Text="跑嗎燈位置" runat="server" ID="ltRunner"/>
-                <button class="js-back-to-top btn btn-secondary w-25" id="btnToTop">回到頂部</button>
+                <button type="button" class="js-back-to-top btn btn-secondary w-25" id="btnToTop">回到頂部</button>
             </div>
             <%--折疊式選單--%>
             <div class="row">
                 <nav class="navbar navbar-expand-md navbar-light bg-light">
-                    <a class="navbar navbar-brand">
+                    <a class="navbar-brand">
+                        &nbsp
                         <img src="../images/NBA_logo.jpg" alt="" width="100" height="50" />
-                        <%--<asp:Literal Text="TEST" ID="ltlTest" runat="server" />--%>
                     </a>
 
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
-                        aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-
-                    <div class="collapse navbar-collapse" id="navbarNavDropdown" >
+                    <div class="collapse navbar-collapse" id="navbarNavDropdown">
                         <%--<ul class="navbar-nav">--%>
                         <ul class="navbar-nav" style="--bs-scroll-height: 100px;">
                             <li class="nav-item">
-                                <asp:Button Text="個資編輯" runat="server" ID="btnUIE" OnClick="btnUIE_Click" CssClass="btn btn-outline-primary"/>
+                                <asp:Button Text="個資編輯" runat="server" ID="btnUIE" OnClick="btnUIE_Click" CssClass="btn btn-outline-primary m-2"/>
                             </li>
                             <li class="nav-item">
-                                <asp:Button Text="冠軍賽資訊編輯" runat="server" ID="btnTIE" Visible="false" OnClick="btnTIE_Click" CssClass="btn btn-outline-primary"/>
+                                <asp:Button Text="冠軍賽資訊編輯" runat="server" ID="btnTIE" Visible="false" OnClick="btnTIE_Click" CssClass="btn btn-outline-primary m-2"/>
                             </li>
                             <li class="nav-item">
-                                <asp:Button Text="權限變更(SuperAdmin)" runat="server" ID="btnLvChange" OnClick="btnLvChange_Click" Visible="false" CssClass="btn btn-outline-danger"/>
-                            </li>                        
-                            <li class="nav-item">
-                                <asp:Button Text="登出" ID="btnLogOut" runat="server" OnClick="btnLogOut_Click" CssClass="btn btn-outline-secondary"/>
+                                <asp:Button Text="權限變更" runat="server" ID="btnLvChange" OnClick="btnLvChange_Click" Visible="false" CssClass="btn btn-outline-danger m-2"/>
                             </li>
+                            <li class="nav-item">
+                                <asp:Button Text="檢視投票" runat="server" ID="btnVote" OnClick="btnVote_Click" CssClass="btn btn-outline-info m-2"/>
+                                <%--<a class="btn btn-outline-info" href="/UserPages/MainInfoPage.aspx?Type=Vote">檢視投票</a>--%>
+                            </li>  
                             <li class="nav-item">
                                 <a href="../Login.aspx"><asp:Label Text="" runat="server" ID="aBackToLogin" CssClass="btn btn-outline-info" Visible="false"/></a>
                             </li>
@@ -215,16 +232,22 @@
                             </li>
                         </ul>
                     </div>
+                    <div class="d-flex me-4">
+                        <asp:Button Text="登出" ID="btnLogOut" runat="server" OnClick="btnLogOut_Click" CssClass="btn btn-outline-secondary"/>
+                    </div>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
                 </nav>
-                
+
             </div>
 
             <div class="row">
+                <div class="col-md-1 col-sm-12"></div>
                 
-                <div class="col-md-2 col-sm-12 col-lg-3">
-                </div>
-                <div class="col-md-8 col-sm-12 col-lg-6">
-
+                <div class="col-md-5 col-sm-12">
                     <asp:PlaceHolder ID="ph_admin" runat="server"  Visible="false">
                         <div class="input-group mb-1">
                             <span class="input-group-text" id="basic-addon1">標題</span>
@@ -246,7 +269,6 @@
                         </div>
                     </asp:PlaceHolder>
                     <hr />
-                    <asp:Panel ID="Panel1" runat="server"></asp:Panel>
                     <asp:Literal Text="資訊圖片等放置(最先的內容以隊伍ID1)" ID="ltlInfo" runat="server" />
                     <%--我的最愛--%>
                     <div class="card">
@@ -259,7 +281,9 @@
                             <asp:ImageButton ImageUrl="~/images/FoulKingFilled.png" runat="server" ID="btnFoulKingFilled" Width="30px" Height="30px" OnClick="btnFoulKingFilled_Click" CssClass="light_btn" ToolTip="取消犯規王名號"/>
                         </div>
                     </div>
-                    <hr />
+                </div>
+
+                <div class="col-md-5 col-sm-12">
                     <asp:Literal Text="" ID="ltlChatBoard" runat="server"/>
                     <hr />
 
@@ -273,14 +297,11 @@
                         <div class="d-grid col-6 mx-auto">
                             <asp:Button Text="發布留言" runat="server" ID="btnSaveChat" OnClick="btnSaveChat_Click" CssClass="btn btn-dark"/>
                         </div>
+                        <br />
                     </asp:PlaceHolder>
-
                 </div>
-                <div class="col-md-2 col-sm-12 col-lg-3">
-
-                </div>
+                <div class="col-md-1 col-sm-12"></div>
             </div>
-
         </div>
     </form>
 </body>

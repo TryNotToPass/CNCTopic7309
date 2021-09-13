@@ -14,6 +14,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
+        <asp:Literal Text="" ID="ltAlert" runat="server" />
         <div class="row">
             <div class="col-md-2 col-sm-12">
             </div>
@@ -34,7 +35,8 @@
                         <asp:BoundField DataField="Email" HeaderText="信箱" />
                         <asp:TemplateField HeaderText="行動">
                             <ItemTemplate>
-                                <asp:Button Text="升/降級" CssClass="btn btn-primary" runat="server" ID="btnUDG" OnCommand="btnUDG_Command" CommandArgument='<%# Eval("ID") %>'/>
+                                <asp:Button Text="升級" CssClass="btn btn-primary" runat="server" ID="btnUG" OnCommand="btnUG_Command" CommandArgument='<%# Eval("ID") %>'/>
+                                <asp:Button Text="降級" CssClass="btn btn-primary" runat="server" ID="btnDG" OnCommand="btnDG_Command" CommandArgument='<%# Eval("ID") %>'/>
                                 <asp:Button Text="刪除" CssClass="btn btn-primary" ID="btnDel" runat="server"
                                 OnCommand="btnDel_Command" CommandArgument='<%# Eval("ID") %>' OnClientClick='<%# $"return funcAlert(\"{Eval("Account")}\")" %>'/>
                             </ItemTemplate>
@@ -42,7 +44,7 @@
                     </Columns>
                 </asp:GridView>
                 <br />
-                <uc1:ucPager runat="server" id="ucPager" PageSize="2" CurrentPage="1" TotalSize="2" Url="/UserPages/PermissionChangePage.aspx"/>
+                <uc1:ucPager runat="server" id="ucPager" PageSize="5" CurrentPage="1" TotalSize="2" Url="/UserPages/PermissionChangePage.aspx"/>
                 <br />
                 <asp:PlaceHolder ID="plcNoData" runat="server" Visible="false">
                     <p>

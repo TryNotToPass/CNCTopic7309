@@ -45,6 +45,10 @@
                         success: function (result) {
                             alert("更新成功");
                             window.location.reload();
+                        },
+                        error: function (jqXHR, exception) {
+                            var msg = jqXHR.responseText;
+                            alert(msg);
                         }
                     });
                 }
@@ -63,6 +67,10 @@
                         success: function (result) {
                             alert("新增成功");
                             window.location.reload();
+                        },
+                        error: function (jqXHR, exception) {
+                            var msg = jqXHR.responseText;
+                            alert(msg);
                         }
                     });
                 }
@@ -101,6 +109,10 @@
                         success: function (result) {
                             alert("更新成功");
                             window.location.reload();
+                        },
+                        error: function (jqXHR, exception) {
+                            var msg = jqXHR.responseText;
+                            alert(msg);
                         }
                     });
                 }
@@ -121,6 +133,10 @@
                         success: function (result) {
                             alert("新增成功");
                             window.location.reload();
+                        },
+                        error: function (jqXHR, exception) {
+                            var msg = jqXHR.responseText;
+                            alert(msg);
                         }
                     });
                 }
@@ -169,6 +185,19 @@
                         success: function (result) {
                             alert("更新成功");
                             window.location.reload();
+                        },
+                        error: function (jqXHR, exception) {
+                            var msg = jqXHR.responseText;
+                            //if (jqXHR.status === 0) {
+                            //    msg += 'Not connect.\n Verify Network.';
+                            //} else if (jqXHR.status == 404) {
+                            //    msg += '測試 [404]';
+                            //} else if (jqXHR.status == 403) {
+                            //    msg += 'Heavy Serer Error [403].';
+                            //} else {
+                            //    msg += 'Uncaught Error.\n' + jqXHR.responseText;
+                            //}
+                            alert(msg);
                         }
                     });
                 }
@@ -193,6 +222,11 @@
                         },
                         success: function (result) {
                             alert("新增成功");
+                            window.location.reload();
+                        },
+                        error: function (jqXHR, exception) {
+                            var msg = jqXHR.responseText;
+                            alert(msg);
                         }
                     });
                 }
@@ -211,6 +245,10 @@
                         success: function (result) {
                             alert("刪除成功");
                             window.location.reload();
+                        },
+                        error: function (jqXHR, exception) {
+                            var msg = jqXHR.responseText;
+                            alert(msg);
                         }
                     });
                 }
@@ -231,6 +269,10 @@
                         success: function (result) {
                             alert("刪除成功");
                             window.location.reload();
+                        },
+                        error: function (jqXHR, exception) {
+                            var msg = jqXHR.responseText;
+                            alert(msg);
                         }
                     });
                 }
@@ -251,6 +293,10 @@
                         success: function (result) {
                             alert("刪除成功");
                             window.location.reload();
+                        },
+                        error: function (jqXHR, exception) {
+                            var msg = jqXHR.responseText;
+                            alert(msg);
                         }
                     });
                 }
@@ -305,6 +351,16 @@
                 $("#divRaceEditor").hide(300);
             });
 
+            $("#btnGvTeam").click(function () {
+                $("#divgvTeam").toggle(200);
+            });
+            $("#btnGvRace").click(function () {
+                $("#divgvRace").toggle(200);
+            });
+            $("#btnGvBaller").click(function () {
+                $("#divgvBaller").toggle(200);
+            });
+
             //資料列
             $(".btnClassEditgvTeam").click(function () {
                 var td = $(this).closest("td");
@@ -328,6 +384,10 @@
                         $("#txtTeamColor").val(result["TeamColor"]);
 
                         $("#divTeamEditor").show(300);
+                    },
+                    error: function (jqXHR, exception) {
+                        var msg = jqXHR.responseText;
+                        alert(msg);
                     }
                 });
             });
@@ -356,6 +416,10 @@
                         $("#txtUniversity").val(result["University"]);
 
                         $("#divBallerEditor").show(300);
+                    },
+                    error: function (jqXHR, exception) {
+                        var msg = jqXHR.responseText;
+                        alert(msg);
                     }
                 });
             });
@@ -389,9 +453,15 @@
                         $("#txtFoul").val(result["Foul"]);
 
                         $("#divRaceEditor").show(300);
+                    },
+                    error: function (jqXHR, exception) {
+                        var msg = jqXHR.responseText;
+                        alert(msg);
                     }
                 });
             });
+
+
         });
     </script>
     <style>
@@ -558,31 +628,35 @@
 
         <div class="row">
             <div class="col-12">
-                <div class="card text-center">
-                    <div class="card-header">
-                        隊伍GRID
+                
+                    <div class="card text-center">
+                        <div class="card-header">
+                            隊伍GRID
+                        </div>
+                        <div class="card-body">
+                            <div id="divgvTeam">
+                                <asp:GridView ID="gvTeam" runat="server" AutoGenerateColumns="False" CssClass="table table-sm">
+                                    <Columns>
+                                        <asp:TemplateField HeaderText="行為">
+                                            <ItemTemplate>
+                                                <%--<a href="#">編輯</a>--%>
+                                                <button type="button" class="btnClassEditgvTeam btn btn-outline-dark">EDIT</button>
+                                                <input type="hidden" class="hfRowID" value='<%# Eval("ID") %>' />
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:BoundField DataField="ID" HeaderText="ID" />
+                                        <asp:BoundField DataField="TeamName" HeaderText="名稱" />
+                                        <asp:BoundField DataField="Local" HeaderText="國家" />
+                                        <asp:BoundField DataField="BallerCount" HeaderText="球員人數" />
+                                        <asp:BoundField DataField="Owner" HeaderText="持有者" />
+                                        <asp:BoundField DataField="HomeCourt" HeaderText="主場" />
+                                        <asp:BoundField DataField="TeamColor" HeaderText="隊色" />
+                                    </Columns>
+                                </asp:GridView>
+                            </div>
+                            <button type="button" id="btnGvTeam" class="btn btn-secondary">關閉或開啟隊伍一覽</button>
+                        </div>
                     </div>
-                    <div class="card-body">
-                        <asp:GridView ID="gvTeam" runat="server" AutoGenerateColumns="False" CssClass="table table-sm">
-                            <Columns>
-                                <asp:TemplateField HeaderText="行為">
-                                    <ItemTemplate>
-                                        <%--<a href="#">編輯</a>--%>
-                                        <button type="button" class="btnClassEditgvTeam btn btn-outline-dark">EDIT</button>
-                                        <input type="hidden" class="hfRowID" value='<%# Eval("ID") %>' />
-                                    </ItemTemplate>
-                                </asp:TemplateField>
-                                <asp:BoundField DataField="ID" HeaderText="ID" />
-                                <asp:BoundField DataField="TeamName" HeaderText="名稱" />
-                                <asp:BoundField DataField="Local" HeaderText="國家" />
-                                <asp:BoundField DataField="BallerCount" HeaderText="球員人數" />
-                                <asp:BoundField DataField="Owner" HeaderText="持有者" />
-                                <asp:BoundField DataField="HomeCourt" HeaderText="主場" />
-                                <asp:BoundField DataField="TeamColor" HeaderText="隊色" />
-                            </Columns>
-                        </asp:GridView>
-                    </div>
-                </div>
             </div>
 
             <div class="col-12">
@@ -591,25 +665,29 @@
                         球員GRID
                     </div>
                     <div class="card-body">
-                        <asp:GridView ID="gvBaller" runat="server" AutoGenerateColumns="False" CssClass="table table-sm">
-                            <Columns>
-                                <asp:TemplateField HeaderText="行為">
-                                    <ItemTemplate>
-                                        <button type="button" class="btnClassEditgvBaller btn btn-outline-dark">EDIT</button>
-                                        <input type="hidden" class="hfRowID" value='<%# Eval("ID") %>' />
-                                    </ItemTemplate>
-                                </asp:TemplateField>
-                                <asp:BoundField DataField="ID" HeaderText="ID" />
-                                <asp:BoundField DataField="TeamName" HeaderText="隸屬" />
-                                <asp:BoundField DataField="Position" HeaderText="位置" />
-                                <asp:BoundField DataField="Number" HeaderText="背號" />
-                                <asp:BoundField DataField="Name" HeaderText="稱呼" />
-                                <asp:BoundField DataField="Height" HeaderText="身高" />
-                                <asp:BoundField DataField="Weight" HeaderText="體重" />
-                                <asp:BoundField DataField="Birth" HeaderText="生日" />
-                                <asp:BoundField DataField="University" HeaderText="大學" />
-                            </Columns>
-                        </asp:GridView>
+                        <div id="divgvBaller">
+                            
+                            <asp:GridView ID="gvBaller" runat="server" AutoGenerateColumns="False" CssClass="table table-sm">
+                                <Columns>
+                                    <asp:TemplateField HeaderText="行為">
+                                        <ItemTemplate>
+                                            <button type="button" class="btnClassEditgvBaller btn btn-outline-dark">EDIT</button>
+                                            <input type="hidden" class="hfRowID" value='<%# Eval("ID") %>' />
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:BoundField DataField="ID" HeaderText="ID" />
+                                    <asp:BoundField DataField="TeamName" HeaderText="隸屬" />
+                                    <asp:BoundField DataField="Position" HeaderText="位置" />
+                                    <asp:BoundField DataField="Number" HeaderText="背號" />
+                                    <asp:BoundField DataField="Name" HeaderText="稱呼" />
+                                    <asp:BoundField DataField="Height" HeaderText="身高" />
+                                    <asp:BoundField DataField="Weight" HeaderText="體重" />
+                                    <asp:BoundField DataField="Birth" HeaderText="生日" />
+                                    <asp:BoundField DataField="University" HeaderText="大學" />
+                                </Columns>
+                            </asp:GridView>
+                        </div>
+                        <button type="button" id="btnGvBaller" class="btn btn-secondary">關閉或開啟球員一覽</button>
                     </div>
                 </div>
 
@@ -622,30 +700,34 @@
                         賽場GRID
                     </div>
                     <div class="card-body">
-                        <asp:GridView ID="gvRace" runat="server" AutoGenerateColumns="False" CssClass="table table-sm">
-                            <Columns>
-                                <asp:TemplateField HeaderText="行為">
-                                    <ItemTemplate>
-                                        <button type="button" class="btnClassEditgvRace btn btn-outline-dark">EDIT</button>
-                                        <input type="hidden" class="hfRowID" value='<%# Eval("ID") %>' />
-                                    </ItemTemplate>
-                                </asp:TemplateField>
-                                <asp:BoundField DataField="ID" HeaderText="ID" />
-                                <asp:BoundField DataField="RaceNum" HeaderText="場號" />
-                                <asp:BoundField DataField="Date" HeaderText="日期" />
-                                <asp:BoundField DataField="TeamName" HeaderText="隊伍名稱" />
-                                <asp:BoundField DataField="Shoot" HeaderText="投籃率" />
-                                <asp:BoundField DataField="ThreePoint" HeaderText="三分命中率" />
-                                <asp:BoundField DataField="Penalty" HeaderText="罰球命中率" />
-                                <asp:BoundField DataField="BackBoard" HeaderText="籃板數" />
-                                <asp:BoundField DataField="Assistance" HeaderText="助攻數" />
-                                <asp:BoundField DataField="Block" HeaderText="阻攻數" />
-                                <asp:BoundField DataField="Steal" HeaderText="抄截數" />
-                                <asp:BoundField DataField="Miss" HeaderText="失誤數" />
-                                <asp:BoundField DataField="RestrictedArea" HeaderText="禁區得分" />
-                                <asp:BoundField DataField="Foul" HeaderText="犯規數" />
-                            </Columns>
-                        </asp:GridView>
+                        <div id="divgvRace">
+                        
+                            <asp:GridView ID="gvRace" runat="server" AutoGenerateColumns="False" CssClass="table table-sm">
+                                <Columns>
+                                    <asp:TemplateField HeaderText="行為">
+                                        <ItemTemplate>
+                                            <button type="button" class="btnClassEditgvRace btn btn-outline-dark">EDIT</button>
+                                            <input type="hidden" class="hfRowID" value='<%# Eval("ID") %>' />
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:BoundField DataField="ID" HeaderText="ID" />
+                                    <asp:BoundField DataField="RaceNum" HeaderText="場號" />
+                                    <asp:BoundField DataField="Date" HeaderText="日期" />
+                                    <asp:BoundField DataField="TeamName" HeaderText="隊伍名稱" />
+                                    <asp:BoundField DataField="Shoot" HeaderText="投籃率" />
+                                    <asp:BoundField DataField="ThreePoint" HeaderText="三分命中率" />
+                                    <asp:BoundField DataField="Penalty" HeaderText="罰球命中率" />
+                                    <asp:BoundField DataField="BackBoard" HeaderText="籃板數" />
+                                    <asp:BoundField DataField="Assistance" HeaderText="助攻數" />
+                                    <asp:BoundField DataField="Block" HeaderText="阻攻數" />
+                                    <asp:BoundField DataField="Steal" HeaderText="抄截數" />
+                                    <asp:BoundField DataField="Miss" HeaderText="失誤數" />
+                                    <asp:BoundField DataField="RestrictedArea" HeaderText="禁區得分" />
+                                    <asp:BoundField DataField="Foul" HeaderText="犯規數" />
+                                </Columns>
+                            </asp:GridView>
+                        </div>
+                        <button type="button" id="btnGvRace" class="btn btn-secondary">關閉或開啟賽事一覽</button>
                     </div>
                 </div>
 

@@ -16,7 +16,9 @@ namespace CNCTopic7309
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            //如果已經登入，就導進主畫面
+            var user = LoginHelper.GetCurrentUserInfo();
+            if (user != null) Response.Redirect("UserPages/MainInfoPage.aspx");
         }
 
         protected void btnLogin_Click(object sender, EventArgs e)

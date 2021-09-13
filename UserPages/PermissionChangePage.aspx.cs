@@ -63,21 +63,40 @@ namespace CNCTopic7309.UserPages
             Response.Redirect(Request.RawUrl);
         }
 
-        protected void btnUDG_Command(object sender, CommandEventArgs e)
+        protected void btnUG_Command(object sender, CommandEventArgs e)
         {
             var userinfo = LoginHelper.GetUserInfoByString(e.CommandArgument.ToString(), "GUID");
             int lv = userinfo.UserLevel;
             if (lv == 2)
             {
-                if (ManageHelper.UpdateUserLv(userinfo, 1)) this.lblMsg.Text = "升級成功！";
-                else this.lblMsg.Text = "升級失敗！";
+                if (ManageHelper.UpdateUserLv(userinfo, 1)) 
+                {
+                    this.ltAlert.Text = "<script>alert('升級成功');</script>";
+                    Response.Redirect(Request.RawUrl);
+                } 
+                else this.ltAlert.Text = $"<script>alert('升級失敗！');</script>";
+                
             }
-            else
+            else this.ltAlert.Text = $"<script>alert('升級失敗！用戶帳號：{userinfo.Account} 已無法再升級');</script>";
+        }
+        protected void btnDG_Command(object sender, CommandEventArgs e)
+        {
+            var userinfo = LoginHelper.GetUserInfoByString(e.CommandArgument.ToString(), "GUID");
+            int lv = userinfo.UserLevel;
+            if (lv == 1)
             {
-                if (ManageHelper.UpdateUserLv(userinfo, 2)) this.lblMsg.Text = "降級成功！";
-                else this.lblMsg.Text = "降級失敗！";
+                if (ManageHelper.UpdateUserLv(userinfo, 2))
+                {
+                    this.ltAlert.Text = "<script>alert('降級成功！');</script>";
+                    Response.Redirect(Request.RawUrl);
+                }
+                else this.ltAlert.Text = $"<script>alert('降級失敗！');</script>";
+                
             }
-            Response.Redirect(Request.RawUrl);
+            else 
+            {
+                this.ltAlert.Text = $"<script>alert('降級失敗！用戶帳號：{userinfo.Account}已無法再降級');</script>";
+            }
         }
     }
 }

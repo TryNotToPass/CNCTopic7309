@@ -223,11 +223,10 @@ namespace UserManager
             }
         }
 
-
         /// <summary>
         /// 藉由GUID取喜好
         /// </summary>
-        /// <param name="Str"></param>
+        /// <param name="Str">使用者GUID字串</param>
         /// <returns></returns>
         public static UsersTaste GetUsersTasteByGUID(string Str)
         {
