@@ -45,7 +45,7 @@
             }
             //產生圖表資訊與圖表
             $.ajax({
-                url: "http://localhost:55092/Handlers/AdminNCHandle.ashx?Act=vote&Type=Baller",
+                url: "/Handlers/AdminNCHandle.ashx?Act=vote&Type=Baller",
                 type: "GET",
                 data: {},
                 success: function (result) {
@@ -79,7 +79,7 @@
                 }
             });
             $.ajax({
-                url: "http://localhost:55092/Handlers/AdminNCHandle.ashx?Act=vote&Type=Team",
+                url: "/Handlers/AdminNCHandle.ashx?Act=vote&Type=Team",
                 type: "GET",
                 data: {},
                 success: function (result) {
@@ -111,7 +111,7 @@
                 }
             });
             $.ajax({
-                url: "http://localhost:55092/Handlers/AdminNCHandle.ashx?Act=vote&Type=Race",
+                url: "/Handlers/AdminNCHandle.ashx?Act=vote&Type=Race",
                 type: "GET",
                 data: {},
                 success: function (result) {
@@ -141,7 +141,7 @@
                 }
             });
             $.ajax({
-                url: "http://localhost:55092/Handlers/AdminNCHandle.ashx?Act=vote&Type=BBadTemp",
+                url: "/Handlers/AdminNCHandle.ashx?Act=vote&Type=BBadTemp",
                 type: "GET",
                 data: {},
                 success: function (result) {
@@ -171,7 +171,7 @@
                 }
             });
             $.ajax({
-                url: "http://localhost:55092/Handlers/AdminNCHandle.ashx?Act=vote&Type=BFoul",
+                url: "/Handlers/AdminNCHandle.ashx?Act=vote&Type=BFoul",
                 type: "GET",
                 data: {},
                 success: function (result) {

@@ -474,8 +474,7 @@ namespace CNCTopic7309.UserPages
             string chatText = this.txtChat.Text;
             if (chatText == null || string.IsNullOrWhiteSpace(chatText))
             {
-                //btnSaveChat.Attributes.Add("OnClientClick", "alert('留言發布失敗！')");
-                //btnSaveChat.Attributes.Remove("OnClientClick");
+                this.ltAlert.Text = "<script>alert('請輸入文字！');</script>";
                 return;
             }
             var user = LoginHelper.GetCurrentUserInfo();
@@ -493,8 +492,6 @@ namespace CNCTopic7309.UserPages
                 About = page
             }; 
             ManageHelper.CreateChatDB(userChat);
-            //btnSaveChat.Attributes.Add("OnClientClick", "alert('留言發布成功！')");
-            //btnSaveChat.Attributes.Remove("OnClientClick");
             Response.Redirect(Request.RawUrl);
         }
 

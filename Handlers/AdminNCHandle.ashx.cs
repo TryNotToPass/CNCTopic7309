@@ -20,7 +20,7 @@ namespace CNCTopic7309.Handlers
 
             if (string.IsNullOrEmpty(actionName) || string.IsNullOrEmpty(typeName))
             {
-                this.ProcessError(context, "無法獲取資料", 404);
+                this.ProcessError(context, "無法獲取資料");
                 return;
             }
 
@@ -35,7 +35,7 @@ namespace CNCTopic7309.Handlers
                     var list = ManageHelper.GetTeamByID(id);
                     if (list == null)
                     {
-                        this.ProcessError(context, "無法獲取該ID的資料", 404);
+                        this.ProcessError(context, "無法獲取該ID的資料");
                         return;
                     }
                     string jsonText = Newtonsoft.Json.JsonConvert.SerializeObject(list);
@@ -47,7 +47,7 @@ namespace CNCTopic7309.Handlers
                     var list = ManageHelper.GetBallerByID(id);
                     if (list == null)
                     {
-                        this.ProcessError(context, "無法獲取該ID的資料", 404);
+                        this.ProcessError(context, "無法獲取該ID的資料");
                         return;
                     }
                     string jsonText = Newtonsoft.Json.JsonConvert.SerializeObject(list);
@@ -59,7 +59,7 @@ namespace CNCTopic7309.Handlers
                     var list = ManageHelper.GetRaceByID(id);
                     if (list == null)
                     {
-                        this.ProcessError(context, "無法獲取該ID的資料", 404);
+                        this.ProcessError(context, "無法獲取該ID的資料");
                         return;
                     }
                     string jsonText = Newtonsoft.Json.JsonConvert.SerializeObject(list);
@@ -85,7 +85,7 @@ namespace CNCTopic7309.Handlers
                         string.IsNullOrWhiteSpace(ballerCountText) ||
                         string.IsNullOrWhiteSpace(owner))
                     {
-                        this.ProcessError(context, "資料漏填", 404);
+                        this.ProcessError(context, "資料漏填");
                         return;
                     }
 
@@ -93,7 +93,12 @@ namespace CNCTopic7309.Handlers
                     int ballerCount;
                     if (!int.TryParse(ballerCountText, out ballerCount))
                     {
-                        this.ProcessError(context, "球員數量出錯！", 404);
+                        this.ProcessError(context, "球員數量出錯！");
+                        return;
+                    }
+                    if (ballerCount < 0)
+                    {
+                        this.ProcessError(context, "球員數量出錯！");
                         return;
                     }
 
@@ -151,7 +156,7 @@ namespace CNCTopic7309.Handlers
                         string.IsNullOrWhiteSpace(restrictedAreaText) ||
                         string.IsNullOrWhiteSpace(foulText))
                     {
-                        this.ProcessError(context, "資料漏填", 404);
+                        this.ProcessError(context, "資料漏填");
                         return;
                     }
 
@@ -172,7 +177,17 @@ namespace CNCTopic7309.Handlers
                         !int.TryParse(missText, out miss) ||
                         !DateTime.TryParse(dateText, out date))
                     {
-                        this.ProcessError(context, "鍵入資料出錯", 404);
+                        this.ProcessError(context, "鍵入資料出錯");
+                        return;
+                    }
+                    if (shoot > 100 || shoot < 0 || threePoint > 100 || threePoint < 0 || penalty > 100 || penalty < 0)
+                    {
+                        this.ProcessError(context, "鍵入資料出錯");
+                        return;
+                    }
+                    if (raceNum < 0 || backBoard < 0 || assistance < 0 || block < 0 || steal < 0 || miss < 0 || ra < 0 || foul < 0)
+                    {
+                        this.ProcessError(context, "鍵入資料出錯");
                         return;
                     }
 
@@ -228,7 +243,7 @@ namespace CNCTopic7309.Handlers
                         string.IsNullOrWhiteSpace(birthText) ||
                         string.IsNullOrWhiteSpace(university))
                     {
-                        this.ProcessError(context, "資料漏填", 404);
+                        this.ProcessError(context, "資料漏填");
                         return;
                     }
 
@@ -242,7 +257,12 @@ namespace CNCTopic7309.Handlers
                         !int.TryParse(numberText, out number) ||
                         !DateTime.TryParse(birthText, out birth))
                     {
-                        this.ProcessError(context, "鍵入資料出錯", 404);
+                        this.ProcessError(context, "鍵入資料出錯");
+                        return;
+                    }
+                    if (height < 50 || weight < 10 || number < 0)
+                    {
+                        this.ProcessError(context, "鍵入資料出錯");
                         return;
                     }
 
@@ -290,7 +310,7 @@ namespace CNCTopic7309.Handlers
                         string.IsNullOrWhiteSpace(ballerCountText) ||
                         string.IsNullOrWhiteSpace(owner))
                     {
-                        this.ProcessError(context, "資料漏填", 404);
+                        this.ProcessError(context, "資料漏填");
                         return;
                     }
 
@@ -298,7 +318,12 @@ namespace CNCTopic7309.Handlers
                     int ballerCount;
                     if (!int.TryParse(ballerCountText, out ballerCount))
                     {
-                        this.ProcessError(context, "球員數量出錯！", 404);
+                        this.ProcessError(context, "球員數量出錯！");
+                        return;
+                    }
+                    if (ballerCount < 0)
+                    {
+                        this.ProcessError(context, "球員數量出錯！");
                         return;
                     }
 
@@ -349,7 +374,7 @@ namespace CNCTopic7309.Handlers
                         string.IsNullOrWhiteSpace(birthText) ||
                         string.IsNullOrWhiteSpace(university))
                     {
-                        this.ProcessError(context, "資料漏填", 404);
+                        this.ProcessError(context, "資料漏填");
                         return;
                     }
 
@@ -363,7 +388,12 @@ namespace CNCTopic7309.Handlers
                         !int.TryParse(numberText, out number) ||
                         !DateTime.TryParse(birthText, out birth))
                     {
-                        this.ProcessError(context, "鍵入資料出錯", 404);
+                        this.ProcessError(context, "鍵入資料出錯");
+                        return;
+                    }
+                    if (height < 50 || weight < 10 || number < 0) 
+                    {
+                        this.ProcessError(context, "鍵入資料出錯");
                         return;
                     }
 
@@ -425,11 +455,11 @@ namespace CNCTopic7309.Handlers
                         string.IsNullOrWhiteSpace(restrictedAreaText) ||
                         string.IsNullOrWhiteSpace(foulText))
                     {
-                        this.ProcessError(context, "資料漏填", 404);
+                        this.ProcessError(context, "資料漏填");
                         return;
                     }
 
-                    // 轉型
+                    // 轉型與檢察
                     DateTime date;
                     double shoot, threePoint, penalty;
                     int raceNum, backBoard, assistance, block, steal, miss, ra, foul;
@@ -446,7 +476,17 @@ namespace CNCTopic7309.Handlers
                         !int.TryParse(missText, out miss) ||
                         !DateTime.TryParse(dateText, out date))
                     {
-                        this.ProcessError(context, "鍵入資料出錯", 404);
+                        this.ProcessError(context, "鍵入資料出錯");
+                        return;
+                    }
+                    if (shoot > 100 || shoot < 0 || threePoint > 100 || threePoint < 0 || penalty > 100 || penalty < 0) 
+                    {
+                        this.ProcessError(context, "鍵入資料出錯");
+                        return;
+                    }
+                    if (raceNum < 0 || backBoard < 0 || assistance < 0 || block < 0 || steal < 0 || miss < 0 || ra < 0 || foul < 0) 
+                    {
+                        this.ProcessError(context, "鍵入資料出錯");
                         return;
                     }
 
@@ -487,14 +527,14 @@ namespace CNCTopic7309.Handlers
             {
                 if (context.Request.Form["ID"] == null || string.IsNullOrWhiteSpace(context.Request.Form["ID"]))
                 {
-                    this.ProcessError(context, "哪裡出錯了", 404);
+                    this.ProcessError(context, "哪裡出錯了");
                     return;
                 }
                 int id = Convert.ToInt32(context.Request.Form["ID"]);
 
                 if (id == 0)
                 {
-                    this.ProcessError(context, "哪裡出錯了", 404);
+                    this.ProcessError(context, "哪裡出錯了");
                     return;
                 }
 
@@ -519,7 +559,7 @@ namespace CNCTopic7309.Handlers
                     string path = context.Request.Form["Path"];
                     if (path == null || string.IsNullOrWhiteSpace(path))
                     {
-                        this.ProcessError(context, "哪裡出錯了", 404);
+                        this.ProcessError(context, "哪裡出錯了");
                         return;
                     }
                     string truePath = GetFilePath(path);
@@ -533,7 +573,7 @@ namespace CNCTopic7309.Handlers
                     var list = ManageHelper.GetTeamList();
                     if (list == null)
                     {
-                        this.ProcessError(context, "無法獲取資料", 404);
+                        this.ProcessError(context, "無法獲取資料");
                         return;
                     }
                     string jsonText = Newtonsoft.Json.JsonConvert.SerializeObject(list);
@@ -545,7 +585,7 @@ namespace CNCTopic7309.Handlers
                     var list = ManageHelper.GetBallerList();
                     if (list == null)
                     {
-                        this.ProcessError(context, "無法獲取資料", 404);
+                        this.ProcessError(context, "無法獲取資料");
                         return;
                     }
                     string jsonText = Newtonsoft.Json.JsonConvert.SerializeObject(list);
@@ -557,7 +597,7 @@ namespace CNCTopic7309.Handlers
                     var list = ManageHelper.GetRaceList();
                     if (list == null)
                     {
-                        this.ProcessError(context, "無法獲取資料", 404);
+                        this.ProcessError(context, "無法獲取資料");
                         return;
                     }
                     string jsonText = Newtonsoft.Json.JsonConvert.SerializeObject(list);
@@ -572,7 +612,7 @@ namespace CNCTopic7309.Handlers
                     var list = UserPersonalHelper.GetPopBallerList("Baller");
                     if (list == null)
                     {
-                        this.ProcessError(context, "無法獲取資料", 404);
+                        this.ProcessError(context, "無法獲取資料");
                         return;
                     }
                     string jsonText = Newtonsoft.Json.JsonConvert.SerializeObject(list);
@@ -584,7 +624,7 @@ namespace CNCTopic7309.Handlers
                     var list = UserPersonalHelper.GetPopBallerList("Team");
                     if (list == null)
                     {
-                        this.ProcessError(context, "無法獲取資料", 404);
+                        this.ProcessError(context, "無法獲取資料");
                         return;
                     }
                     string jsonText = Newtonsoft.Json.JsonConvert.SerializeObject(list);
@@ -596,7 +636,7 @@ namespace CNCTopic7309.Handlers
                     var list = UserPersonalHelper.GetPopBallerList("Race");
                     if (list == null)
                     {
-                        this.ProcessError(context, "無法獲取資料", 404);
+                        this.ProcessError(context, "無法獲取資料");
                         return;
                     }
                     string jsonText = Newtonsoft.Json.JsonConvert.SerializeObject(list);
@@ -608,7 +648,7 @@ namespace CNCTopic7309.Handlers
                     var list = UserPersonalHelper.GetPopBallerList("BBadTemp");
                     if (list == null)
                     {
-                        this.ProcessError(context, "無法獲取資料", 404);
+                        this.ProcessError(context, "無法獲取資料");
                         return;
                     }
                     string jsonText = Newtonsoft.Json.JsonConvert.SerializeObject(list);
@@ -620,7 +660,7 @@ namespace CNCTopic7309.Handlers
                     var list = UserPersonalHelper.GetPopBallerList("BFoul");
                     if (list == null)
                     {
-                        this.ProcessError(context, "無法獲取資料", 404);
+                        this.ProcessError(context, "無法獲取資料");
                         return;
                     }
                     string jsonText = Newtonsoft.Json.JsonConvert.SerializeObject(list);
@@ -637,9 +677,9 @@ namespace CNCTopic7309.Handlers
             return HttpContext.Current.Server.MapPath($"{path}");
         }
 
-        private void ProcessError(HttpContext context, string msg, int statuscode)
+        private void ProcessError(HttpContext context, string msg)
         {
-            context.Response.StatusCode = statuscode;
+            context.Response.StatusCode = 400;
             context.Response.ContentType = "text/plain";
             context.Response.Write(msg);
             context.Response.End();

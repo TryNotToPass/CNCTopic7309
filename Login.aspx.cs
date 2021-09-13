@@ -24,7 +24,6 @@ namespace CNCTopic7309
         protected void btnLogin_Click(object sender, EventArgs e)
         {
             string eMsg;
-            //if ("aaa" == this.txtAccount.Text && "111" == this.txtPassword.Text)
             if (LoginHelper.TryLogin(this.txtAccount.Text, this.txtPassword.Text, out eMsg))
             {
                 Response.Redirect("UserPages/MainInfoPage.aspx");

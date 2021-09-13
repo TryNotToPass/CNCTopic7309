@@ -23,7 +23,7 @@
                 var id = hf.val();
                 if (id) {
                     $.ajax({
-                        url: "http://localhost:55092/Handlers/AdminNCHandle.ashx?Act=delete&Type=Chat",
+                        url: "/Handlers/AdminNCHandle.ashx?Act=delete&Type=Chat",
                         type: "POST",
                         data: {
                             "ID": id
@@ -52,7 +52,7 @@
                 var path = hfp.val();
                 if (id && path) {
                     $.ajax({
-                        url: "http://localhost:55092/Handlers/AdminNCHandle.ashx?Act=delete&Type=Pic",
+                        url: "/Handlers/AdminNCHandle.ashx?Act=delete&Type=Pic",
                         type: "POST",
                         data: {
                             "ID": id,
@@ -75,7 +75,7 @@
 
             //獲取列表
             $.ajax({
-                url: "http://localhost:55092/Handlers/AdminNCHandle.ashx?Act=list&Type=Team",
+                url: "/Handlers/AdminNCHandle.ashx?Act=list&Type=Team",
                 type: "GET",
                 data: {},
                 success: function (result) {
@@ -95,7 +95,7 @@
                 }
             });
             $.ajax({
-                url: "http://localhost:55092/Handlers/AdminNCHandle.ashx?Act=list&Type=Baller",
+                url: "/Handlers/AdminNCHandle.ashx?Act=list&Type=Baller",
                 type: "GET",
                 data: {},
                 success: function (result) {
@@ -115,7 +115,7 @@
                 }
             });
             $.ajax({
-                url: "http://localhost:55092/Handlers/AdminNCHandle.ashx?Act=list&Type=Race",
+                url: "/Handlers/AdminNCHandle.ashx?Act=list&Type=Race",
                 type: "GET",
                 data: {},
                 success: function (result) {
@@ -135,6 +135,7 @@
                 }
             });
 
+            //回到頂部
             var $win = $(window);
             var $backToTop = $('.js-back-to-top');
             $backToTop.hide();

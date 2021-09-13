@@ -25,13 +25,9 @@
                 var owner = $("#txtOwner").val();
                 var homeCourt = $("#txtHomeCourt").val();
                 var teamColor = $("#txtTeamColor").val();
-                //if (!teamName || !local || !ballerCount || !teamColor) {
-                //    alert("必填資料尚未填寫");
-                //    return;
-                //}
                 if (id) {
                     $.ajax({
-                        url: "http://localhost:55092/Handlers/AdminNCHandle.ashx?Act=update&Type=Team",
+                        url: "/Handlers/AdminNCHandle.ashx?Act=update&Type=Team",
                         type: "POST",
                         data: {
                             "ID": id,
@@ -43,6 +39,7 @@
                             "TeamColor": teamColor
                         },
                         success: function (result) {
+                            //alert(result);
                             alert("更新成功");
                             window.location.reload();
                         },
@@ -54,7 +51,7 @@
                 }
                 else {
                     $.ajax({
-                        url: "http://localhost:55092/Handlers/AdminNCHandle.ashx?Act=create&Type=Team",
+                        url: "/Handlers/AdminNCHandle.ashx?Act=create&Type=Team",
                         type: "POST",
                         data: {
                             "TeamName": teamName,
@@ -93,7 +90,7 @@
                 //}
                 if (id) {
                     $.ajax({
-                        url: "http://localhost:55092/Handlers/AdminNCHandle.ashx?Act=update&Type=Baller",
+                        url: "/Handlers/AdminNCHandle.ashx?Act=update&Type=Baller",
                         type: "POST",
                         data: {
                             "ID": id,
@@ -118,7 +115,7 @@
                 }
                 else {
                     $.ajax({
-                        url: "http://localhost:55092/Handlers/AdminNCHandle.ashx?Act=create&Type=Baller",
+                        url: "/Handlers/AdminNCHandle.ashx?Act=create&Type=Baller",
                         type: "POST",
                         data: {
                             "TeamName": teamName,
@@ -143,7 +140,6 @@
             });
 
             $("#btnRaceSave").click(function () {
-
                 var id = $("#hfIDR").val();
                 var teamName = $("#txtRTName").val();
                 var raceNum = $("#txtRaceNum").val();
@@ -158,10 +154,6 @@
                 var miss = $("#txtMiss").val();
                 var ra = $("#txtRestrictedArea").val();
                 var foul = $("#txtFoul").val();
-                //if (!teamName || !local || !ballerCount || !teamColor) {
-                //    alert("必填資料尚未填寫");
-                //    return;
-                //}
                 if (id) {
                     $.ajax({
                         url: "http://localhost:55092/Handlers/AdminNCHandle.ashx?Act=update&Type=Race",
@@ -188,22 +180,13 @@
                         },
                         error: function (jqXHR, exception) {
                             var msg = jqXHR.responseText;
-                            //if (jqXHR.status === 0) {
-                            //    msg += 'Not connect.\n Verify Network.';
-                            //} else if (jqXHR.status == 404) {
-                            //    msg += '測試 [404]';
-                            //} else if (jqXHR.status == 403) {
-                            //    msg += 'Heavy Serer Error [403].';
-                            //} else {
-                            //    msg += 'Uncaught Error.\n' + jqXHR.responseText;
-                            //}
                             alert(msg);
                         }
                     });
                 }
                 else {
                     $.ajax({
-                        url: "http://localhost:55092/Handlers/AdminNCHandle.ashx?Act=create&Type=Race",
+                        url: "/Handlers/AdminNCHandle.ashx?Act=create&Type=Race",
                         type: "POST",
                         data: {
                             "TeamName": teamName,
@@ -237,7 +220,7 @@
                 var id = $("#hfIDT").val();
                 if (id) {
                     $.ajax({
-                        url: "http://localhost:55092/Handlers/AdminNCHandle.ashx?Act=delete&Type=Team",
+                        url: "/Handlers/AdminNCHandle.ashx?Act=delete&Type=Team",
                         type: "POST",
                         data: {
                             "ID": id
@@ -261,7 +244,7 @@
                 var id = $("#hfIDB").val();
                 if (id) {
                     $.ajax({
-                        url: "http://localhost:55092/Handlers/AdminNCHandle.ashx?Act=delete&Type=Baller",
+                        url: "/Handlers/AdminNCHandle.ashx?Act=delete&Type=Baller",
                         type: "POST",
                         data: {
                             "ID": id
@@ -285,7 +268,7 @@
                 var id = $("#hfIDR").val();
                 if (id) {
                     $.ajax({
-                        url: "http://localhost:55092/Handlers/AdminNCHandle.ashx?Act=delete&Type=Race",
+                        url: "/Handlers/AdminNCHandle.ashx?Act=delete&Type=Race",
                         type: "POST",
                         data: {
                             "ID": id
@@ -369,7 +352,7 @@
                 var rowID = hf.val();
 
                 $.ajax({
-                    url: "http://localhost:55092/Handlers/AdminNCHandle.ashx?Act=query&Type=Team",
+                    url: "/Handlers/AdminNCHandle.ashx?Act=query&Type=Team",
                     type: "POST",
                     data: {
                         "ID": rowID,
@@ -399,7 +382,7 @@
                 var rowID = hf.val();
 
                 $.ajax({
-                    url: "http://localhost:55092/Handlers/AdminNCHandle.ashx?Act=query&Type=Baller",
+                    url: "/Handlers/AdminNCHandle.ashx?Act=query&Type=Baller",
                     type: "POST",
                     data: {
                         "ID": rowID,
@@ -431,7 +414,7 @@
                 var rowID = hf.val();
 
                 $.ajax({
-                    url: "http://localhost:55092/Handlers/AdminNCHandle.ashx?Act=query&Type=Race",
+                    url: "/Handlers/AdminNCHandle.ashx?Act=query&Type=Race",
                     type: "POST",
                     data: {
                         "ID": rowID,
@@ -461,6 +444,9 @@
                 });
             });
 
+            $("#btnToTop").click(function () {
+                $('html, body').animate({ scrollTop: 0 }, 10);
+            });
 
         });
     </script>
@@ -475,6 +461,16 @@
             right: 10px;
             transition: 500ms;
         }
+        .followYou2 {
+            position: fixed;
+            bottom: 60px;
+            right: -80px;
+            transition: 500ms;
+        }
+        .followYou2:hover {
+            right: 10px;
+            transition: 500ms;
+        }
     </style>
 </head>
 <body>
@@ -482,153 +478,154 @@
         <input type="hidden" id="hfIDT" />
         <input type="hidden" id="hfIDB" />
         <input type="hidden" id="hfIDR" />
-        <div class="row">
-            <div class="col-md-4 col-sm-12">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-4 col-sm-12">
 
-                <div id="divTeamEditor">
-                    <div class="input-group mb-2">
-                        <span class="input-group-text" id="team-addon1">名稱</span>
-                        <input type="text" id="txtTTName" class="form-control" aria-describedby="team-addon1"/>
+                    <div id="divTeamEditor">
+                        <div class="input-group mb-2">
+                            <span class="input-group-text" id="team-addon1">名稱</span>
+                            <input type="text" id="txtTTName" class="form-control" aria-describedby="team-addon1" />
+                        </div>
+                        <div class="input-group mb-2">
+                            <span class="input-group-text" id="team-addon2">地區</span>
+                            <input type="text" id="txtLocal" class="form-control" aria-describedby="team-addon2" />
+                        </div>
+                        <div class="input-group mb-2">
+                            <span class="input-group-text" id="team-addon3">球員人數</span>
+                            <input type="text" id="txtBallerCount" class="form-control" aria-describedby="team-addon3" />
+                        </div>
+                        <div class="input-group mb-2">
+                            <span class="input-group-text" id="team-addon4">持有者</span>
+                            <input type="text" id="txtOwner" class="form-control" aria-describedby="team-addon4" />
+                        </div>
+                        <div class="input-group mb-2">
+                            <span class="input-group-text" id="team-addon5">主場</span>
+                            <input type="text" id="txtHomeCourt" class="form-control" aria-describedby="team-addon5" />
+                        </div>
+                        <div class="input-group mb-2">
+                            <span class="input-group-text" id="team-addon6">隊伍顏色</span>
+                            <input type="text" id="txtTeamColor" class="form-control" aria-describedby="team-addon6" />
+                        </div>
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <button type="button" id="btnTeamSave" class="btn btn-secondary">儲存隊伍</button>
+                            <button type="button" id="btnTeamDel" class="btn btn-secondary">刪除隊伍</button>
+                            <button type="button" id="btnTeamCancel" class="btn btn-secondary">關閉本填寫欄位</button>
+                        </div>
                     </div>
-                    <div class="input-group mb-2">
-                        <span class="input-group-text" id="team-addon2">地區</span>
-                        <input type="text" id="txtLocal" class="form-control" aria-describedby="team-addon2"/>
+
+                </div>
+                <div class="col-md-4 col-sm-12">
+
+                    <div id="divBallerEditor">
+                        <div class="input-group mb-2">
+                            <span class="input-group-text" id="baller-addon1">隸屬球隊</span>
+                            <input type="text" id="txtBTName" class="form-control" aria-describedby="baller-addon1" />
+                        </div>
+                        <div class="input-group mb-2">
+                            <span class="input-group-text" id="baller-addon2">位置</span>
+                            <input type="text" id="txtPosition" class="form-control" aria-describedby="baller-addon2" />
+                        </div>
+                        <div class="input-group mb-2">
+                            <span class="input-group-text" id="baller-addon3">背號</span>
+                            <input type="text" id="txtNumber" class="form-control" aria-describedby="baller-addon3" />
+                        </div>
+                        <div class="input-group mb-2">
+                            <span class="input-group-text" id="baller-addon4">姓名</span>
+                            <input type="text" id="txtName" class="form-control" aria-describedby="baller-addon4" />
+                        </div>
+                        <div class="input-group mb-2">
+                            <span class="input-group-text" id="baller-addon5">身高</span>
+                            <input type="text" id="txtHeight" class="form-control" aria-describedby="baller-addon5" />
+                        </div>
+                        <div class="input-group mb-2">
+                            <span class="input-group-text" id="baller-addon6">體重</span>
+                            <input type="text" id="txtWeight" class="form-control" aria-describedby="baller-addon6" />
+                        </div>
+                        <div class="input-group mb-2">
+                            <span class="input-group-text" id="baller-addon7">生日</span>
+                            <input type="text" id="txtBirth" class="form-control" aria-describedby="baller-addon7" />
+                        </div>
+                        <div class="input-group mb-2">
+                            <span class="input-group-text" id="baller-addon8">畢業</span>
+                            <input type="text" id="txtUniversity" class="form-control" aria-describedby="baller-addon8" />
+                        </div>
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <button type="button" id="btnBallerSave" class="btn btn-secondary">儲存球員</button>
+                            <button type="button" id="btnBallerDel" class="btn btn-secondary">刪除球員</button>
+                            <button type="button" id="btnBallerCancel" class="btn btn-secondary">關閉本填寫欄位</button>
+                        </div>
                     </div>
-                    <div class="input-group mb-2">
-                        <span class="input-group-text" id="team-addon3">球員人數</span>
-                        <input type="text" id="txtBallerCount" class="form-control" aria-describedby="team-addon3"/>
-                    </div>
-                    <div class="input-group mb-2">
-                        <span class="input-group-text" id="team-addon4">持有者</span>
-                        <input type="text" id="txtOwner" class="form-control" aria-describedby="team-addon4"/>
-                    </div>
-                    <div class="input-group mb-2">
-                        <span class="input-group-text" id="team-addon5">主場</span>
-                        <input type="text" id="txtHomeCourt" class="form-control" aria-describedby="team-addon5"/>
-                    </div>
-                    <div class="input-group mb-2">
-                        <span class="input-group-text" id="team-addon6">隊伍顏色</span>
-                        <input type="text" id="txtTeamColor" class="form-control" aria-describedby="team-addon6"/>
-                    </div>
-                    <div class="btn-group" role="group" aria-label="Basic example">
-                        <button type="button" id="btnTeamSave" class="btn btn-secondary">儲存隊伍</button>
-                        <button type="button" id="btnTeamDel" class="btn btn-secondary">刪除隊伍</button>
-                        <button type="button" id="btnTeamCancel" class="btn btn-secondary">關閉本填寫欄位</button>
+
+                </div>
+                <div class="col-md-4 col-sm-12">
+
+                    <div id="divRaceEditor">
+                        <div class="input-group">
+                            <span class="input-group-text" id="race-addon1">場號</span>
+                            <input type="text" id="txtRaceNum" class="form-control" aria-describedby="race-addon1" />
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-text" id="race-addon2">日期</span>
+                            <input type="text" id="txtDate" class="form-control" aria-describedby="race-addon2" />
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-text" id="race-addon3">隊伍名稱</span>
+                            <input type="text" id="txtRTName" class="form-control" aria-describedby="race-addon3" />
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-text" id="race-addon4">投籃率</span>
+                            <input type="text" id="txtShoot" class="form-control" aria-describedby="race-addon4" />
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-text" id="race-addon5">三分命中率</span>
+                            <input type="text" id="txtThreePoint" class="form-control" aria-describedby="race-addon5" />
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-text" id="race-addon6">罰球命中率</span>
+                            <input type="text" id="txtPenalty" class="form-control" aria-describedby="race-addon6" />
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-text" id="race-addon7">籃板數</span>
+                            <input type="text" id="txtBackBoard" class="form-control" aria-describedby="race-addon7" />
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-text" id="race-addon8">助攻數</span>
+                            <input type="text" id="txtAssistance" class="form-control" aria-describedby="race-addon8" />
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-text" id="race-addon9">阻攻數</span>
+                            <input type="text" id="txtBlock" class="form-control" aria-describedby="race-addon9" />
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-text" id="race-addon10">抄截數</span>
+                            <input type="text" id="txtSteal" class="form-control" aria-describedby="race-addon10" />
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-text" id="race-addon11">失誤數</span>
+                            <input type="text" id="txtMiss" class="form-control" aria-describedby="race-addon11" />
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-text" id="race-addon12">禁區得分數</span>
+                            <input type="text" id="txtRestrictedArea" class="form-control" aria-describedby="race-addon12" />
+                        </div>
+                        <div class="input-group mb-1">
+                            <span class="input-group-text" id="race-addon13">犯規數</span>
+                            <input type="text" id="txtFoul" class="form-control" aria-describedby="race-addon13" />
+                        </div>
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <button type="button" id="btnRaceSave" class="btn btn-secondary">儲存賽事</button>
+                            <button type="button" id="btnRaceDel" class="btn btn-secondary">刪除賽事</button>
+                            <button type="button" id="btnRaceCancel" class="btn btn-secondary">關閉本填寫欄位</button>
+                        </div>
                     </div>
                 </div>
 
             </div>
-            <div class="col-md-4 col-sm-12">
 
-                <div id="divBallerEditor">
-                    <div class="input-group mb-2">
-                        <span class="input-group-text" id="baller-addon1">隸屬球隊</span>
-                        <input type="text" id="txtBTName" class="form-control" aria-describedby="baller-addon1"/>
-                    </div>
-                    <div class="input-group mb-2">
-                        <span class="input-group-text" id="baller-addon2">位置</span>
-                        <input type="text" id="txtPosition" class="form-control" aria-describedby="baller-addon2"/>
-                    </div>
-                    <div class="input-group mb-2">
-                        <span class="input-group-text" id="baller-addon3">背號</span>
-                        <input type="text" id="txtNumber" class="form-control" aria-describedby="baller-addon3"/>
-                    </div>
-                    <div class="input-group mb-2">
-                        <span class="input-group-text" id="baller-addon4">姓名</span>
-                        <input type="text" id="txtName" class="form-control" aria-describedby="baller-addon4"/>
-                    </div>
-                    <div class="input-group mb-2">
-                        <span class="input-group-text" id="baller-addon5">身高</span>
-                        <input type="text" id="txtHeight" class="form-control" aria-describedby="baller-addon5"/>
-                    </div>
-                    <div class="input-group mb-2">
-                        <span class="input-group-text" id="baller-addon6">體重</span>
-                        <input type="text" id="txtWeight" class="form-control" aria-describedby="baller-addon6"/>
-                    </div>
-                    <div class="input-group mb-2">
-                        <span class="input-group-text" id="baller-addon7">生日</span>
-                        <input type="text" id="txtBirth" class="form-control" aria-describedby="baller-addon7"/>
-                    </div>
-                    <div class="input-group mb-2">
-                        <span class="input-group-text" id="baller-addon8">畢業</span>
-                        <input type="text" id="txtUniversity" class="form-control" aria-describedby="baller-addon8"/>
-                    </div>
-                    <div class="btn-group" role="group" aria-label="Basic example">
-                        <button type="button" id="btnBallerSave" class="btn btn-secondary">儲存球員</button>
-                        <button type="button" id="btnBallerDel" class="btn btn-secondary">刪除球員</button>
-                        <button type="button" id="btnBallerCancel" class="btn btn-secondary">關閉本填寫欄位</button>
-                    </div>
-                </div>
+            <div class="row">
+                <div class="col-12">
 
-            </div>
-            <div class="col-md-4 col-sm-12">
-
-                <div id="divRaceEditor">
-                    <div class="input-group">
-                        <span class="input-group-text" id="race-addon1">場號</span>
-                        <input type="text" id="txtRaceNum" class="form-control" aria-describedby="race-addon1"/>
-                    </div>
-                    <div class="input-group">
-                        <span class="input-group-text" id="race-addon2">日期</span>
-                        <input type="text" id="txtDate" class="form-control" aria-describedby="race-addon2"/>
-                    </div>
-                    <div class="input-group">
-                        <span class="input-group-text" id="race-addon3">隊伍名稱</span>
-                        <input type="text" id="txtRTName" class="form-control" aria-describedby="race-addon3"/>
-                    </div>
-                    <div class="input-group">
-                        <span class="input-group-text" id="race-addon4">投籃率</span>
-                        <input type="text" id="txtShoot" class="form-control" aria-describedby="race-addon4"/>
-                    </div>
-                    <div class="input-group">
-                        <span class="input-group-text" id="race-addon5">三分命中率</span>
-                        <input type="text" id="txtThreePoint" class="form-control" aria-describedby="race-addon5"/>
-                    </div>
-                    <div class="input-group">
-                        <span class="input-group-text" id="race-addon6">罰球命中率</span>
-                        <input type="text" id="txtPenalty" class="form-control" aria-describedby="race-addon6"/>
-                    </div>
-                    <div class="input-group">
-                        <span class="input-group-text" id="race-addon7">籃板數</span>
-                        <input type="text" id="txtBackBoard" class="form-control" aria-describedby="race-addon7"/>
-                    </div>
-                    <div class="input-group">
-                        <span class="input-group-text" id="race-addon8">助攻數</span>
-                        <input type="text" id="txtAssistance" class="form-control" aria-describedby="race-addon8"/>
-                    </div>
-                    <div class="input-group">
-                        <span class="input-group-text" id="race-addon9">阻攻數</span>
-                        <input type="text" id="txtBlock" class="form-control" aria-describedby="race-addon9"/>
-                    </div>
-                    <div class="input-group">
-                        <span class="input-group-text" id="race-addon10">抄截數</span>
-                        <input type="text" id="txtSteal" class="form-control" aria-describedby="race-addon10"/>
-                    </div>
-                    <div class="input-group">
-                        <span class="input-group-text" id="race-addon11">失誤數</span>
-                        <input type="text" id="txtMiss" class="form-control" aria-describedby="race-addon11"/>
-                    </div>
-                    <div class="input-group">
-                        <span class="input-group-text" id="race-addon12">禁區得分數</span>
-                        <input type="text" id="txtRestrictedArea" class="form-control" aria-describedby="race-addon12"/>
-                    </div>
-                    <div class="input-group mb-1">
-                        <span class="input-group-text" id="race-addon13">犯規數</span>
-                        <input type="text" id="txtFoul" class="form-control" aria-describedby="race-addon13"/>
-                    </div>
-                    <div class="btn-group" role="group" aria-label="Basic example">
-                        <button type="button" id="btnRaceSave" class="btn btn-secondary">儲存賽事</button>
-                        <button type="button" id="btnRaceDel" class="btn btn-secondary">刪除賽事</button>
-                        <button type="button" id="btnRaceCancel" class="btn btn-secondary">關閉本填寫欄位</button>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="row">
-            <div class="col-12">
-                
                     <div class="card text-center">
                         <div class="card-header">
                             隊伍GRID
@@ -657,83 +654,86 @@
                             <button type="button" id="btnGvTeam" class="btn btn-secondary">關閉或開啟隊伍一覽</button>
                         </div>
                     </div>
-            </div>
-
-            <div class="col-12">
-                <div class="card text-center">
-                    <div class="card-header">
-                        球員GRID
-                    </div>
-                    <div class="card-body">
-                        <div id="divgvBaller">
-                            
-                            <asp:GridView ID="gvBaller" runat="server" AutoGenerateColumns="False" CssClass="table table-sm">
-                                <Columns>
-                                    <asp:TemplateField HeaderText="行為">
-                                        <ItemTemplate>
-                                            <button type="button" class="btnClassEditgvBaller btn btn-outline-dark">EDIT</button>
-                                            <input type="hidden" class="hfRowID" value='<%# Eval("ID") %>' />
-                                        </ItemTemplate>
-                                    </asp:TemplateField>
-                                    <asp:BoundField DataField="ID" HeaderText="ID" />
-                                    <asp:BoundField DataField="TeamName" HeaderText="隸屬" />
-                                    <asp:BoundField DataField="Position" HeaderText="位置" />
-                                    <asp:BoundField DataField="Number" HeaderText="背號" />
-                                    <asp:BoundField DataField="Name" HeaderText="稱呼" />
-                                    <asp:BoundField DataField="Height" HeaderText="身高" />
-                                    <asp:BoundField DataField="Weight" HeaderText="體重" />
-                                    <asp:BoundField DataField="Birth" HeaderText="生日" />
-                                    <asp:BoundField DataField="University" HeaderText="大學" />
-                                </Columns>
-                            </asp:GridView>
-                        </div>
-                        <button type="button" id="btnGvBaller" class="btn btn-secondary">關閉或開啟球員一覽</button>
-                    </div>
                 </div>
 
-            </div>
-
-            <div class="col-12">
-
-                <div class="card text-center">
-                    <div class="card-header">
-                        賽場GRID
-                    </div>
-                    <div class="card-body">
-                        <div id="divgvRace">
-                        
-                            <asp:GridView ID="gvRace" runat="server" AutoGenerateColumns="False" CssClass="table table-sm">
-                                <Columns>
-                                    <asp:TemplateField HeaderText="行為">
-                                        <ItemTemplate>
-                                            <button type="button" class="btnClassEditgvRace btn btn-outline-dark">EDIT</button>
-                                            <input type="hidden" class="hfRowID" value='<%# Eval("ID") %>' />
-                                        </ItemTemplate>
-                                    </asp:TemplateField>
-                                    <asp:BoundField DataField="ID" HeaderText="ID" />
-                                    <asp:BoundField DataField="RaceNum" HeaderText="場號" />
-                                    <asp:BoundField DataField="Date" HeaderText="日期" />
-                                    <asp:BoundField DataField="TeamName" HeaderText="隊伍名稱" />
-                                    <asp:BoundField DataField="Shoot" HeaderText="投籃率" />
-                                    <asp:BoundField DataField="ThreePoint" HeaderText="三分命中率" />
-                                    <asp:BoundField DataField="Penalty" HeaderText="罰球命中率" />
-                                    <asp:BoundField DataField="BackBoard" HeaderText="籃板數" />
-                                    <asp:BoundField DataField="Assistance" HeaderText="助攻數" />
-                                    <asp:BoundField DataField="Block" HeaderText="阻攻數" />
-                                    <asp:BoundField DataField="Steal" HeaderText="抄截數" />
-                                    <asp:BoundField DataField="Miss" HeaderText="失誤數" />
-                                    <asp:BoundField DataField="RestrictedArea" HeaderText="禁區得分" />
-                                    <asp:BoundField DataField="Foul" HeaderText="犯規數" />
-                                </Columns>
-                            </asp:GridView>
+                <div class="col-12">
+                    <div class="card text-center">
+                        <div class="card-header">
+                            球員GRID
                         </div>
-                        <button type="button" id="btnGvRace" class="btn btn-secondary">關閉或開啟賽事一覽</button>
+                        <div class="card-body">
+                            <div id="divgvBaller">
+
+                                <asp:GridView ID="gvBaller" runat="server" AutoGenerateColumns="False" CssClass="table table-sm">
+                                    <Columns>
+                                        <asp:TemplateField HeaderText="行為">
+                                            <ItemTemplate>
+                                                <button type="button" class="btnClassEditgvBaller btn btn-outline-dark">EDIT</button>
+                                                <input type="hidden" class="hfRowID" value='<%# Eval("ID") %>' />
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:BoundField DataField="ID" HeaderText="ID" />
+                                        <asp:BoundField DataField="TeamName" HeaderText="隸屬" />
+                                        <asp:BoundField DataField="Position" HeaderText="位置" />
+                                        <asp:BoundField DataField="Number" HeaderText="背號" />
+                                        <asp:BoundField DataField="Name" HeaderText="稱呼" />
+                                        <asp:BoundField DataField="Height" HeaderText="身高" />
+                                        <asp:BoundField DataField="Weight" HeaderText="體重" />
+                                        <asp:BoundField DataField="Birth" HeaderText="生日" />
+                                        <asp:BoundField DataField="University" HeaderText="大學" />
+                                    </Columns>
+                                </asp:GridView>
+                            </div>
+                            <button type="button" id="btnGvBaller" class="btn btn-secondary">關閉或開啟球員一覽</button>
+                        </div>
                     </div>
+
                 </div>
 
+                <div class="col-12">
+
+                    <div class="card text-center">
+                        <div class="card-header">
+                            賽場GRID
+                        </div>
+                        <div class="card-body">
+                            <div id="divgvRace">
+
+                                <asp:GridView ID="gvRace" runat="server" AutoGenerateColumns="False" CssClass="table table-sm">
+                                    <Columns>
+                                        <asp:TemplateField HeaderText="行為">
+                                            <ItemTemplate>
+                                                <button type="button" class="btnClassEditgvRace btn btn-outline-dark">EDIT</button>
+                                                <input type="hidden" class="hfRowID" value='<%# Eval("ID") %>' />
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:BoundField DataField="ID" HeaderText="ID" />
+                                        <asp:BoundField DataField="RaceNum" HeaderText="場號" />
+                                        <asp:BoundField DataField="Date" HeaderText="日期" />
+                                        <asp:BoundField DataField="TeamName" HeaderText="隊伍名稱" />
+                                        <asp:BoundField DataField="Shoot" HeaderText="投籃率" />
+                                        <asp:BoundField DataField="ThreePoint" HeaderText="三分命中率" />
+                                        <asp:BoundField DataField="Penalty" HeaderText="罰球命中率" />
+                                        <asp:BoundField DataField="BackBoard" HeaderText="籃板數" />
+                                        <asp:BoundField DataField="Assistance" HeaderText="助攻數" />
+                                        <asp:BoundField DataField="Block" HeaderText="阻攻數" />
+                                        <asp:BoundField DataField="Steal" HeaderText="抄截數" />
+                                        <asp:BoundField DataField="Miss" HeaderText="失誤數" />
+                                        <asp:BoundField DataField="RestrictedArea" HeaderText="禁區得分" />
+                                        <asp:BoundField DataField="Foul" HeaderText="犯規數" />
+                                    </Columns>
+                                </asp:GridView>
+                            </div>
+                            <button type="button" id="btnGvRace" class="btn btn-secondary">關閉或開啟賽事一覽</button>
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </div>
+
         <a href="MainInfoPage.aspx" class="btn btn-outline-dark followYou">★返回資訊總頁</a>
+        <button type="button" class="btn btn-outline-dark followYou2" id="btnToTop">★回到頂部=>=></button>
     </form>
 </body>
 </html>
