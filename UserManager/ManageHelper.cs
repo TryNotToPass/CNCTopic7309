@@ -449,7 +449,7 @@ namespace UserManager
                             context.SaveChanges();
                         }
                     }
-                    //DeleteSameTypePic(ID, "Team");
+                    DeleteSameTypePic(ID, "Team");
                 }
                 else if ( type == "B")
                 {
@@ -462,7 +462,7 @@ namespace UserManager
                             context.SaveChanges();
                         }
                     }
-                    //DeleteSameTypePic(ID, "Baller");
+                    DeleteSameTypePic(ID, "Baller");
                 } 
                 else if (type == "R")
                 {
@@ -475,7 +475,7 @@ namespace UserManager
                             context.SaveChanges();
                         }
                     }
-                    //DeleteSameTypePic(ID, "Race");
+                    DeleteSameTypePic(ID, "Race");
                 }
                 else if (type == "Chat")
                 {
@@ -584,9 +584,9 @@ namespace UserManager
                         foreach (var item in dbo)
                         {
                             context.Pictures.Remove(item);
-                            context.SaveChanges();
                             File.Delete(HttpContext.Current.Server.MapPath($"~/FileDownload/{type}_pic/{item.Pic}"));
                         }
+                        context.SaveChanges();
                     }
                 }
                 //由於路徑問題會失敗
