@@ -16,7 +16,7 @@
             </div>
             <div class="col-md-8 col-sm-10">
                 <asp:PlaceHolder runat="server" ID="ph_changeACC">
-                    <div class="card">
+                    <div class="card mt-4">
                           <div class="card-header">
                             個人資料
                           </div>

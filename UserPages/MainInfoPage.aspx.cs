@@ -16,6 +16,7 @@ namespace CNCTopic7309.UserPages
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            
             //確認權限啟用功能
             //this.ltlTest.Text = LoginHelper.GetUserType().ToString();
             int userLV = LoginHelper.GetUserType();
@@ -163,7 +164,6 @@ namespace CNCTopic7309.UserPages
                         this.ltlInfo.Text += "<div class='card-body'><div class='table-responsive'>";
                         this.ltlInfo.Text += "資料不存在，請選擇其他資料！</div></div>";
                     }
-
                 }
                 if (about == "Race")
                 {
@@ -502,7 +502,8 @@ namespace CNCTopic7309.UserPages
 
         protected void btnUpload_Click(object sender, EventArgs e)
         {
-            if (this.fuInfo.HasFile && FileHelper.ValidFileUpload(this.fuInfo, out List<string> tempList))
+            List<string> msgList = new List<string>();
+            if (this.fuInfo.HasFile && FileHelper.ValidFileUpload(this.fuInfo, out msgList))
             {
                 string saveFileName = FileHelper.GetNewFileName(this.fuInfo);
                 string filePath = Path.Combine(this.GetSaveFolderPath(), saveFileName);
@@ -542,7 +543,16 @@ namespace CNCTopic7309.UserPages
             }
             else 
             {
-                this.ltAlert.Text = "<script>alert('必須含有圖片！');</script>";
+                if (msgList.Any())
+                {
+                    this.ltAlert.Text = "<script>alert('";
+                    foreach (var item in msgList)
+                    {
+                        this.ltAlert.Text += item + "。";
+                    }
+                    this.ltAlert.Text += "')</script>";
+                }
+                else this.ltAlert.Text = "<script>alert('必須含有圖片！');</script>";
             }
             
         }

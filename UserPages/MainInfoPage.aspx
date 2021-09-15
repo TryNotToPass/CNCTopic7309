@@ -160,6 +160,7 @@
         }
         body {
             background-color: #3AB0FA;
+            overflow-x: hidden;
         }
         .light_btn{
             transition: 500ms;
@@ -169,7 +170,7 @@
             box-shadow: 0px 0px 6px 1px #FA9A89, inset 10em 10em #FA9A89;
             transition: 200ms;
         }
-s
+        
     </style>
 </head>
 <body>
@@ -263,7 +264,7 @@ s
                             <asp:TextBox runat="server" ID="txtPHref" CssClass="form-control" placeholder="可以不輸入內容"/>
                         </div>
                         <div class="input-group mb-2">
-                            <asp:FileUpload ID="fuInfo" runat="server" CssClass="form-control" />
+                            <asp:FileUpload ID="fuInfo" runat="server" CssClass="form-control"/>
                         </div>
                         <div class="d-grid col-6 mx-auto">
                             <asp:Button Text="上傳文章或圖片" runat="server" ID="btnUpload" OnClick="btnUpload_Click" CssClass="btn btn-light"/>

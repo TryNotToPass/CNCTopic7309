@@ -52,7 +52,7 @@ namespace CNCTopic7309.UserPages
                     Email = email
                 };
                 LoginHelper.UpdateUserInfo(model);
-                Response.Redirect(Request.RawUrl);
+                this.ltlMsg.Text = "資料更新完畢";
             }
             else 
             {
@@ -92,6 +92,7 @@ namespace CNCTopic7309.UserPages
 
         protected void btnPWDChange_Click(object sender, EventArgs e)
         {
+            this.ltlMsg.Text = string.Empty;
             if (!this.ph_changePWD.Visible)
             {
                 this.ph_changePWD.Visible = true;
@@ -135,7 +136,5 @@ namespace CNCTopic7309.UserPages
             msgList = list;
             return true;
         }
-
-
     }
 }

@@ -8,6 +8,8 @@
     <title>使用者登入</title>
     <link href="css/bootstrap.css" rel="stylesheet" />
     <script src="js/bootstrap.js"></script>
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
     <style>
         body {
             background-color: blue;
@@ -55,7 +57,7 @@
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <h2 class="h2 text-gray-900 mb-2">NBA台灣賽事分析網</h2>
+                                        <h2 class="h2 text-gray-900 mb-2 fw-bold">NBA台灣賽事分析網</h2>
                                         <h4 class="h4 text-gray-900 mb-3">一同享受一年一度的NBA冠軍賽吧！</h4>
                                     </div>
                                     <div class="form-group2">

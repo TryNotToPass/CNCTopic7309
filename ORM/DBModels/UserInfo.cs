@@ -28,5 +28,8 @@ namespace ORM.DBModels
         [Required]
         [StringLength(100)]
         public string Email { get; set; }
+
+        [Column(TypeName = "date")]
+        public DateTime CreateDate { get; set; }
     }
 }

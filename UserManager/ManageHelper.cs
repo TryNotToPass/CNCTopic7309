@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ORM.DBModels;
 using System.IO;
+using System.Web;
 
 namespace UserManager
 {
@@ -23,7 +24,7 @@ namespace UserManager
                     var query =
                         (from item in context.UserInfoes
                          where item.UserLevel > 0
-                         orderby item.UserLevel
+                         orderby item.CreateDate descending
                          select item);
 
                     var list = query.ToList();
@@ -370,6 +371,7 @@ namespace UserManager
                 using (ContextModel context = new ContextModel())
                 {
                     var dbObject = context.Ballers.Where(obj => obj.ID == data.ID).FirstOrDefault();
+                    dbObject.TeamName = data.TeamName;
                     dbObject.Position = data.Position;
                     dbObject.Number = data.Number;
                     dbObject.Name = data.Name;
@@ -447,6 +449,7 @@ namespace UserManager
                             context.SaveChanges();
                         }
                     }
+                    //DeleteSameTypePic(ID, "Team");
                 }
                 else if ( type == "B")
                 {
@@ -459,6 +462,7 @@ namespace UserManager
                             context.SaveChanges();
                         }
                     }
+                    //DeleteSameTypePic(ID, "Baller");
                 } 
                 else if (type == "R")
                 {
@@ -471,6 +475,7 @@ namespace UserManager
                             context.SaveChanges();
                         }
                     }
+                    //DeleteSameTypePic(ID, "Race");
                 }
                 else if (type == "Chat")
                 {
@@ -560,6 +565,31 @@ namespace UserManager
                 }
                 //由於路徑問題會失敗
                 File.Delete(path);
+            }
+            catch (Exception ex)
+            {
+                LoginHelper.WriteLog(ex);
+            }
+        }
+
+        public static void DeleteSameTypePic(int infoID, string type)
+        {
+            try
+            {
+                using (ContextModel context = new ContextModel())
+                {
+                    var dbo = context.Pictures.Where(o => o.InfoID == infoID && o.About == type);
+                    if (dbo != null)
+                    {
+                        foreach (var item in dbo)
+                        {
+                            context.Pictures.Remove(item);
+                            context.SaveChanges();
+                            File.Delete(HttpContext.Current.Server.MapPath($"~/FileDownload/{type}_pic/{item.Pic}"));
+                        }
+                    }
+                }
+                //由於路徑問題會失敗
             }
             catch (Exception ex)
             {

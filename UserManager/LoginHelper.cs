@@ -253,6 +253,7 @@ namespace UserManager
                 {
                     user.ID = Guid.NewGuid();
                     user.UserLevel = 2;
+                    user.CreateDate = DateTime.Now;
                     context.UserInfoes.Add(user);
                     context.SaveChanges();
                 }
@@ -289,7 +290,11 @@ namespace UserManager
                 return null;
             }
         }
-
+        /// <summary>
+        /// 更新帳號打錯次數
+        /// </summary>
+        /// <param name="forgetPWDRec"></param>
+        /// <returns></returns>
         public static bool UpdateFPWD_WrongTimes(ForgetPWDRec forgetPWDRec)
         {
             //字串應在按下案件前確認，故這裡不確認
@@ -310,7 +315,10 @@ namespace UserManager
                 return false;
             }
         }
-
+        /// <summary>
+        /// 刪除忘記密碼資料
+        /// </summary>
+        /// <param name="pwGuid"></param>
         public static void DeleteForgotPWDInfo(Guid pwGuid)
         {
             try

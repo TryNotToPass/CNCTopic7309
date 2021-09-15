@@ -16,10 +16,10 @@
     <form id="form1" runat="server">
         <asp:Literal Text="" ID="ltAlert" runat="server" />
         <div class="row">
-            <div class="col-md-2 col-sm-12">
+            <div class="col-md-1 col-sm-12">
             </div>
 
-            <div class="col-md-8 col-sm-12 text-center">
+            <div class="col-md-9 col-sm-12 text-center">
                 <div class="d-grid gap-2 col-6 mx-auto">
                     <a href="MainInfoPage.aspx" class="btn btn-primary">返回資訊主頁</a>
                 </div>
@@ -33,6 +33,7 @@
                         <asp:BoundField DataField="Name" HeaderText="暱稱"/>
                         <asp:BoundField DataField="Account" HeaderText="帳號" />
                         <asp:BoundField DataField="Email" HeaderText="信箱" />
+                        <asp:BoundField DataField="CreateDate" HeaderText="加入日期" />
                         <asp:TemplateField HeaderText="行動">
                             <ItemTemplate>
                                 <asp:Button Text="升級" CssClass="btn btn-primary" runat="server" ID="btnUG" OnCommand="btnUG_Command" CommandArgument='<%# Eval("ID") %>'/>
@@ -54,7 +55,7 @@
                 <asp:Label Text="" runat="server" ID="lblMsg"/>
             </div>
 
-            <div class="col-md-2 col-sm-12">
+            <div class="col-md-1 col-sm-12">
             </div>
         </div>
     </form>
