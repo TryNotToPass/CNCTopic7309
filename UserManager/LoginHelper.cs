@@ -263,6 +263,11 @@ namespace UserManager
             }
         }
 
+        /// <summary>
+        /// 寄信
+        /// </summary>
+        /// <param name="eMail"></param>
+        /// <param name="ID"></param>
         public static void SendGmail(string eMail, Guid ID)
         {
             MailMessage mail = new MailMessage();
@@ -280,7 +285,7 @@ namespace UserManager
 
             string idText = ID.ToString();
             //byte[] idByte = Encoding.Default.GetBytes(idText);
-            string add = "http://localhost:55092/GetPWDBack.aspx?ID=" + idText;
+            string add = "http://localhost:8082/GetPWDBack.aspx?ID=" + idText;
             //內容
             mail.Body = "<h1>你好，若你沒有忘記NBA冠軍賽系統之密碼，那請無視這張郵件</h1> <br/> <p>請點擊以下連結取回密碼</p> <br/>" +
                 "<a href='"+ add + "'>取回密碼連結</a>";

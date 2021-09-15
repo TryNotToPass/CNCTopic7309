@@ -55,7 +55,8 @@
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">一同享受一年一度的NBA冠軍賽吧！</h1>
+                                        <h2 class="h2 text-gray-900 mb-2">NBA台灣賽事分析網</h2>
+                                        <h4 class="h4 text-gray-900 mb-3">一同享受一年一度的NBA冠軍賽吧！</h4>
                                     </div>
                                     <div class="form-group2">
                                         <asp:TextBox runat="server" CssClass="form-control form-control-user" ID="txtAccount" placeholder="請輸入帳號"></asp:TextBox>

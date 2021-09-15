@@ -8,7 +8,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>NBA資訊主頁</title>
+    <title>NBA台灣賽事分析網</title>
     <link href="../css/bootstrap.css" rel="stylesheet" />
     <script src="../js/bootstrap.js"></script>
     <%--<script src="../js/popper.min.js"></script>--%>
@@ -195,7 +195,7 @@ s
                                 <asp:Button Text="個資編輯" runat="server" ID="btnUIE" OnClick="btnUIE_Click" CssClass="btn btn-outline-primary m-2"/>
                             </li>
                             <li class="nav-item">
-                                <asp:Button Text="冠軍賽資訊編輯" runat="server" ID="btnTIE" Visible="false" OnClick="btnTIE_Click" CssClass="btn btn-outline-primary m-2"/>
+                                <asp:Button Text="編輯查詢資料" runat="server" ID="btnTIE" Visible="false" OnClick="btnTIE_Click" CssClass="btn btn-outline-primary m-2"/>
                             </li>
                             <li class="nav-item">
                                 <asp:Button Text="權限變更" runat="server" ID="btnLvChange" OnClick="btnLvChange_Click" Visible="false" CssClass="btn btn-outline-danger m-2"/>

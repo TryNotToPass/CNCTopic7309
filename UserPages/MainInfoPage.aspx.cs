@@ -125,7 +125,7 @@ namespace CNCTopic7309.UserPages
 
                         int textLV = LoginHelper.GetUserInfoByString(guid, "GUID").UserLevel;
 
-                        if (textLV == 1) this.ltlChatBoard.Text += $"<h6 class='card-subtitle mb-2 text-muted'>來自管理員：{UserName}</h6>";
+                        if (textLV == 1) this.ltlChatBoard.Text += $"<h6 class='card-subtitle mb-2 text-muted'>來自版主：{UserName}</h6>";
                         else if (textLV == 0) this.ltlChatBoard.Text += $"<h6 class='card-subtitle mb-2 text-muted'>來自超級管理員：{UserName}</h6>";
                         else this.ltlChatBoard.Text += $"<h6 class='card-subtitle mb-2 text-muted'>來自：{UserName}</h6>";
 
@@ -477,6 +477,11 @@ namespace CNCTopic7309.UserPages
                 this.ltAlert.Text = "<script>alert('請輸入文字！');</script>";
                 return;
             }
+            if (chatText.Length > 2000)
+            {
+                this.ltAlert.Text = "<script>alert('內容過長！');</script>";
+                return;
+            }
             var user = LoginHelper.GetCurrentUserInfo();
             if (user == null) 
             {
@@ -511,8 +516,23 @@ namespace CNCTopic7309.UserPages
                 };
 
                 string pText = this.txtPText.Text;
+                if (pText.Length > 2000) 
+                {
+                    this.ltAlert.Text = "<script>alert('文章過長！');</script>";
+                    return;
+                }
                 string pTitle = this.txtPTitle.Text;
+                if (pText.Length > 50)
+                {
+                    this.ltAlert.Text = "<script>alert('標題過長！');</script>";
+                    return;
+                }
                 string pHref = this.txtPHref.Text;
+                if (pText.Length > 1000)
+                {
+                    this.ltAlert.Text = "<script>alert('連結過長！');</script>";
+                    return;
+                }
                 if (pText != null || string.IsNullOrWhiteSpace(pText)) picture.PicText = pText;
                 if (pTitle != null || string.IsNullOrWhiteSpace(pTitle)) picture.PicTitle = pTitle;
                 if (pHref != null || string.IsNullOrWhiteSpace(pHref)) picture.HyperLink = pHref;

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ORM.DBModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -59,5 +60,48 @@ namespace CNCTopic7309.UserPages
             }
         }
 
+        protected void gvBaller_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            var row = e.Row;
+
+            if (row.RowType == DataControlRowType.DataRow)
+            {
+                Label lbl = row.FindControl("lblBirth") as Label;
+
+                var rowData = row.DataItem as Baller;
+                string date = rowData.Birth.ToString("yyyy-MM-dd");
+
+                if (date != null)
+                {
+                    lbl.Text = date;
+                }
+                else
+                {
+                    lbl.Text = "無法獲取資料";
+                }
+            }
+        }
+
+        protected void gvRace_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            var row = e.Row;
+
+            if (row.RowType == DataControlRowType.DataRow)
+            {
+                Label lbl = row.FindControl("lblRaceDate") as Label;
+
+                var rowData = row.DataItem as Race;
+                string date = rowData.Date.ToString("yyyy-MM-dd");
+
+                if (date != null)
+                {
+                    lbl.Text = date;
+                }
+                else
+                {
+                    lbl.Text = "無法獲取資料";
+                }
+            }
+        }
     }
 }

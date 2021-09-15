@@ -20,13 +20,13 @@ namespace ORM.DBModels
 
         public int InfoID { get; set; }
 
-        [StringLength(20)]
+        [StringLength(50)]
         public string PicTitle { get; set; }
 
         [StringLength(2000)]
         public string PicText { get; set; }
 
-        [StringLength(100)]
+        [StringLength(1000)]
         public string HyperLink { get; set; }
     }
 }

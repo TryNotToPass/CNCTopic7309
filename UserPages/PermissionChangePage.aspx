@@ -27,7 +27,7 @@
                     <Columns>
                         <asp:TemplateField HeaderText="層級">
                             <ItemTemplate>
-                                <%# ((int)Eval("UserLevel") == 1) ? "管理員" : "使用者" %>
+                                <%# ((int)Eval("UserLevel") == 1) ? "版主" : "使用者" %>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:BoundField DataField="Name" HeaderText="暱稱"/>

@@ -497,7 +497,6 @@ namespace UserManager
         /// <param name="picture"></param>
         public static void CreatePictureData(Picture picture)
         {
-
             try
             {
                 using (ContextModel context = new ContextModel())

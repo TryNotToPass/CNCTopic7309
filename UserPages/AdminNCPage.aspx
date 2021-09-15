@@ -84,10 +84,6 @@
                 var weight = $("#txtWeight").val();
                 var birth = $("#txtBirth").val();
                 var university = $("#txtUniversity").val();
-                //if (!teamName || !local || !ballerCount || !teamColor) {
-                //    alert("必填資料尚未填寫");
-                //    return;
-                //}
                 if (id) {
                     $.ajax({
                         url: "/Handlers/AdminNCHandle.ashx?Act=update&Type=Baller",
@@ -156,7 +152,7 @@
                 var foul = $("#txtFoul").val();
                 if (id) {
                     $.ajax({
-                        url: "http://localhost:55092/Handlers/AdminNCHandle.ashx?Act=update&Type=Race",
+                        url: "/Handlers/AdminNCHandle.ashx?Act=update&Type=Race",
                         type: "POST",
                         data: {
                             "ID": id,
@@ -298,7 +294,7 @@
                 $("#txtHomeCourt").val('');
                 $("#txtTeamColor").val('');
 
-                $("#divTeamEditor").hide(300);
+                $("#divTeamEditor").toggle(300);
             });
 
             $("#btnBallerCancel").click(function () {
@@ -312,7 +308,7 @@
                 $("#txtBirth").val('');
                 $("#txtUniversity").val('');
 
-                $("#divBallerEditor").hide(300);
+                $("#divBallerEditor").toggle(300);
             });
 
             $("#btnRaceCancel").click(function () {
@@ -331,7 +327,7 @@
                 $("#txtRestrictedArea").val('');
                 $("#txtFoul").val('');
 
-                $("#divRaceEditor").hide(300);
+                $("#divRaceEditor").toggle(300);
             });
 
             $("#btnGvTeam").click(function () {
@@ -395,7 +391,9 @@
                         $("#txtNumber").val(result["Number"]);
                         $("#txtHeight").val(result["Height"]);
                         $("#txtWeight").val(result["Weight"]);
-                        $("#txtBirth").val(result["Birth"]);
+                        var m = new Date(result["Birth"]);
+                        var dateString = m.getFullYear() + "/" + (m.getMonth() + 1) + "/" + m.getDate();
+                        $("#txtBirth").val(dateString);
                         $("#txtUniversity").val(result["University"]);
 
                         $("#divBallerEditor").show(300);
@@ -422,7 +420,9 @@
                     success: function (result) {
                         $("#hfIDR").val(result["ID"]);
                         $("#txtRaceNum").val(result["RaceNum"]);
-                        $("#txtDate").val(result["Date"]);
+                        var m = new Date(result["Date"]);
+                        var dateString = m.getFullYear() + "/" + (m.getMonth() + 1) + "/" + m.getDate();
+                        $("#txtDate").val(dateString);
                         $("#txtRTName").val(result["TeamName"]);
                         $("#txtShoot").val(result["Shoot"]);
                         $("#txtThreePoint").val(result["ThreePoint"]);
@@ -510,10 +510,9 @@
                         <div class="btn-group" role="group" aria-label="Basic example">
                             <button type="button" id="btnTeamSave" class="btn btn-secondary">儲存隊伍</button>
                             <button type="button" id="btnTeamDel" class="btn btn-secondary">刪除隊伍</button>
-                            <button type="button" id="btnTeamCancel" class="btn btn-secondary">關閉本填寫欄位</button>
                         </div>
                     </div>
-
+                    <button type="button" id="btnTeamCancel" class="btn btn-secondary m-3">關閉/開啟隊伍欄位</button>
                 </div>
                 <div class="col-md-4 col-sm-12">
 
@@ -553,10 +552,9 @@
                         <div class="btn-group" role="group" aria-label="Basic example">
                             <button type="button" id="btnBallerSave" class="btn btn-secondary">儲存球員</button>
                             <button type="button" id="btnBallerDel" class="btn btn-secondary">刪除球員</button>
-                            <button type="button" id="btnBallerCancel" class="btn btn-secondary">關閉本填寫欄位</button>
                         </div>
                     </div>
-
+                    <button type="button" id="btnBallerCancel" class="btn btn-secondary m-3">關閉/開啟球員欄位</button>
                 </div>
                 <div class="col-md-4 col-sm-12">
 
@@ -616,9 +614,9 @@
                         <div class="btn-group" role="group" aria-label="Basic example">
                             <button type="button" id="btnRaceSave" class="btn btn-secondary">儲存賽事</button>
                             <button type="button" id="btnRaceDel" class="btn btn-secondary">刪除賽事</button>
-                            <button type="button" id="btnRaceCancel" class="btn btn-secondary">關閉本填寫欄位</button>
                         </div>
                     </div>
+                    <button type="button" id="btnRaceCancel" class="btn btn-secondary m-3">關閉/開啟賽事欄位</button>
                 </div>
 
             </div>
@@ -664,7 +662,7 @@
                         <div class="card-body">
                             <div id="divgvBaller">
 
-                                <asp:GridView ID="gvBaller" runat="server" AutoGenerateColumns="False" CssClass="table table-sm">
+                                <asp:GridView ID="gvBaller" runat="server" AutoGenerateColumns="False" CssClass="table table-sm" OnRowDataBound="gvBaller_RowDataBound">
                                     <Columns>
                                         <asp:TemplateField HeaderText="行為">
                                             <ItemTemplate>
@@ -679,7 +677,11 @@
                                         <asp:BoundField DataField="Name" HeaderText="稱呼" />
                                         <asp:BoundField DataField="Height" HeaderText="身高" />
                                         <asp:BoundField DataField="Weight" HeaderText="體重" />
-                                        <asp:BoundField DataField="Birth" HeaderText="生日" />
+                                        <asp:TemplateField HeaderText="生日">
+                                            <ItemTemplate>
+                                                <asp:Label runat="server" ID="lblBirth"></asp:Label>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
                                         <asp:BoundField DataField="University" HeaderText="大學" />
                                     </Columns>
                                 </asp:GridView>
@@ -699,7 +701,7 @@
                         <div class="card-body">
                             <div id="divgvRace">
 
-                                <asp:GridView ID="gvRace" runat="server" AutoGenerateColumns="False" CssClass="table table-sm">
+                                <asp:GridView ID="gvRace" runat="server" AutoGenerateColumns="False" CssClass="table table-sm" OnRowDataBound="gvRace_RowDataBound">
                                     <Columns>
                                         <asp:TemplateField HeaderText="行為">
                                             <ItemTemplate>
@@ -709,7 +711,12 @@
                                         </asp:TemplateField>
                                         <asp:BoundField DataField="ID" HeaderText="ID" />
                                         <asp:BoundField DataField="RaceNum" HeaderText="場號" />
-                                        <asp:BoundField DataField="Date" HeaderText="日期" />
+                                        <%--<asp:BoundField DataField="Date" HeaderText="日期" />--%>
+                                        <asp:TemplateField HeaderText="日期">
+                                            <ItemTemplate>
+                                                <asp:Label runat="server" ID="lblRaceDate"></asp:Label>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
                                         <asp:BoundField DataField="TeamName" HeaderText="隊伍名稱" />
                                         <asp:BoundField DataField="Shoot" HeaderText="投籃率" />
                                         <asp:BoundField DataField="ThreePoint" HeaderText="三分命中率" />
