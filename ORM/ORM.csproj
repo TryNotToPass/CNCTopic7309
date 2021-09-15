@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="DBModels\Baller.cs" />
     <Compile Include="DBModels\ContextModel.cs" />
+    <Compile Include="DBModels\ForgetPWDRec.cs" />
     <Compile Include="DBModels\Picture.cs" />
     <Compile Include="DBModels\Race.cs" />
     <Compile Include="DBModels\Team.cs" />

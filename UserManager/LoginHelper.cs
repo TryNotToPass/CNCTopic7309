@@ -264,12 +264,99 @@ namespace UserManager
         }
 
         /// <summary>
+        /// 獲取忘記密碼資料
+        /// </summary>
+        /// <param name="guid"></param>
+        /// <returns></returns>
+        public static ForgetPWDRec GetForgetPWDInfo(Guid guid)
+        {
+            try
+            {
+                using (ContextModel context = new ContextModel())
+                {
+                    var query =
+                        (from item in context.ForgetPWDRecs
+                         where item.GUID == guid
+                         select item);
+                    var obj = query.FirstOrDefault();
+
+                    return obj;
+                }
+            }
+            catch (Exception ex)
+            {
+                WriteLog(ex);
+                return null;
+            }
+        }
+
+        public static bool UpdateFPWD_WrongTimes(ForgetPWDRec forgetPWDRec)
+        {
+            //字串應在按下案件前確認，故這裡不確認
+            try
+            {
+                using (ContextModel context = new ContextModel())
+                {
+                    var dbObj = context.ForgetPWDRecs.Where(o => o.GUID == forgetPWDRec.GUID).FirstOrDefault();
+                    dbObj.WrongTime = forgetPWDRec.WrongTime;
+                    context.SaveChanges();
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                WriteLog(ex);
+                return false;
+            }
+        }
+
+        public static void DeleteForgotPWDInfo(Guid pwGuid)
+        {
+            try
+            {
+                using (ContextModel cxModel = new ContextModel())
+                {
+                    var dbo = cxModel.ForgetPWDRecs.Where(o => o.GUID == pwGuid).FirstOrDefault();
+                    if (dbo != null)
+                    {
+                        cxModel.ForgetPWDRecs.Remove(dbo);
+                        cxModel.SaveChanges();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                LoginHelper.WriteLog(ex);
+            }
+        }
+        /// <summary>
         /// 寄信
         /// </summary>
         /// <param name="eMail"></param>
         /// <param name="ID"></param>
         public static void SendGmail(string eMail, Guid ID)
         {
+            //進資料庫
+            Guid guid = Guid.NewGuid();
+            string guidText = guid.ToString();
+            ForgetPWDRec forgetPWDRec = new ForgetPWDRec();
+            try
+            {
+                using (ContextModel context = new ContextModel())
+                {
+                    forgetPWDRec.GUID = guid;
+                    forgetPWDRec.ExpireDate = DateTime.Now.AddDays(1);
+                    forgetPWDRec.WrongTime = 0;
+                    context.ForgetPWDRecs.Add(forgetPWDRec);
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                LoginHelper.WriteLog(ex);
+            }
+
             MailMessage mail = new MailMessage();
             //前面是發信email後面是顯示的名稱
             mail.From = new MailAddress("wuyukagura@gmail.com", "NBA冠軍賽系統");
@@ -284,8 +371,8 @@ namespace UserManager
             mail.Subject = "忘記密碼信件-此信件由NBA冠軍賽系統自動寄出";
 
             string idText = ID.ToString();
-            //byte[] idByte = Encoding.Default.GetBytes(idText);
-            string add = "http://localhost:8082/GetPWDBack.aspx?ID=" + idText;
+            int portnumber = HttpContext.Current.Request.Url.Port;
+            string add = "http://localhost:" + portnumber + "/GetPWDBack.aspx?ID=" + idText + "&GUID=" + guidText;
             //內容
             mail.Body = "<h1>你好，若你沒有忘記NBA冠軍賽系統之密碼，那請無視這張郵件</h1> <br/> <p>請點擊以下連結取回密碼</p> <br/>" +
                 "<a href='"+ add + "'>取回密碼連結</a>";

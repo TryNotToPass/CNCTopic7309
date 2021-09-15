@@ -8,11 +8,12 @@ namespace ORM.DBModels
     public partial class ContextModel : DbContext
     {
         public ContextModel()
-            : base("name=DefaultConnectString")
+            : base("name=DefaultConnectionString")
         {
         }
 
         public virtual DbSet<Baller> Ballers { get; set; }
+        public virtual DbSet<ForgetPWDRec> ForgetPWDRecs { get; set; }
         public virtual DbSet<Picture> Pictures { get; set; }
         public virtual DbSet<Race> Races { get; set; }
         public virtual DbSet<Team> Teams { get; set; }
