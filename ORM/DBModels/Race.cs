@@ -12,6 +12,9 @@ namespace ORM.DBModels
 
         public int RaceNum { get; set; }
 
+        [StringLength(10)]
+        public string Score { get; set; }
+
         [Column(TypeName = "date")]
         public DateTime Date { get; set; }
 

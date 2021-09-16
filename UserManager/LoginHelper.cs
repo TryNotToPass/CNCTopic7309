@@ -339,7 +339,7 @@ namespace UserManager
             }
         }
         /// <summary>
-        /// 寄信
+        /// 寄信(忘記密碼)
         /// </summary>
         /// <param name="eMail"></param>
         /// <param name="ID"></param>
@@ -405,6 +405,58 @@ namespace UserManager
 
             //放掉宣告出來的mail
             mail.Dispose();
+        }
+
+        public static bool SendGmailToAdmin(string eMail, string name, string account, string userEmail, string content, string title, string type)
+        {
+            try
+            {
+                MailMessage mail = new MailMessage();
+                //前面是發信email後面是顯示的名稱
+                mail.From = new MailAddress("wuyukagura@gmail.com", $"帳戶：{account} 稱呼：{name}");
+
+                //收信者email
+                //mail.To.Add(eMail);
+                mail.To.Add("markzmarkz725@gmail.com");
+
+                //設定優先權
+                mail.Priority = MailPriority.Normal;
+
+                //標題
+                mail.Subject = "【" + type + "】" + title;
+
+                //內容
+                mail.Body = $"<p>{content}</p><br/><br/>欲收回信的信箱：{userEmail}";
+
+                //內容使用html
+                mail.IsBodyHtml = true;
+
+                //設定gmail的smtp (這是google的)
+                SmtpClient MySmtp = new SmtpClient("smtp.gmail.com", 587);
+
+                //您在gmail的帳號密碼
+                MySmtp.Credentials = new System.Net.NetworkCredential("wuyukagura@gmail.com", "9kirisameKagura8");
+
+                //開啟ssl
+                MySmtp.EnableSsl = true;
+
+                //發送郵件
+                MySmtp.Send(mail);
+
+                //放掉宣告出來的MySmtp
+                MySmtp = null;
+
+                //放掉宣告出來的mail
+                mail.Dispose();
+
+                return true;
+            } 
+            catch(Exception ex) 
+            {
+                WriteLog(ex);
+                return false;
+            }
+            
         }
     }
 }

@@ -22,36 +22,79 @@ namespace CNCTopic7309.UserPages
             if (voteList.FavoriteBallerID != null)
             {
                 int id = Convert.ToInt32(voteList.FavoriteBallerID);
-                fvBallerName = ManageHelper.GetBallerByID(id).Name;
-                fvBallerLink = $"<td><a href='/UserPages/MainInfoPage.aspx?ID=${voteList.FavoriteBallerID}&Type=Baller'>{fvBallerName}</a></td>";
+                var baller = ManageHelper.GetBallerByID(id);
+                if (baller != null)
+                {
+                    fvBallerName = baller.Name;
+                    fvBallerLink = $"<td><a href='/UserPages/MainInfoPage.aspx?ID=${voteList.FavoriteBallerID}&Type=Baller'>{fvBallerName}</a></td>";
+                }
+                else
+                {
+                    fvBallerLink = "<td>尚無 <a href='/UserPages/MainInfoPage.aspx?ID=1&Type=Baller'>現在立刻去找</a></td>";
+                }
             }
             else fvBallerLink = "<td>尚無 <a href='/UserPages/MainInfoPage.aspx?ID=1&Type=Baller'>現在立刻去找</a></td>";
             if (voteList.FavoriteTeamID != null)
             {
                 int id = Convert.ToInt32(voteList.FavoriteTeamID);
-                fvTeamName = ManageHelper.GetTeamByID(id).TeamName;
-                fvTeamLink = $"<td><a href='/UserPages/MainInfoPage.aspx?ID={voteList.FavoriteTeamID}&Type=Team'>{fvTeamName}</a></td>";
+                var team = ManageHelper.GetTeamByID(id);
+                if (team != null)
+                {
+                    fvTeamName = team.TeamName;
+                    fvTeamLink = $"<td><a href='/UserPages/MainInfoPage.aspx?ID={voteList.FavoriteTeamID}&Type=Team'>{fvTeamName}</a></td>";
+                }
+                else
+                {
+                    fvTeamLink = "<td>尚無 <a href='/UserPages/MainInfoPage.aspx?ID=1&Type=Team'>現在立刻去找</a></td>";
+                }
+
             }
             else fvTeamLink = "<td>尚無 <a href='/UserPages/MainInfoPage.aspx?ID=1&Type=Team'>現在立刻去找</a></td>";
             if (voteList.FavoriteRaceID != null)
             {
                 int id = Convert.ToInt32(voteList.FavoriteRaceID);
-                fvRaceNum ="第 " + ManageHelper.GetRaceByID(id).RaceNum.ToString() + " 場賽事";
-                fvRaceLink = $"<td><a href='/UserPages/MainInfoPage.aspx?ID={voteList.FavoriteRaceID}&Type=Race'>{fvRaceNum}</a></td>";
+                var race = ManageHelper.GetRaceByID(id);
+                if (race != null)
+                {
+                    fvRaceNum = "第 " + race.RaceNum.ToString() + " 場賽事";
+                    fvRaceLink = $"<td><a href='/UserPages/MainInfoPage.aspx?ID={voteList.FavoriteRaceID}&Type=Race'>{fvRaceNum}</a></td>";
+                }
+                else
+                {
+                    fvRaceLink = "<td>尚無 <a href='/UserPages/MainInfoPage.aspx?ID=1&Type=Race'>現在立刻去找</a></td>";
+                }
+
             }
             else fvRaceLink = "<td>尚無 <a href='/UserPages/MainInfoPage.aspx?ID=1&Type=Race'>現在立刻去找</a></td>";
             if (voteList.BadTemperBallerID != null)
             {
                 int id = Convert.ToInt32(voteList.BadTemperBallerID);
-                btBallerName = ManageHelper.GetBallerByID(id).Name;
-                btBallerLink = $"<td><a href='/UserPages/MainInfoPage.aspx?ID={voteList.BadTemperBallerID}&Type=Baller'>{btBallerName}</a></td>";
+                var baller = ManageHelper.GetBallerByID(id);
+                if (baller != null)
+                {
+                    btBallerName = baller.Name;
+                    btBallerLink = $"<td><a href='/UserPages/MainInfoPage.aspx?ID={voteList.BadTemperBallerID}&Type=Baller'>{btBallerName}</a></td>";
+                }
+                else
+                {
+                    btBallerLink = "<td>尚無 <a href='/UserPages/MainInfoPage.aspx?ID=1&Type=Baller'>現在立刻去找</a></td>";
+                }
+                
             }
             else btBallerLink = "<td>尚無 <a href='/UserPages/MainInfoPage.aspx?ID=1&Type=Baller'>現在立刻去找</a></td>";
             if (voteList.FoulKingBallerID != null)
             {
                 int id = Convert.ToInt32(voteList.FoulKingBallerID);
-                fkBallerName = ManageHelper.GetBallerByID(id).Name;
-                fkBallerLink = $"<td><a href='/UserPages/MainInfoPage.aspx?ID={voteList.FoulKingBallerID}&Type=Baller'>{fkBallerName}</a></td>";
+                var baller = ManageHelper.GetBallerByID(id);
+                if (baller != null)
+                {
+                    fkBallerName = baller.Name;
+                    fkBallerLink = $"<td><a href='/UserPages/MainInfoPage.aspx?ID={voteList.FoulKingBallerID}&Type=Baller'>{fkBallerName}</a></td>";
+                }
+                else 
+                {
+                    fkBallerLink = "<td>尚無 <a href='/UserPages/MainInfoPage.aspx?ID=1&Type=Baller'>現在立刻去找</a></td>";
+                }
             }
             else fkBallerLink = "<td>尚無 <a href='/UserPages/MainInfoPage.aspx?ID=1&Type=Baller'>現在立刻去找</a></td>";
             #endregion

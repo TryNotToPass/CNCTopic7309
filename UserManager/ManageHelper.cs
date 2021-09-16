@@ -166,6 +166,29 @@ namespace UserManager
                 return null;
             }
         }
+
+        public static List<Baller> GetBallerListByTeam(string teamName)
+        {
+            try
+            {
+                using (ContextModel context = new ContextModel())
+                {
+                    var query =
+                        (from item in context.Ballers
+                         where item.TeamName == teamName
+                         orderby item.ID
+                         select item);
+
+                    var list = query.ToList();
+                    return list;
+                }
+            }
+            catch (Exception ex)
+            {
+                LoginHelper.WriteLog(ex);
+                return null;
+            }
+        }
         /// <summary>
         /// 藉由ID獲取賽場資料
         /// </summary>
@@ -404,6 +427,7 @@ namespace UserManager
                 {
                     var dbObject = context.Races.Where(obj => obj.ID == data.ID).FirstOrDefault();
                     dbObject.RaceNum = data.RaceNum;
+                    dbObject.Score = data.Score;
                     dbObject.Date = data.Date;
                     dbObject.TeamName = data.TeamName;
                     dbObject.Shoot = data.Shoot;

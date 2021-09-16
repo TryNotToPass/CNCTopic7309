@@ -150,6 +150,7 @@
                 var miss = $("#txtMiss").val();
                 var ra = $("#txtRestrictedArea").val();
                 var foul = $("#txtFoul").val();
+                var score = $("#txtScore").val();
                 if (id) {
                     $.ajax({
                         url: "/Handlers/AdminNCHandle.ashx?Act=update&Type=Race",
@@ -168,7 +169,8 @@
                             "Steal": steal,
                             "Miss": miss,
                             "RestrictedArea": ra,
-                            "Foul": foul
+                            "Foul": foul,
+                            "Score":score
                         },
                         success: function (result) {
                             alert("更新成功");
@@ -197,7 +199,8 @@
                             "Steal": steal,
                             "Miss": miss,
                             "RestrictedArea": ra,
-                            "Foul": foul
+                            "Foul": foul,
+                            "Score": score
                         },
                         success: function (result) {
                             alert("新增成功");
@@ -325,6 +328,7 @@
                 $("#txtSteal").val('');
                 $("#txtMiss").val('');
                 $("#txtRestrictedArea").val('');
+                $("#txtScore").val('');
                 $("#txtFoul").val('');
 
                 $("#divRaceEditor").toggle(300);
@@ -434,6 +438,7 @@
                         $("#txtMiss").val(result["Miss"]);
                         $("#txtRestrictedArea").val(result["RestrictedArea"]);
                         $("#txtFoul").val(result["Foul"]);
+                        $("#txtScore").val(result["Score"]);
 
                         $("#divRaceEditor").show(300);
                     },
@@ -566,6 +571,10 @@
                         <div class="input-group">
                             <span class="input-group-text" id="race-addon2">日期</span>
                             <input type="text" id="txtDate" class="form-control" aria-describedby="race-addon2" />
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-text" id="race-addonEx">得分</span>
+                            <input type="text" id="txtScore" class="form-control" aria-describedby="race-addonEx" />
                         </div>
                         <div class="input-group">
                             <span class="input-group-text" id="race-addon3">隊伍名稱</span>
@@ -718,6 +727,7 @@
                                             </ItemTemplate>
                                         </asp:TemplateField>
                                         <asp:BoundField DataField="TeamName" HeaderText="隊伍名稱" />
+                                        <asp:BoundField DataField="Score" HeaderText="得分" />
                                         <asp:BoundField DataField="Shoot" HeaderText="投籃率" />
                                         <asp:BoundField DataField="ThreePoint" HeaderText="三分命中率" />
                                         <asp:BoundField DataField="Penalty" HeaderText="罰球命中率" />

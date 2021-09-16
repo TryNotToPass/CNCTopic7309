@@ -141,6 +141,7 @@ namespace CNCTopic7309.Handlers
                     string missText = context.Request.Form["Miss"];
                     string restrictedAreaText = context.Request.Form["RestrictedArea"];
                     string foulText = context.Request.Form["Foul"];
+                    string scoreText = context.Request.Form["Score"];
 
                     // 必填檢查
                     if (string.IsNullOrWhiteSpace(teamName) ||
@@ -154,7 +155,8 @@ namespace CNCTopic7309.Handlers
                         string.IsNullOrWhiteSpace(blockText) ||
                         string.IsNullOrWhiteSpace(stealText) ||
                         string.IsNullOrWhiteSpace(restrictedAreaText) ||
-                        string.IsNullOrWhiteSpace(foulText))
+                        string.IsNullOrWhiteSpace(foulText) ||
+                        string.IsNullOrWhiteSpace(scoreText))
                     {
                         this.ProcessError(context, "資料漏填");
                         return;
@@ -163,7 +165,7 @@ namespace CNCTopic7309.Handlers
                     // 轉型
                     DateTime date;
                     double shoot, threePoint, penalty;
-                    int raceNum, backBoard, assistance, block, steal, miss, ra, foul;
+                    int raceNum, backBoard, assistance, block, steal, miss, ra, foul, score;
                     if (!double.TryParse(shootText, out shoot) ||
                         !double.TryParse(threePointText, out threePoint) ||
                         !double.TryParse(penaltyText, out penalty) ||
@@ -175,6 +177,7 @@ namespace CNCTopic7309.Handlers
                         !int.TryParse(restrictedAreaText, out ra) ||
                         !int.TryParse(foulText, out foul) ||
                         !int.TryParse(missText, out miss) ||
+                        !int.TryParse(scoreText, out score) ||
                         !DateTime.TryParse(dateText, out date))
                     {
                         this.ProcessError(context, "鍵入資料出錯");
@@ -185,7 +188,7 @@ namespace CNCTopic7309.Handlers
                         this.ProcessError(context, "鍵入資料出錯");
                         return;
                     }
-                    if (raceNum < 0 || backBoard < 0 || assistance < 0 || block < 0 || steal < 0 || miss < 0 || ra < 0 || foul < 0)
+                    if (raceNum < 0 || backBoard < 0 || assistance < 0 || block < 0 || steal < 0 || miss < 0 || ra < 0 || foul < 0 || score < 0)
                     {
                         this.ProcessError(context, "鍵入資料出錯");
                         return;
@@ -197,6 +200,7 @@ namespace CNCTopic7309.Handlers
                         {
                             TeamName = teamName,
                             Shoot = shoot,
+                            Score = scoreText,
                             ThreePoint = threePoint,
                             Penalty = penalty,
                             RaceNum = raceNum,
@@ -440,6 +444,7 @@ namespace CNCTopic7309.Handlers
                     string missText = context.Request.Form["Miss"];
                     string restrictedAreaText = context.Request.Form["RestrictedArea"];
                     string foulText = context.Request.Form["Foul"];
+                    string scoreText = context.Request.Form["Score"];
 
                     // 必填檢查
                     if (string.IsNullOrWhiteSpace(teamName) ||
@@ -453,6 +458,7 @@ namespace CNCTopic7309.Handlers
                         string.IsNullOrWhiteSpace(blockText) ||
                         string.IsNullOrWhiteSpace(stealText) ||
                         string.IsNullOrWhiteSpace(restrictedAreaText) ||
+                        string.IsNullOrWhiteSpace(scoreText) ||
                         string.IsNullOrWhiteSpace(foulText))
                     {
                         this.ProcessError(context, "資料漏填");
@@ -462,7 +468,7 @@ namespace CNCTopic7309.Handlers
                     // 轉型與檢察
                     DateTime date;
                     double shoot, threePoint, penalty;
-                    int raceNum, backBoard, assistance, block, steal, miss, ra, foul;
+                    int raceNum, backBoard, assistance, block, steal, miss, ra, foul, score;
                     if (!double.TryParse(shootText, out shoot) ||
                         !double.TryParse(threePointText, out threePoint) ||
                         !double.TryParse(penaltyText, out penalty) ||
@@ -474,6 +480,7 @@ namespace CNCTopic7309.Handlers
                         !int.TryParse(restrictedAreaText, out ra) ||
                         !int.TryParse(foulText, out foul) ||
                         !int.TryParse(missText, out miss) ||
+                        !int.TryParse(scoreText, out score) ||
                         !DateTime.TryParse(dateText, out date))
                     {
                         this.ProcessError(context, "鍵入資料出錯");
@@ -484,7 +491,7 @@ namespace CNCTopic7309.Handlers
                         this.ProcessError(context, "鍵入資料出錯");
                         return;
                     }
-                    if (raceNum < 0 || backBoard < 0 || assistance < 0 || block < 0 || steal < 0 || miss < 0 || ra < 0 || foul < 0) 
+                    if (raceNum < 0 || backBoard < 0 || assistance < 0 || block < 0 || steal < 0 || miss < 0 || ra < 0 || foul < 0 || score < 0) 
                     {
                         this.ProcessError(context, "鍵入資料出錯");
                         return;
@@ -496,6 +503,7 @@ namespace CNCTopic7309.Handlers
                         {
                             ID = id,
                             TeamName = teamName,
+                            Score = scoreText,
                             Shoot = shoot,
                             ThreePoint = threePoint,
                             Penalty = penalty,

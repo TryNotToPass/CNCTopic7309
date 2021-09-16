@@ -177,6 +177,54 @@
     <form id="form1" runat="server">
         <asp:Literal ID="ltAlert" runat="server" Text=""/>
         <div class="container-fliud">
+
+            <%--送信小視窗--%>
+            <table>
+                <tr>
+                    <td colspan="2" align="center">
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">聯絡超級管理員</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text" id="new-addon2">信件標題</span>
+                                            <asp:TextBox runat="server" ID="txtTitle" class="form-control" placeholder="請輸入標題" aria-describedby="new-addon2"/>
+                                        </div>
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text" id="new-addon1">信件種類</span>
+                                            <asp:DropDownList ID="DropDownList1" runat="server" aria-describedby="new-addon1">
+                                                <asp:ListItem Selected="True" Value="疑難雜症"> 疑難雜症 </asp:ListItem>
+                                                <asp:ListItem Value="會員糾紛"> 會員糾紛 </asp:ListItem>
+                                                <asp:ListItem Value="問題回報"> 問題回報 </asp:ListItem>
+                                                <asp:ListItem Value="應徵版主"> 應徵版主 </asp:ListItem>
+                                            </asp:DropDownList>
+                                        </div>
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text" id="new-addon3">信件內容</span>
+                                            <asp:TextBox runat="server" ID="txtContent" class="form-control" TextMode="MultiLine" placeholder="欲傳達之事項" aria-describedby="new-addon3"/>
+                                        </div>
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text" id="new-addon5">信箱</span>
+                                            <asp:TextBox runat="server" ID="txtMail" TextMode="Email" class="form-control" placeholder="欲接收回信的信箱，可以不填" aria-describedby="new-addon5"/>
+                                        </div>
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <asp:Button Text="確認送出" ID="btnSendMail" CssClass="btn btn-primary" runat="server" OnClick="btnSendMail_Click" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </td>
+                </tr>
+            </table>
+
             <div class="row sticky-top justify-content-center">
                 <asp:Literal Text="跑嗎燈位置" runat="server" ID="ltRunner"/>
                 <button type="button" class="js-back-to-top btn btn-secondary w-25" id="btnToTop">回到頂部</button>
@@ -193,18 +241,25 @@
                         <%--<ul class="navbar-nav">--%>
                         <ul class="navbar-nav" style="--bs-scroll-height: 100px;">
                             <li class="nav-item">
-                                <asp:Button Text="個資編輯" runat="server" ID="btnUIE" OnClick="btnUIE_Click" CssClass="btn btn-outline-primary m-2"/>
+                                <asp:Button Text="個資編輯" runat="server" ID="btnUIE" OnClick="btnUIE_Click" CssClass="btn btn-outline-primary m-1"/>
                             </li>
                             <li class="nav-item">
-                                <asp:Button Text="編輯查詢資料" runat="server" ID="btnTIE" Visible="false" OnClick="btnTIE_Click" CssClass="btn btn-outline-primary m-2"/>
+                                <asp:Button Text="編輯查詢資料" runat="server" ID="btnTIE" Visible="false" OnClick="btnTIE_Click" CssClass="btn btn-outline-primary m-1"/>
                             </li>
                             <li class="nav-item">
-                                <asp:Button Text="權限變更" runat="server" ID="btnLvChange" OnClick="btnLvChange_Click" Visible="false" CssClass="btn btn-outline-danger m-2"/>
+                                <asp:Button Text="權限變更" runat="server" ID="btnLvChange" OnClick="btnLvChange_Click" Visible="false" CssClass="btn btn-outline-danger m-1"/>
                             </li>
                             <li class="nav-item">
-                                <asp:Button Text="檢視投票" runat="server" ID="btnVote" OnClick="btnVote_Click" CssClass="btn btn-outline-info m-2"/>
+                                <asp:Button Text="檢視投票" runat="server" ID="btnVote" OnClick="btnVote_Click" CssClass="btn btn-outline-info m-1"/>
                                 <%--<a class="btn btn-outline-info" href="/UserPages/MainInfoPage.aspx?Type=Vote">檢視投票</a>--%>
-                            </li>  
+                            </li>
+                            <asp:PlaceHolder ID="sendMailtoSA" runat="server">
+                                <li class="nav-item">
+                                    <button type="button" class="btn btn-outline-info m-1" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                        聯絡超級管理員
+                                    </button>
+                                </li>
+                            </asp:PlaceHolder>
                             <li class="nav-item">
                                 <a href="../Login.aspx"><asp:Label Text="" runat="server" ID="aBackToLogin" CssClass="btn btn-outline-info" Visible="false"/></a>
                             </li>
@@ -277,14 +332,14 @@
                         <div class="card-body">
                             <asp:ImageButton ImageUrl="~/images/heartBtn.png" runat="server" ID="btnHeartHole" Width="25px" Height="25px" OnClick="btnHeartHole_Click" CssClass="light_btn" ToolTip="成為最愛"/>
                             <asp:ImageButton ImageUrl="~/images/heartBtnFilled.png" runat="server" ID="btnHeart" Width="25px" Height="25px" OnClick="btnHeart_Click" CssClass="light_btn" ToolTip="取消最愛"/>
-                            <asp:ImageButton ImageUrl="~/images/badTemp.png" runat="server" ID="btnBadTemp" Width="25px" Height="25px" OnClick="btnBadTemp_Click" CssClass="light_btn" ToolTip="壞脾最壞"/>
+                            <asp:ImageButton ImageUrl="~/images/badTemp.png" runat="server" ID="btnBadTemp" Width="25px" Height="25px" OnClick="btnBadTemp_Click" CssClass="light_btn" ToolTip="脾氣最壞"/>
                             <asp:ImageButton ImageUrl="~/images/badTempFilled.png" runat="server" ID="btnBadTempFilled" Width="25px" Height="25px" OnClick="btnBadTempFilled_Click" CssClass="light_btn" ToolTip="取消壞脾氣"/>
                             <asp:ImageButton ImageUrl="~/images/FoulKing.png" runat="server" ID="btnFoulKing" Width="30px" Height="30px" OnClick="btnFoulKing_Click" CssClass="light_btn" ToolTip="犯規之王"/>
                             <asp:ImageButton ImageUrl="~/images/FoulKingFilled.png" runat="server" ID="btnFoulKingFilled" Width="30px" Height="30px" OnClick="btnFoulKingFilled_Click" CssClass="light_btn" ToolTip="取消犯規王名號"/>
                         </div>
                     </div>
+                    <asp:Literal Text="" runat="server" ID="ltBallerListByTeam"/>
                 </div>
-
                 <div class="col-md-5 col-sm-12">
                     <asp:Literal Text="" ID="ltlChatBoard" runat="server"/>
                     <hr />

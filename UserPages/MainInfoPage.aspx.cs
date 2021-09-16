@@ -36,6 +36,7 @@ namespace CNCTopic7309.UserPages
                 this.btnUIE.Visible = false;
                 this.btnLogOut.Visible = false;
                 this.btnVote.Visible = false;
+                this.sendMailtoSA.Visible = false;
 
                 this.aBackToLogin.Visible = true;
                 this.aBackToLogin.Text = "前往登入";
@@ -44,6 +45,7 @@ namespace CNCTopic7309.UserPages
             if (userLV == 0)
             {
                 this.btnLvChange.Visible = true;
+                this.sendMailtoSA.Visible = false;
             }
 
             #region 跑馬燈
@@ -57,26 +59,29 @@ namespace CNCTopic7309.UserPages
             if (popBallerList != null && popBallerList.Count > 0) 
             {
                 runnerText += "★☆★☆★☆★☆★☆★☆★☆★☆──────最受喜愛球星投票！";
-                foreach (var item in popBallerList)
-                {
-                    runnerText += $"球星 {item.Name}：獲得{item.PopCount}人喜愛。";
-                }
+                //foreach (var item in popBallerList)
+                //{
+                //    runnerText += $"球星 {item.Name}：獲得{item.PopCount}人喜愛。";
+                //}
+                runnerText += $"球星 {popBallerList.Last().Name}：獲得{popBallerList.Last().PopCount}人喜愛。";
             }
             if (popTeamList != null && popTeamList.Count > 0)
             {
                 runnerText += "★☆★☆★☆★☆★☆★☆★☆★☆──────最受喜愛球隊投票！";
-                foreach (var item in popTeamList)
-                {
-                    runnerText += $"球隊 {item.Name}：獲得{item.PopCount}人喜愛。";
-                }
+                //foreach (var item in popTeamList)
+                //{
+                //    runnerText += $"球隊 {item.Name}：獲得{item.PopCount}人喜愛。";
+                //}
+                runnerText += $"球隊 {popTeamList.Last().Name}：獲得{popTeamList.Last().PopCount}人喜愛。";
             }
             if (popRaceList != null && popRaceList.Count > 0)
             {
                 runnerText += "★☆★☆★☆★☆★☆★☆★☆★☆──────萬眾矚目賽事投票！";
-                foreach (var item in popRaceList)
-                {
-                    runnerText += $"{item.Name}：獲得{item.PopCount}人讚揚。";
-                }
+                runnerText += $"{popRaceList.Last().Name}：獲得{popRaceList.Last().PopCount}人讚揚。";
+                //foreach (var item in popRaceList)
+                //{
+                //    runnerText += $"{item.Name}：獲得{item.PopCount}人讚揚。";
+                //}
             }
             if (popBFoulKingList != null && popBFoulKingList.Count > 0)
             {
@@ -164,6 +169,24 @@ namespace CNCTopic7309.UserPages
                         this.ltlInfo.Text += "<div class='card-body'><div class='table-responsive'>";
                         this.ltlInfo.Text += "資料不存在，請選擇其他資料！</div></div>";
                     }
+                    var ballerByTeam = ManageHelper.GetBallerListByTeam(rowInfo.TeamName);
+                    if (ballerByTeam != null && ballerByTeam.Count > 0)
+                    {
+                        this.ltBallerListByTeam.Text += "<div class='list-group mt-2 mb-4'>";
+                        this.ltBallerListByTeam.Text += "<li class='list-group-item'>球員列表</li>";
+                        foreach (var item in ballerByTeam)
+                        {
+                            this.ltBallerListByTeam.Text += $"<a href='/UserPages/MainInfoPage.aspx?ID={item.ID}&Type=Baller' class='list-group-item list-group-item-action' aria-current='true'>{item.Name}</a>";
+                        }
+                        this.ltBallerListByTeam.Text += "</div>";
+                    }
+                    else
+                    {
+                        this.ltBallerListByTeam.Text += "<div class='list-group'>";
+                        this.ltBallerListByTeam.Text += "<li class='list-group-item'>球員列表</li>";
+                        this.ltBallerListByTeam.Text += "<li class='list-group-item disabled'>尚無登入球員資料</li>";
+                        this.ltBallerListByTeam.Text += "</div>";
+                    }
                 }
                 if (about == "Race")
                 {
@@ -175,13 +198,18 @@ namespace CNCTopic7309.UserPages
                         string date = rowInfo.Date.ToString("yyyyMMdd");
                         this.ltlInfo.Text += $"<div class='card-header py-3'><h6 class='m-0 font-weight-bold text-primary'>第{rowInfo.RaceNum}場-{rowInfo.TeamName}-{date}</h6></div>";
                         this.ltlInfo.Text += "<div class='card-body'>";
+                        double sr = Convert.ToDouble(rowInfo.Score);
+                        double srate = sr / 2;
+                        string barColor = GetBarColor(srate);
+                        this.ltlInfo.Text += $"<h4 class='small font-weight-bold'>得分<span class='float-right'>{rowInfo.Score}</span></h4>";
+                        this.ltlInfo.Text += $"<div class='progress mb-4'><div class='{barColor}' role='progressbar' style='width: {srate}%' aria-valuenow='{srate}' aria-valuemin='0' aria-valuemax='100'></div></div>";
                         double shootRate = rowInfo.Shoot;
-                        string barColor = GetBarColor(shootRate);
-                        this.ltlInfo.Text += $"<h4 class='small font-weight-bold'>投球率<span class='float-right'>{shootRate}%</span></h4>";
+                        barColor = GetBarColor(shootRate);
+                        this.ltlInfo.Text += $"<h4 class='small font-weight-bold'>投球命中率<span class='float-right'>{shootRate}%</span></h4>";
                         this.ltlInfo.Text += $"<div class='progress mb-4'><div class='{barColor}' role='progressbar' style='width: {shootRate}%' aria-valuenow='{shootRate}' aria-valuemin='0' aria-valuemax='100'></div></div>";
                         double threeRate = rowInfo.ThreePoint;
                         barColor = GetBarColor(threeRate);
-                        this.ltlInfo.Text += $"<h4 class='small font-weight-bold'>三分率<span class='float-right'>{threeRate}%</span></h4>";
+                        this.ltlInfo.Text += $"<h4 class='small font-weight-bold'>三分命中率<span class='float-right'>{threeRate}%</span></h4>";
                         this.ltlInfo.Text += $"<div class='progress mb-4'><div class='{barColor}' role='progressbar' style='width: {threeRate}%' aria-valuenow='{threeRate}' aria-valuemin='0' aria-valuemax='100'></div></div>";
                         double penaltyRate = rowInfo.Penalty;
                         barColor = GetBarColor(penaltyRate);
@@ -582,6 +610,41 @@ namespace CNCTopic7309.UserPages
                         if (about == "Race") ut.FavoriteRaceID = id;
                         UserPersonalHelper.UpdateUserTaste(ut);
                         this.UTLike();
+                        if (about == "Team") 
+                        {
+                            var data = ManageHelper.GetTeamByID(id);
+                            List<PopViewModel> popTeamList = UserPersonalHelper.GetPopBallerList("Team");
+                            if (popTeamList != null && popTeamList.Count > 0)
+                            {
+                                foreach (var item in popTeamList)
+                                {
+                                    if (data.TeamName.CompareTo(item.Name) == 0)
+                                    {
+                                        this.ltAlert.Text = $"<script>alert('目前共有{item.PopCount}人喜歡 {item.Name}');</script>";
+                                        break;
+                                    }
+                                    
+                                }
+                            }
+                        }
+                        if (about == "Baller")
+                        {
+                            var data = ManageHelper.GetBallerByID(id);
+                            List<PopViewModel> popBallerList = UserPersonalHelper.GetPopBallerList("Baller");
+                            if (popBallerList != null && popBallerList.Count > 0)
+                            {
+                                foreach (var item in popBallerList)
+                                {
+                                    if (data.Name.CompareTo(item.Name) == 0)
+                                    {
+                                        this.ltAlert.Text = $"<script>alert('目前共有{item.PopCount}人喜歡 {item.Name}');</script>";
+                                        break;
+                                    }
+
+                                }
+                            }
+                        }
+                        
                     }
                     else
                     {
@@ -714,6 +777,7 @@ namespace CNCTopic7309.UserPages
                         if (about == "Baller") ut.FoulKingBallerID = id;
                         UserPersonalHelper.UpdateUserTaste(ut);
                         this.UTFoulKing();
+
                     }
                     else
                     {
@@ -766,6 +830,23 @@ namespace CNCTopic7309.UserPages
             {
                 Response.Redirect("VoteInfoPage.aspx");
             }
+        }
+
+        protected void btnSendMail_Click(object sender, EventArgs e)
+        {
+            var user = LoginHelper.GetCurrentUserInfo();
+            string title = this.txtTitle.Text;
+            string content = this.txtContent.Text;
+            string userEmail = this.txtMail.Text;
+            string type = this.DropDownList1.Text;
+            if (string.IsNullOrWhiteSpace(title) || string.IsNullOrWhiteSpace(content) || string.IsNullOrWhiteSpace(type)) 
+            {
+                this.ltAlert.Text = "<script>alert('所有送信填寫欄位不得為空！');</script>";
+                return;
+            }
+            bool ok = LoginHelper.SendGmailToAdmin("fakeemail.@hueoe.com", user.Name, user.Account, userEmail, content, title, type);
+            if (ok) this.ltAlert.Text = "<script>alert('送信完成');</script>";  
+            else this.ltAlert.Text = "<script>alert('送信失敗');</script>";
         }
     }
 }
