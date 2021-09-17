@@ -180,6 +180,7 @@ namespace CNCTopic7309.Handlers
                         !int.TryParse(scoreText, out score) ||
                         !DateTime.TryParse(dateText, out date))
                     {
+                        //可以回傳200，假裝正常必免系統錯誤訊息(另外，自訂錯誤頁拿掉也可)
                         this.ProcessError(context, "鍵入資料出錯");
                         return;
                     }

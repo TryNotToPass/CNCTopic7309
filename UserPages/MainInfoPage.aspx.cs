@@ -124,12 +124,24 @@ namespace CNCTopic7309.UserPages
                     foreach (var item in ucpagerChatList)
                     {
                         string guid = item.UserID.ToString();
-                        string UserName = LoginHelper.GetUserInfoByString(guid, "GUID").Name;
+                        var chatlist = LoginHelper.GetUserInfoByString(guid, "GUID");
+                        string UserName;
+                        int textLV = 2;
+                        if (chatlist == null)
+                        {
+                            UserName = "已刪除的使用者";
+                        }
+                        else 
+                        {
+                            UserName = chatlist.Name;
+                            textLV = chatlist.UserLevel;
+                        }
+                        
                         this.ltlChatBoard.Text += "<div class='card text-center'>" +
                                                     $"<div class='card-body'><p class='card-text'>{item.Chat}</p><table align='center'><tr><td>" +
                                                     $"<input type='hidden' class='hfIDC' value='{item.ID}'/>";
 
-                        int textLV = LoginHelper.GetUserInfoByString(guid, "GUID").UserLevel;
+                        
 
                         if (textLV == 1) this.ltlChatBoard.Text += $"<h6 class='card-subtitle mb-2 text-muted'>來自版主：{UserName}</h6>";
                         else if (textLV == 0) this.ltlChatBoard.Text += $"<h6 class='card-subtitle mb-2 text-muted'>來自超級管理員：{UserName}</h6>";
